@@ -24,13 +24,14 @@ app.use(express.static('public/uploads'));
 app.use(express.static('public/styles.css'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-// app.use(morgan('dev'));
+//app.use(morgan('dev'));
 app.use((req, res, next) => {
   res.locals.path = req.path;
   next();
 });
 
 app.use('/', homeRouter);
+// app.use('/login', homeRouter);
 // app.use('/auth', authRoute);
 // app.use('/users', userRoute);
 

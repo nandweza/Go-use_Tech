@@ -1,0 +1,30 @@
+<%- include('./partials/head.ejs') %>
+
+    <body>
+        <%- include('./partials/nav.ejs') %>
+
+        <div class="main">
+            <div class="login-main">
+                <div class="form-wrapper">
+                    <form>
+                        <h3>Login</h3>
+                        <label for="uname">Username</label>
+                        <br>
+                        <input type="text" id="uname" name="uname" placeholder="eg Jon Doe">
+                        <br>
+                        <label for="password">Password</label>
+                        <br>
+                        <input type="password" id="password" name="password" >
+                        <br>
+                        <input type="button" value="LOGIN">
+                        <br>
+                        <p class="register">
+                            Not a member? <a href="/register">Register here</a>
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <%- include('./partials/footer.ejs') %>
+    </body>

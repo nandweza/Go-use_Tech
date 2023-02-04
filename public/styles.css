@@ -191,7 +191,7 @@ nav .login {
     text-align: center;
     font-size: 3rem;
     font-weight: 800;
-    color: var(--main-blue);
+    color: var(--main-white);
 }
 
 .contact-wrapper {
@@ -215,6 +215,7 @@ nav .login {
 .contact-wrapper .left h3 {
     font-size: 2.5rem;
     margin-bottom: 20px;
+    text-align: center;
 }
 
 .contact-wrapper .left label {
@@ -296,4 +297,62 @@ footer .footer-text {
     font-weight: lighter;
     margin-right: 400px;
     color: white;
+}
+
+/* login */
+.login-main {
+    margin-top: 175px;
+}
+
+.form-wrapper {
+    background-color: white;
+    padding: 50px 80px;
+    border-radius: 25px;
+}
+
+/* .form-wrapper form {
+    background-color: var(--main-black);
+    padding: 70px;
+    border-radius: 25px;
+} */
+
+.form-wrapper form h3 {
+    text-align: center;
+    font-size: 3rem;
+    font-weight: 800;
+}
+
+.form-wrapper form label {
+    margin-bottom: 0;
+    margin-top: 5px;
+    font-size: 1.2rem;
+    margin-left: 10px;
+}
+
+.form-wrapper form input {
+    width: 100%;
+    border-radius: 25px;
+    padding: 8px;
+    font-size: 1rem;
+    font-weight: 400;
+    margin: 10px;
+}
+
+.form-wrapper form p {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+.form-wrapper form a {
+    color: var(--main-orange);
+}
+
+.form-wrapper form a:hover {
+    color: var(--main-blue);
+}
+
+/* register */
+.register-main {
+    margin: 50px;
 }
