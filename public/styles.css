@@ -60,7 +60,7 @@ a:hover {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    margin: 20px auto;
+    margin: 10px auto;
   }
   
   nav li {
@@ -72,15 +72,16 @@ a:hover {
     color: var(--main-blue);
     font-size: 1.6rem;
     text-align: center;
-    padding: 14px 30px;
+    padding: 5px 30px;
+    padding-top: 15px;
     text-decoration: none;
     /*border-radius: 25px;*/
   }
 
 nav a:hover {
-    color: var(--main-white);
+    color: var(--main-orange);
     text-shadow: 1px 1px 1px 1px solid #262626;
-    border-bottom: 2px solid var(--main-white);
+    border-bottom: 2px solid var(--main-orange);
     padding-bottom: 2px;
   }
 
