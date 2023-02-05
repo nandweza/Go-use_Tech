@@ -357,3 +357,23 @@ footer .footer-text {
 .register-main {
     margin: 50px;
 }
+
+/* courses */
+.course-nav {
+    float: right;
+    padding-bottom: 20px;
+    position: fixed;
+    width: 100%;
+    box-shadow: 0px 4px 2px rgb(243, 239, 239), 0px -4px 2px rgb(238, 227, 227);
+}
+
+.course-nav ul {
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.course-nav ul input {
+    margin-top: 15px;
+    margin-right: 50px;
+    padding: 8px;
+}

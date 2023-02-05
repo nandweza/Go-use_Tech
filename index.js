@@ -2,7 +2,8 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const dotenv = require("dotenv");
-const homeRouter = require('./routes/home');
+const appRouter = require('./routes/appRouter');
+// const coursesRouter = require('./routes/courses');
 // const authRoute = require('/routes/auth');
 // const userRoute = require('/routes/users');
 
@@ -30,7 +31,8 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/', homeRouter);
+app.use('/', appRouter);
+//app.use('/courses', coursesRouter);                                                                                                                                                                                        
 // app.use('/login', homeRouter);
 // app.use('/auth', authRoute);
 // app.use('/users', userRoute);
