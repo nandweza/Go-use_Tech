@@ -330,13 +330,18 @@ footer .footer-text {
     margin-left: 10px;
 }
 
-.form-wrapper form input {
+.form-wrapper form input,
+.form-wrapper form button {
     width: 100%;
     border-radius: 25px;
     padding: 8px;
     font-size: 1rem;
     font-weight: 400;
     margin: 10px;
+}
+
+.form-wrapper form button {
+    background-color: var(--main-orange);
 }
 
 .form-wrapper form p {

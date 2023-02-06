@@ -7,7 +7,7 @@ const appRouter = require('./routes/appRouter');
 // const authRoute = require('/routes/auth');
 // const userRoute = require('/routes/users');
 
-const port = 8000;
+const port = 8001;
 dotenv.config();
 
 mongoose.set('strictQuery', true);
