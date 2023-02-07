@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
+const session = require('express-session');
+const flash = require('connect-flash');
 const User = require('../models/User');
 
 //home routes
@@ -19,11 +21,18 @@ router.post("/register", async (req, res) => {
     const newUser = new User({
         username: req.body.username,
         email: req.body.email,
-        profilePic: req.body.profilePic,
-        isAdmin: req.body.isAdmin,
+        role: req.body.role,
         password: (await bcrypt.hash(req.body.password, salt)),
-        cpassword: (await bcrypt.compare(req.body.cpassword, req.body.password)),
+        cpassword: (await bcrypt.hash(req.body.cpassword, salt)),
     });
+
+    if (req.body.password.length < 6) {
+        return res.status(400).json({ message: "Password must be at least 6 characters long" })
+    }
+
+    if (req.body.password !== req.body.cpassword) {
+        return res.status({ message: 'password does not match' })
+    }
 
     try {
         await newUser.save();
@@ -49,9 +58,14 @@ router.post("/login", async (req, res) => {
       // check user password with hashed password stored in the database
       const validPassword = bcrypt.compare(password, user.password);
       if (validPassword) {
-        res.redirect('/courses');
-        console.log("login successfully");
-        // res.status(200).json({ message: "Valid password" });
+        if (user.role === 'admin') {
+            res.redirect('/admin');
+        } else {
+
+            res.redirect('/courses');
+            console.log("login successfully");
+            // res.status(200).json({ message: "Valid password" });
+        }
       } else {
         res.redirect("/login");
         // res.status(400).json({ error: "Invalid Password" });
@@ -63,6 +77,11 @@ router.post("/login", async (req, res) => {
 router.get('/courses', (req, res) => {
     res.render('courses');
 });
+
+//admin routes
+router.get('/admin', (req, res) => {
+    res.render('admin');
+})
 
 //logout
 router.get('/logout', (req, res) => {
