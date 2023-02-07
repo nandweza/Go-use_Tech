@@ -2,4 +2,82 @@
 
     <body>
         <%- include('./partials/admin-navbar.ejs') %>
+
+        <main class="admin">
+            <div class="admin-grid">
+                <div class="admin-card">
+                    <div class="info">
+                        <i class="fa fa-users"></i>
+                        <div class="info-text">
+                            10 Users
+                        </div>
+                    </div>
+                </div>
+                <div class="admin-card">
+                    <div class="info">
+                        <i class="fa fa-book"></i>
+                        <div class="info-text">
+                            15 Courses
+                        </div>
+                    </div>
+                </div>
+                <div class="admin-card">
+                    <div class="info">
+                        <%= new Date().getHours(); %>:<%= new Date().getMinutes(); %>:<%= new Date().getSeconds(); %>
+                        <br>
+                        <div class="info-text">
+                            <%= new Date().getDate(); %>.<%= new Date().getMonth(); %>.<%= new Date().getFullYear(); %>
+                        </div>
+                    </div>
+                </div>
+                <div class="admin-card">
+                    <div class="info">
+                        <i class="fa fa-globe"></i>
+                        <div class="info-text">
+                            <a href="/">Go to Page</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="admin-card">
+                    <div class="info">
+                        <i class="fa fa-list"></i>
+                        <div class="info-text">
+                            <a href="/">Go to Courses</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="admin-card">
+                    <div class="info">
+                        <i class="fa fa-newspaper-o"></i>
+                        <div class="info-text">
+                            <a href="/">View Blog Posts</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="admin-card">
+                    <div class="info">
+                        <i class="fa fa-plus"></i>
+                        <div class="info-text">
+                            <a href="/">Add Course</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="admin-card">
+                    <div class="info">
+                        <i class="fa fa-plus"></i>
+                        <div class="info-text">
+                            <a href="/">Add Post</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="admin-card">
+                    <div class="info">
+                        <i class="fa fa-users"></i>
+                        <div class="info-text">
+                            <a href="/">View Users</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
     </body>

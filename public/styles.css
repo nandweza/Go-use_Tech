@@ -385,24 +385,6 @@ footer .footer-text {
 
 /* admin page */
 
-.sidebar {
-    color: var(--main-black);
-    width: 200px;
-    flex: 1;
-    height: calc(100vh - 100px);
-    background-color: #f1f1f1;
-    position: fixed;
-    top: 100px;
-}
-
-.sidebar ul {
-    margin-left: 0;
-}
-
-.sidebar a {
-    color: var(--main-black);
-}
-
 .nav-wrapper {
     display: flex;
     align-items: center;
@@ -426,7 +408,7 @@ footer .footer-text {
 .nav-wrapper .topleft h2 {
     margin-left: -500px;
     margin-right: 500px;
-    margin-top: 50px;
+    margin-top: 40px;
     font-size: 3.5rem;
     font-weight: 800;
 }
@@ -436,10 +418,107 @@ footer .footer-text {
     align-items: center;
     float: right;
     font-size: 1.5rem;
+    margin-left: 200px;
+}
+
+.nav-wrapper .topright a {
+    color: var(--main-black);
+    border: 2px solid var(--main-black);
+    padding: 10px;
+}
+
+.nav-wrapper .topright a:hover {
+    color: var(--main-blue);
+    border: 2px solid var(--main-blue);
+}
+
+.sidebar {
+    color: var(--main-black);
+    width: 200px;
+    flex: 1;
+    height: calc(100vh - 100px);
+    background-color: #f1f1f1;
+    position: fixed;
+    top: 100px;
+}
+
+.sidebar ul {
+    margin-left: 0;
+}
+
+.sidebar a {
+    color: var(--main-black);
+}
+
+/* .sidebar ul li .nav-header {
+    width: 100%;
+    margin: 20px;
+    padding-right: 20px;
+    background-color: azure;
+} */
+
+.sidebar ul li h3 {
+    margin-left: -15px;
+    margin-top: 10px;
+    font-size: 1.5rem;
+    opacity: 70%;
+    /* border-bottom: 1px solid var(--main-black); */
+}
+
+.sidebar ul li .nav-content a {
+    margin-left: -15px;
+    padding-top: 0;
+    margin-top: 0;
+    font-size: 1.7rem;
+    font-weight: 500;
+}
+
+.sidebar ul li .nav-content a:hover {
+    border: none;
+    color: var(--main-blue);
+}
+
+.sidebar ul li .nav-content .l-m {
+    margin-left: -50px;
 }
 
 .admin {
-    margin: 220px;
-    margin-top: 20px;
+    margin-left: 200px;
     margin-bottom: 0;
+}
+
+.admin .admin-grid {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-gap: 2rem;
+    margin-left: 50px;
+    padding-top: 120px;
+}
+
+.admin .admin-grid .admin-card {
+    width: 300px;
+    height: 150px;
+    background-color: white;
+    cursor: pointer;
+    text-align: center;
+    padding: 10px;
+    color: var(--main-black);
+}
+
+.admin .admin-grid .admin-card .info {
+    font-size: 40px;
+    font-weight: 800;
+    margin-top: 20px;
+}
+
+.admin .admin-grid .admin-card .info .info-text {
+    font-size: 25px;
+    font-weight: normal;
+}
+
+.admin .admin-grid .admin-card .info .info-text a {
+    font-size: 25px;
+    font-weight: normal;
+    text-align: center;
+    color: var(--main-black);
 }
