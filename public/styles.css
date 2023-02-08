@@ -458,28 +458,26 @@ footer .footer-text {
 } */
 
 .sidebar ul li h3 {
-    margin-left: -15px;
+    margin-left: -10px;
     margin-top: 10px;
-    font-size: 1.5rem;
+    font-size: 1.7rem;
+    font-weight: 600;
     opacity: 70%;
     /* border-bottom: 1px solid var(--main-black); */
 }
 
 .sidebar ul li .nav-content a {
-    margin-left: -15px;
+    /* margin-left: -15px; */
     padding-top: 0;
     margin-top: 0;
-    font-size: 1.7rem;
+    font-size: 1.5rem;
     font-weight: 500;
+    text-align: left;
 }
 
 .sidebar ul li .nav-content a:hover {
     border: none;
     color: var(--main-blue);
-}
-
-.sidebar ul li .nav-content .l-m {
-    margin-left: -50px;
 }
 
 .admin {
@@ -521,4 +519,28 @@ footer .footer-text {
     font-weight: normal;
     text-align: center;
     color: var(--main-black);
+}
+
+/* add blog post */
+.admin .container {
+    padding-top: 120px;
+}
+
+.admin .container form {
+    margin: 0 100px;
+}
+
+.admin .container form input[type="text"],
+.admin .container form input[type="file"],
+.admin .container form textarea {
+    margin-bottom: 20px;
+}
+
+.admin .container form input[type="file"]{
+    cursor: pointer;
+}
+
+/* add course */
+.admin .container .course-form {
+    margin: 0 200px;
 }

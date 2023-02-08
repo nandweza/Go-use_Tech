@@ -1,0 +1,15 @@
+<%- include('./partials/head.ejs') %>
+<body>
+    <%- include('./partials/admin-navbar.ejs') %>
+    <main class="admin">
+        <div class="container">
+            <form action="/addPost" method="post" enctype="multipart/form-data">
+                <input type="text" name="title" id="title" placeholder="Blog title">
+                <input type="file" name="img" id="img" multiple="multiple" accept="image/*">
+                <textarea name="content" id="content" cols="30" rows="20" placeholder="Write here"></textarea>
+                <button type="submit" class="btn btn-primary">Add Post</button>
+            </form>
+        </div>
+    </main>
+    
+</body>

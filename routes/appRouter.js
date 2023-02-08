@@ -1,9 +1,25 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
+const multer = require('multer');
+const multiparty = require('multiparty');
 const session = require('express-session');
 const flash = require('connect-flash');
 const User = require('../models/User');
+const Course = require('../models/Course');
+const Post = require('../models/Post');
+
+let posts = [];
+let courses = [];
+
+const Storage = multer.diskStorage({
+    destination: "./public/uploads",
+    filename: (req, file, cb) => {
+        cb(null, file.originalname)
+    }
+});
+
+const upload = multer({ storage: Storage }).single('img');
 
 //home routes
 router.get('/', (req, res) => {
@@ -61,7 +77,6 @@ router.post("/login", async (req, res) => {
         if (user.role === 'admin') {
             res.redirect('/admin');
         } else {
-
             res.redirect('/courses');
             console.log("login successfully");
             // res.status(200).json({ message: "Valid password" });
@@ -81,6 +96,60 @@ router.get('/courses', (req, res) => {
 //admin routes
 router.get('/admin', (req, res) => {
     res.render('admin');
+})
+
+/* *** add blog posts routes *** */
+
+//get addPost page
+router.get('/addPost', (req, res) => {
+    res.render('addPost');
+})
+
+//post blog post
+router.post('/addPost', upload, (req, res) => {
+    const { title, content } = req.body;
+    const img = req.file.filename;
+
+    if (!title || !content || !img) {
+        return res.redirect('/addPost');
+    }
+
+    const posts = new Post({ title, content, img })
+
+    posts
+      .save()
+      .then(() => {
+        console.log('Post Created!');
+        res.redirect('/admin');
+      })
+      .catch((err) => console.log(err));
+})
+
+/* *** course routes *** */
+
+//get course page
+router.get('/addCourse', (req, res) => {
+    res.render('addCourse');
+})
+
+//post course
+router.post('/addCourse', upload, (req, res) => {
+    const { title, desc, author } = req.body;
+    const video = req.file.filename;
+
+    if (!title || !desc || !author || !video) {
+        return res.redirect('/addPost');
+    }
+
+    const courses = new Course({ title, desc, author, video })
+
+    courses
+      .save()
+      .then(() => {
+        console.log('Course Created!');
+        res.redirect('/admin');
+      })
+      .catch((err) => console.log(err));
 })
 
 //logout
