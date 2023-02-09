@@ -3,9 +3,9 @@
     <%- include('./partials/admin-navbar.ejs') %>
     <main class="admin">
         <div class="container">
-            <form action="/addCourse" method="post" class="course-form">
+            <form action="/addCourse" method="post" class="course-form" enctype="multipart/form-data">
                 <input type="text" name="title" id="title" placeholder="Course Title">
-                <input type="file" name="vdo" id="vdo" placeholder="add video">
+                <input type="file" name="img" id="img" placeholder="add video" multiple="multiple" accept="image/*">
                 <input type="text" name="author" id="author" placeholder="by Jon Doe">
                 <textarea name="desc" id="desc" cols="30" rows="15" placeholder="Course description"></textarea>
                 <button type="submit" class="btn btn-primary">Add Course</button>

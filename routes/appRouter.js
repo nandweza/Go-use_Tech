@@ -125,6 +125,12 @@ router.post('/addPost', upload, (req, res) => {
       .catch((err) => console.log(err));
 })
 
+//get blog posts
+router.get('/blog', async (req, res) => {
+    posts = await Post.find().sort({createdAt: -1});
+    res.render('blog', { posts: posts });
+})
+
 /* *** course routes *** */
 
 //get course page
@@ -135,13 +141,13 @@ router.get('/addCourse', (req, res) => {
 //post course
 router.post('/addCourse', upload, (req, res) => {
     const { title, desc, author } = req.body;
-    const video = req.file.filename;
+    const img = req.file.filename;
 
-    if (!title || !desc || !author || !video) {
-        return res.redirect('/addPost');
+    if (!title || !desc || !author || !img) {
+        return res.redirect('/addCourse');
     }
 
-    const courses = new Course({ title, desc, author, video })
+    const courses = new Course({ title, desc, author, img })
 
     courses
       .save()

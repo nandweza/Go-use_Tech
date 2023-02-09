@@ -11,6 +11,11 @@
     --main-orange: rgb(233, 107, 34);
 }
 
+html,body {
+    margin:0;
+    padding:0;
+}
+
 html {
     font-size: 68%;
     font-family: 'Courier New', Courier, monospace;
@@ -298,6 +303,71 @@ footer .footer-text {
     font-weight: lighter;
     margin-right: 400px;
     color: white;
+}
+
+/* Blog */
+.blog .main {
+    padding-top: 200px;
+    height: auto;
+    width: 100vw;
+    padding-left: 90px;
+    padding-right: 90px;
+}
+
+.blog-header{
+    text-align: center;
+}
+
+.featured-blogs {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    place-items: center;
+    grid-gap: 2rem;
+    width: 100%;
+    gap: 0;
+    margin: 0;
+    margin-top: 4rem;
+    margin-bottom: 3rem;
+}
+
+.fblog {
+    width: 350px;
+    height: 400px;
+    padding: 12px;
+    background-color: var(--main-white);
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+    color: var(--main-black);
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.fblog .date {
+    padding-top: 5px;
+    padding-left: 5px;
+    font-size: 11px;
+    font-weight: normal;
+    opacity: 70%;
+}
+
+.fblog .title {
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.fblog .img-div {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.fblog .img-div img{
+    margin: 0 auto;
+    width: 100%;
+    height: 200px;
+}
+
+.fblog .desc {
+    padding: 2px;
+    font-weight: 400;
 }
 
 /* login */

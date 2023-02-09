@@ -1,12 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+<%- include('./partials/head.ejs') %>
 <body>
-    <main class="blog-main"></main>
+    <%- include('./partials/nav.ejs') %>
+    <div class="blog content">
+        <div class="main">
+            <!-- <div class="blog-header">My blog content</div> -->
+            <div class="box featured-blogs">
+                <% if (posts.length > 0) { %>
+                    <% posts.forEach((post) => { %>
+                        <div class="single-blog fblog">
+                            <div class="img-div">
+                                <img src="<%= post.img %>" class="img-responsive"/>
+                            </div>
+                            <span class="date">
+                                <%= post.createdAt %>
+                            </span>
+                            <br>
+                            <br>
+                            <div class="title">
+                                <%= post.title %>
+                            </div>
+                            <div class="desc">
+                                <p>
+                                  <%= post.content.substring(0, 180) + "..." %>
+                                  <a href="/blog/<%= post._id %>" style="color: red;">Read more.</a>
+                                </p>
+                            </div>
+                        </div>
+                    <% }) %>
+                <% } else { %>
+                <div style="margin: auto;">There are no blog posts to display...</div>
+                <% } %>
+            </div>
+        </div>
+    </div>
+
+    <%- include('./partials/footer.ejs') %>
 </body>
 </html>
