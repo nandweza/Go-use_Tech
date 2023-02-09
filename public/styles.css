@@ -2,6 +2,9 @@
 
 * {
     box-sizing: border-box;
+    overflow-x: hidden;
+    margin:0;
+    padding:0;
 }
 
 :root {
@@ -9,11 +12,6 @@
     --main-white: whitesmoke;
     --main-blue: rgb(31, 112, 192);
     --main-orange: rgb(233, 107, 34);
-}
-
-html,body {
-    margin:0;
-    padding:0;
 }
 
 html {
@@ -331,6 +329,7 @@ footer .footer-text {
 }
 
 .fblog {
+    overflow-y: hidden;
     width: 350px;
     height: 400px;
     padding: 12px;
@@ -368,6 +367,7 @@ footer .footer-text {
 .fblog .desc {
     padding: 2px;
     font-weight: 400;
+    height: 300px;
 }
 
 /* login */
