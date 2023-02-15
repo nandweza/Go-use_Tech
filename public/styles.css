@@ -2,7 +2,7 @@
 
 * {
     box-sizing: border-box;
-    overflow-x: hidden;
+    /* overflow-x: hidden; */
     margin:0;
     padding:0;
 }
@@ -17,6 +17,11 @@
 html {
     font-size: 68%;
     font-family: 'Courier New', Courier, monospace;
+}
+
+body, h1, h2, h3, h4, h5, h6, p, div, span{
+    margin: 0;
+    padding: 0;
 }
 
 body {
@@ -453,6 +458,18 @@ footer .footer-text {
     padding: 8px;
 }
 
+/* ****Course Page**** */
+.courses {
+    margin-top: 250px;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-gap: 4rem;
+}
+
+.single-course {
+    width: 400px;
+}
+
 /* admin page */
 
 .nav-wrapper {
@@ -528,7 +545,7 @@ footer .footer-text {
 } */
 
 .sidebar ul li h3 {
-    margin-left: -10px;
+    margin-left: 15px;
     margin-top: 10px;
     font-size: 1.7rem;
     font-weight: 600;

@@ -7,7 +7,7 @@
                     <img class="logo" src="/images/go.png" alt="logo">
                 </li>
                 <li>
-                    <input type="search" id="search" name="search" placeholder="Search for a scourse">
+                    <input type="search" id="search" name="search" placeholder="Search for a course">
                 </li>
                 <li>
                     <a href="/logout">Logout</a>
@@ -15,6 +15,32 @@
             </ul>
         </nav>
         <div class="main">
-
+            <div class="courses">
+                <% if (courses.length > 0) { %>
+                    <% courses.forEach((course) => { %>
+                        <div class="single-course">
+                            <div class="img-div">
+                                <video src="<%= course.img %>" class=""/>
+                                </div>
+                        <span class="date">
+                            <%= course.createdAt %>
+                        </span>
+                        <br>
+                        <br>
+                        <div class="title">
+                            <%= course.title %>
+                        </div>
+                        <div class="desc">
+                            <p>
+                              <%= course.desc %>
+                              <!-- <a href="/course/<%= course._id %>" style="color: red;">Read more.</a> -->
+                            </p>
+                        </div>
+                    </div>
+                    <% }) %>
+                <% } else { %>
+                <div style="margin: auto;">There are no blog posts to display...</div>
+                <% } %>
+            </div>
         </div>
     </body>

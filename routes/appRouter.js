@@ -8,6 +8,20 @@ const flash = require('connect-flash');
 const User = require('../models/User');
 const Course = require('../models/Course');
 const Post = require('../models/Post');
+const fs = require('fs');
+
+// const initializeApp = require('firebase/app');
+// const getStorage =  require('firebase/storage');
+// const ref =  require('firebase/storage');
+// const uploadBytes =  require('firebase/storage');
+// const getDownloadURL =  require('firebase/storage');
+// const config = require('../config/config');
+
+// //initialize a firebase app
+// initializeApp(config.firebaseConfig);
+
+// //initialize cloud storage and get a reference to the service
+// const storage = getStorage();
 
 let posts = [];
 let courses = [];
@@ -89,8 +103,9 @@ router.post("/login", async (req, res) => {
   });  
 
 //courses routes
-router.get('/courses', (req, res) => {
-    res.render('courses');
+router.get('/courses', async (req, res) => {
+    courses = await Course.find().sort({createdAt: -1});
+    res.render('courses', { courses: courses });
 });
 
 //admin routes

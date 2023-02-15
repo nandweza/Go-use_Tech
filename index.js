@@ -6,6 +6,7 @@ const appRouter = require('./routes/appRouter');
 // const coursesRouter = require('./routes/courses');
 // const authRoute = require('/routes/auth');
 // const userRoute = require('/routes/users');
+// import * as dotenv from 'dotenv';
 
 const port = process.env.PORT || 8001;
 dotenv.config();
