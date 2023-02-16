@@ -392,6 +392,25 @@ footer .footer-text {
     font-weight: bold;
 }
 
+.singlePost .posts-card {
+    margin: 0 200px;
+}
+
+.singlePost .posts-card img {
+    width: 100%;
+}
+
+.singlePost .posts-card h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-top: 30px;
+}
+
+.singlePost .posts-card .desc {
+    font-size: 1.2rem;
+    font-weight: 400;
+}
+
 /* login */
 .login-main {
     margin-top: 175px;
