@@ -460,14 +460,46 @@ footer .footer-text {
 
 /* ****Course Page**** */
 .courses {
-    margin-top: 250px;
+    margin: 250px 100px 20px 100px;
     display: grid;
     grid-template-columns: auto auto auto;
     grid-gap: 4rem;
+    color: var(--main-black);
+}
+
+.courses:hover {
+    cursor: pointer;
+}
+
+.courses .img-div video:hover {
+    paused: false;
+
 }
 
 .single-course {
-    width: 400px;
+    /* width: 400px; */
+}
+
+.single-course .img-div video {
+    border-radius: 10px;
+}
+
+.single-course .date {
+    opacity: 70%;
+    padding: 0 10px;
+}
+
+.single-course .title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 0px 8px;
+}
+
+.single-course .desc {
+    font-size: 1rem;
+    font-weight: normal;
+    width: 300px;
+    padding: 0px 8px;
 }
 
 /* admin page */

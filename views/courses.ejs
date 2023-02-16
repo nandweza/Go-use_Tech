@@ -20,8 +20,10 @@
                     <% courses.forEach((course) => { %>
                         <div class="single-course">
                             <div class="img-div">
-                                <video src="<%= course.img %>" class=""/>
-                                </div>
+                                <video width="320" height="240" muted>
+                                    <source src="<%= course.img %>" type="video/mp4">
+                                </video>
+                            </div>
                         <span class="date">
                             <%= course.createdAt %>
                         </span>
@@ -32,14 +34,14 @@
                         </div>
                         <div class="desc">
                             <p>
-                              <%= course.desc %>
+                              <%= course.desc.substring(0, 100) %>
                               <!-- <a href="/course/<%= course._id %>" style="color: red;">Read more.</a> -->
                             </p>
                         </div>
                     </div>
                     <% }) %>
                 <% } else { %>
-                <div style="margin: auto;">There are no blog posts to display...</div>
+                <div style="margin: auto;">There are no courses to display...</div>
                 <% } %>
             </div>
         </div>
