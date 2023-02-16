@@ -146,6 +146,17 @@ router.get('/blog', async (req, res) => {
     res.render('blog', { posts: posts });
 })
 
+//get single blog post
+router.get("/blog/:id", async (req, res) => {
+    try {
+        const { id } = req.params;
+        const post = await Post.findOne({ _id: id });
+        res.render("singlePost", { post: post });
+    } catch (err) {
+        res.status(500).send("Blog not found");
+    }
+});
+
 /* *** course routes *** */
 
 //get course page
