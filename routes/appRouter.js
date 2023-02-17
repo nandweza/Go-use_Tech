@@ -102,12 +102,6 @@ router.post("/login", async (req, res) => {
     }
   });  
 
-//courses routes
-router.get('/courses', async (req, res) => {
-    courses = await Course.find().sort({createdAt: -1});
-    res.render('courses', { courses: courses });
-});
-
 //admin routes
 router.get('/admin', (req, res) => {
     res.render('admin');
@@ -157,9 +151,21 @@ router.get("/blog/:id", async (req, res) => {
     }
 });
 
+//get all posts by admin
+router.get('/allPosts', async (req, res) => {
+    posts = await Post.find().sort({createdAt: -1});
+    res.render('allPosts', { posts: posts });
+})
+
 /* *** course routes *** */
 
-//get course page
+//courses routes
+router.get('/courses', async (req, res) => {
+    courses = await Course.find().sort({createdAt: -1});
+    res.render('courses', { courses: courses });
+});
+
+//get addCourse page
 router.get('/addCourse', (req, res) => {
     res.render('addCourse');
 })
@@ -182,6 +188,23 @@ router.post('/addCourse', upload, (req, res) => {
         res.redirect('/admin');
       })
       .catch((err) => console.log(err));
+})
+
+//get single course
+router.get("/courses/:id", async (req, res) => {
+    try {
+        const { id } = req.params;
+        const course = await Course.findOne({ _id: id });
+        res.render("singleCourse", { course: course });
+    } catch (err) {
+        res.status(500).send("Course not found");
+    }
+});
+
+//get all courses by admin
+router.get('/allCourses', async (req, res) => {
+    courses = await Course.find().sort({createdAt: -1});
+    res.render('allCourses', { courses: courses });
 })
 
 //logout

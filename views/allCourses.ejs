@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('./partials/head.ejs') %>
+
+    <body>
+        <%- include('./partials/admin-navbar.ejs') %>
+        <div class="all-admin-main">
+            <div class="admin-posts">
+                <div class="posts-wrapper">
+                    <% courses.forEach ( function (course) { %>
+                    <form class="form-bt" action="/delete" method="post">
+                        <div class="icons-2">
+                            <button>
+                                <a href="/edit/<%= course._id %>" data-toggle="model"><i class="fa fa-edit" style="font-size: 30px; color: black;"></i></a>
+                            </button>
+                            <button name="deleteBtn" value="<%=course._id%>" type="submit" class="danger-btn">
+                                <i class="fa fa-trash" style="font-size: 30px; color: black;"></i>
+                            </button>
+                        </div>
+                            <div class="title-text">
+                                <%= course.title %>
+                            </div>
+                            <span>
+                                <%= course.createdAt %>
+                            </span>
+                            <div>
+                                <img src="<%= course.img %>" />
+                            </div>
+                            <div class="desc">
+                                <%= course.desc %>
+                            </div>
+                            <div class="icons">
+                            </div>
+                        </form>
+                    <% }); %>
+                    </div>
+                </div>
+            </div>
+    </body>
+</html>

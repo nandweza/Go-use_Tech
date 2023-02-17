@@ -699,3 +699,38 @@ footer .footer-text {
 .admin .container .course-form {
     margin: 0 200px;
 }
+
+/* get all posts by admin */
+.admin-wrapper {
+    padding-top: 120px;
+    padding-left: 30px;
+    margin-right: 100px;
+}
+
+.posts-wrapper {
+    padding: 50px;
+}
+
+.posts-wrapper form {
+    margin-bottom: 20px;
+    border-bottom: 1px solid #000;
+}
+
+.posts-wrapper .icons {
+    padding-bottom: 50px;
+}
+
+.posts-wrapper  img {
+    max-width: 100%;
+}
+
+.posts-wrapper .title-text {
+    margin-top: 20px;
+    font-size: 4rem;
+    font-weight: bold;
+}
+
+.posts-wrapper.desc {
+    font-size: 1.2rem;
+    padding: 10px;
+}

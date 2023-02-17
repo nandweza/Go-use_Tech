@@ -1,0 +1,21 @@
+<%- include('./partials/head.ejs') %>
+
+<body>
+        <div class="posts-card">
+                <div>
+                    <video width="320" height="240" muted>
+                        <source src="<%= course.img %>" type="video/mp4">
+                    </video>
+                </div>
+                <span class="text-muted">
+                    <%= course.createdAt %>
+                </span>
+                <h2 class="title-text">
+                    <%= course.title %>
+                </h2>
+                <div class="desc mt-2">
+                    <%= course.desc %>
+                </div>
+            </div>
+    </div>
+</body>
