@@ -707,7 +707,8 @@ footer .footer-text {
     margin-right: 100px;
 }
 
-.posts-wrapper {
+.posts-wrapper,
+.course-wrapper {
     padding: 50px;
 }
 

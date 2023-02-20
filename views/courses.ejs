@@ -20,7 +20,7 @@
                     <% courses.forEach((course) => { %>
                         <div class="single-course">
                             <div class="img-div">
-                                <video width="320" height="240" muted>
+                                <video width="320" height="240" muted controls>
                                     <source src="<%= course.img %>" type="video/mp4">
                                 </video>
                             </div>
@@ -34,7 +34,7 @@
                         </div>
                         <div class="desc">
                             <p>
-                              <%= course.desc.substring(0, 100) %>
+                              <%= course.desc.substring(0, 80) %>
                               <a href="/courses<%= courses._id %>" style="color: red;">Read more.</a>
                             </p>
                         </div>

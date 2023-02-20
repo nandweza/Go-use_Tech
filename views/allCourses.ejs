@@ -4,9 +4,9 @@
 
     <body>
         <%- include('./partials/admin-navbar.ejs') %>
-        <div class="all-admin-main">
-            <div class="admin-posts">
-                <div class="posts-wrapper">
+        <div class="admin">
+            <div class="admin-wrapper">
+                <div class="course-wrapper">
                     <% courses.forEach ( function (course) { %>
                     <form class="form-bt" action="/delete" method="post">
                         <div class="icons-2">
@@ -23,8 +23,10 @@
                             <span>
                                 <%= course.createdAt %>
                             </span>
-                            <div>
-                                <img src="<%= course.img %>" />
+                            <div class="img-div">
+                                <video width="640" height="360" controls>
+                                    <source src="<%= course.img %>" type="video/mp4">
+                                </video>
                             </div>
                             <div class="desc">
                                 <%= course.desc %>
