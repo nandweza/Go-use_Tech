@@ -9,7 +9,7 @@
                 <div class="posts-wrapper">
                     <% posts.forEach ( function (post) { %>
                     <form class="form-bt" action="/delete" method="post">
-                        <div class="icons-2">
+                        <div class="icons">
                             <button>
                                 <a href="/edit/<%= post._id %>" data-toggle="model"><i class="fa fa-edit" style="font-size: 30px; color: black;"></i></a>
                             </button>
@@ -20,7 +20,7 @@
                         <div>
                             <img src="<%= post.img %>" />
                         </div>
-                        <span class="text-muted mb-5">
+                        <span class="text-muted">
                             <%= post.createdAt %>
                         </span>
                         <div class="title-text">

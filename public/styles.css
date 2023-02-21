@@ -115,78 +115,117 @@ nav .login {
     color: var(--main-blue);
     background-color: var(--main-white);
     background-size: cover;
-    background-image: url("");
+    background-image: url("/images/main-home.jpg");
 
 }
 
-.main-left {
-    width: 50%;
+.main-home {
     height: 100vh;
     text-align: left;
     margin-top: 250px;
     padding-bottom: 250px;
 }
 
-.main-right {
-    width: 50%;
-    height: 100vh;
-    margin-top: 150px;
-    text-align: center;
+.main-home .text {
+    margin-left: -250px;
 }
 
-.main-left .text {
-    margin-left: 70px;
-}
-
-.main-left h1 {
-    font-size: 3rem;
+.main-home h1 {
+    font-size: 4rem;
     font-weight: 800;
+    border-bottom: 1px solid var(--main-white);
+    margin-bottom: 20px;
+    color: var(--main-white);
 }
 
-.main-left p {
-    font-size: 1rem;
+.main-home p {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: var(--main-white);
 }
 
-.main-right .wrapper {
-    width: 80%;
-    height: 70vh;
-    border-top-left-radius: 25%;
-    border-bottom-right-radius: 25%;
-    background-color: #262626;
+.home-btn {
+    margin-left: -250px;
 }
 
-.main-right .wrapper img {
-    background-size: cover;
-    width: 100%;
-    height: 100%;
-    border-top-left-radius: 25%;
-    border-bottom-right-radius: 25%;
+.home-btn .main-btn {
+    padding: 8px;
+    font-size: 1.5rem;
+}
+
+.home-btn .main-btn a {
+    color: var(--main-white);
+}
+
+.home-btn .left {
+    background: transparent;
+    color: var(--main-white);
+    margin-right: 10px;
+    border: 1px solid var(--main-white);
+}
+
+.home-btn .right {
+    background-color: var(--main-orange);
+    border: none;
 }
 
 .about {
     margin-top: 50px;
     text-align: center;
-    height: auto;
+    height: 100vh;
 }
 
 .about h1 {
-    font-size: 3rem;
+    font-size: 4rem;
     font-weight: 800;
     color: var(--main-blue);
+}
+
+.about .underline {
+    width: 300px;
+    height: 2px;
+    margin-top: 20px;
+    background-color: var(--main-blue);
+    margin: 0 auto;
 }
 
 .abt-wrapper {
     display: grid;
     grid-template-columns: auto auto;
-    margin: 20px;
+    grid-gap: 2rem;
+    margin-top: 70px;
+    padding: 20px 100px;
+}
+
+.abt-wrapper .one {
+    width: 500px;
 }
 
 .abt-wrapper .left {
-    margin-left: 100px;
+    text-align: left;
+    padding: 20pxs;
+    font-size: 1.1rem;
+    background-color: white;
 }
 
 .abt-wrapper .right {
-    margin-right: 100px;
+    
+}
+
+.right .wrapper {
+    width: 100%;
+    height: auto;
+    border-top-left-radius: 25%;
+    border-bottom-right-radius: 25%;
+    background-color: #262626;
+}
+
+.right .wrapper img {
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    border-top-left-radius: 25%;
+    border-bottom-right-radius: 25%;
 }
 
 .contact {

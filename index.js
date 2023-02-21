@@ -33,7 +33,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/', appRouter);
-//app.use('/courses', coursesRouter);                                                                                                                                                                                        
+//app.use('/courses', coursesRouter);
 // app.use('/login', homeRouter);
 // app.use('/auth', authRoute);
 // app.use('/users', userRoute);

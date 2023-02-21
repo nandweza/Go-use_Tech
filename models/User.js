@@ -7,7 +7,7 @@ const UserSchema = new mongoose.Schema(
         password: { type: String, require: true,
                     match:/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/, minlength: 6},
         cpassword: { type: String, required: true},
-        role: {  type: String, default: "Basic", required: true },
+        role: { type: String, default: "Basic", required: true },
     },
     { timestamps: true }
 );
