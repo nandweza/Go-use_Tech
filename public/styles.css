@@ -215,10 +215,6 @@ nav .login {
     font-weight: 600;
 }
 
-.abt-wrapper .right {
-    
-}
-
 .right .wrapper {
     width: 100%;
     height: auto;
@@ -299,6 +295,11 @@ input[type=button] {
 .contact-wrapper .right {
     margin: 0 auto;
     padding: 50px;
+    background-color: white;
+    margin-right: 100px;
+    width: 80%;
+    border-top-right-radius: 25%;
+    border-bottom-left-radius: 25%;
 }
 
 .contact-wrapper .right h3 {
@@ -306,22 +307,24 @@ input[type=button] {
     font-weight: 800;
     margin-top: 50px;
     margin-bottom: 30px;
-    color: white;
+    color: var(--main-black);
+    text-align: center;
 }
 
 .contact-wrapper .right .fa {
     color: var(--main-orange);
-    font-size: 4rem;
+    font-size: 5rem;
     font-weight: 800;
     margin-bottom: 20px;
     margin-top: 20px;
+    padding-left: 20px;
 }
 
 .contact-wrapper .right span {
     font-size: 1.8rem;
-    margin-left: 20px;
-    margin-bottom: 20px;
-    color: white;
+    margin-left: 50px;
+    margin-bottom: 50px;
+    color: var(--main-black);
 }
 
 
@@ -459,7 +462,7 @@ footer .footer-text {
 
 /* login */
 .login-main {
-    margin-top: 175px;
+    margin-top: 100px;
 }
 
 .form-wrapper {
@@ -473,6 +476,15 @@ footer .footer-text {
     padding: 70px;
     border-radius: 25px;
 } */
+
+.form-wrapper .back {
+    text-align: center;
+    border: 1px solid var(--main-black);
+    font-size: 2rem;
+    background: var(--main-orange);
+    color: var(--main-black);
+    border-radius: 25px;
+}
 
 .form-wrapper form h3 {
     text-align: center;
