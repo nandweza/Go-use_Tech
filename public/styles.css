@@ -203,9 +203,16 @@ nav .login {
 
 .abt-wrapper .left {
     text-align: left;
-    padding: 20pxs;
+    padding: 40px;
     font-size: 1.1rem;
     background-color: white;
+    border-top-right-radius: 25%;
+    border-bottom-left-radius: 25%;
+}
+
+.abt-wrapper .left h2 {
+    text-align: center;
+    font-weight: 600;
 }
 
 .abt-wrapper .right {
