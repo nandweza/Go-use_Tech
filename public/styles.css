@@ -14,6 +14,15 @@
     --main-orange: rgb(233, 107, 34);
 }
 
+
+html, body {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    overflow-x: hidden;
+}
+
 html {
     font-size: 68%;
     font-family: 'Courier New', Courier, monospace;
@@ -131,7 +140,7 @@ nav .login {
 }
 
 .main-home h1 {
-    font-size: 4rem;
+    font-size: 5rem;
     font-weight: 800;
     border-bottom: 1px solid var(--main-white);
     margin-bottom: 20px;
@@ -139,7 +148,7 @@ nav .login {
 }
 
 .main-home p {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     margin-bottom: 10px;
     color: var(--main-white);
 }
@@ -193,6 +202,7 @@ nav .login {
     display: grid;
     grid-template-columns: auto auto;
     grid-gap: 2rem;
+    place-items: center;
     margin-top: 70px;
     padding: 20px 100px;
 }
@@ -205,7 +215,8 @@ nav .login {
     text-align: left;
     padding: 40px;
     font-size: 1.1rem;
-    background-color: white;
+    /* background-color: white; */
+    border: 1px solid var(--main-black);
     border-top-right-radius: 25%;
     border-bottom-left-radius: 25%;
 }
@@ -231,13 +242,52 @@ nav .login {
     border-bottom-right-radius: 25%;
 }
 
+/*team section*/
+.team {
+    margin: 0 auto;
+    padding-top: 20px;
+}
+
+.team h2 {
+    font-size: 3rem;
+    font-weight: 700;
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-gap: 4rem;
+    place-items: center;
+}
+
+.team-member img {
+    width: 300px;
+    height: 300px;
+}
+
+.team-member h4 {
+    font-size: 2.2rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+.team-member p {
+    font-size: 1.5rem;
+    font-weight: 500;
+    text-align: center;
+}
+
+/*contact section*/
+
 .contact {
     margin-top: 50px;
     height: auto;
     background-color: var(--main-black);
 }
 
-.contact h1 {
+.contact h2 {
     padding-top: 50px;
     text-align: center;
     font-size: 3rem;
@@ -248,6 +298,7 @@ nav .login {
 .contact-wrapper {
     display: grid;
     grid-template-columns: auto auto;
+    place-items: center;
     margin: 20px;
     margin-bottom: 0;
     padding-bottom: 100px;
@@ -281,7 +332,7 @@ input[type=text], input[type=email], textarea {
     border-radius: 5px;
 }
 
-input[type=button] {
+input[type=submit] {
     margin-top: 5px;
     background-color: var(--main-orange);
     border: none;
