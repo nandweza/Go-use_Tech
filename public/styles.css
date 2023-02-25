@@ -390,10 +390,11 @@ footer {
     padding-top: 15px;
     padding-bottom: 15px;
     font-size: 1vw;
+    padding: 0 20px;
 }
 
 footer .footer-icons {
-    margin-right: 100px;
+    margin-left: auto;
 }
 
 footer .footer-icons li {
@@ -405,9 +406,9 @@ footer .footer-icons a {
 }
 
 footer .footer-text {
+    order: 1;
     font-size: 1.7vw;
     font-weight: lighter;
-    margin-right: 400px;
     color: white;
 }
 
