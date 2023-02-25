@@ -76,7 +76,7 @@ a:hover {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    margin: 10px auto;
+    margin: 5px 0;
   }
   
   nav li {
@@ -86,7 +86,7 @@ a:hover {
   nav li a {
     display: block;
     color: var(--main-blue);
-    font-size: 1.6rem;
+    font-size: 1.6vw;
     text-align: center;
     padding: 5px 30px;
     padding-top: 15px;
@@ -300,8 +300,8 @@ nav .login {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     place-items: center;
-    grid-gap: 2rem;
-    margin: 20px;
+    grid-gap: 4rem;
+    margin: 20px 100px;
     margin-bottom: 0;
     padding-bottom: 100px;
 }
@@ -317,13 +317,13 @@ nav .login {
 }
 
 .contact-wrapper .left h3 {
-    font-size: 2.5rem;
+    font-size: 2.5vw;
     margin-bottom: 20px;
     text-align: center;
 }
 
 .contact-wrapper .left label {
-    font-size: 1.5rem;
+    font-size: 2.5vmin;
     margin-top: 10px;
     margin-bottom: 0;
 }
@@ -348,6 +348,7 @@ input[type=submit] {
 .contact-wrapper .right {
     margin: 0 auto;
     padding: 50px;
+    height: 100%;
     background-color: white;
     /* margin-right: 100px; */
     width: 100%;
@@ -356,7 +357,7 @@ input[type=submit] {
 }
 
 .contact-wrapper .right h3 {
-    font-size: 2.5rem;
+    font-size: 2.5vw;
     font-weight: 800;
     margin-top: 50px;
     margin-bottom: 30px;
@@ -366,7 +367,7 @@ input[type=submit] {
 
 .contact-wrapper .right .fa {
     color: var(--main-orange);
-    font-size: 5rem;
+    font-size: 5vw;
     font-weight: 800;
     margin-bottom: 20px;
     margin-top: 20px;
@@ -374,7 +375,7 @@ input[type=submit] {
 }
 
 .contact-wrapper .right span {
-    font-size: 1.8rem;
+    font-size: 1.8vw;
     margin-left: 50px;
     margin-bottom: 50px;
     color: var(--main-black);
@@ -388,7 +389,7 @@ footer {
     background-color: var(--main-black);
     padding-top: 15px;
     padding-bottom: 15px;
-    font-size: 1rem;
+    font-size: 1vw;
 }
 
 footer .footer-icons {
@@ -404,7 +405,7 @@ footer .footer-icons a {
 }
 
 footer .footer-text {
-    font-size: 1.7rem;
+    font-size: 1.7vw;
     font-weight: lighter;
     margin-right: 400px;
     color: white;
