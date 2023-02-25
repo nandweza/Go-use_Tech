@@ -52,15 +52,15 @@ router.post('/contact', (req, res) => {
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-            user: 'allannandweza@gmail.com',
-            pass: 'raak arbd cizr rlpw'
+            user: 'usetech.go@gmail.com',
+            pass: 'qubqkkmudpltverb'
         }
     });
     
     const mailOptions = {
         from: req.body.email,
-        to: 'allannandweza@gmail',
-        suject: `Message from ${req.body.email}: ${req.body.subject}`,
+        to: 'usetech.go@gmail.com',
+        subject: `Message from ${req.body.email}: ${req.body.subject}`,
         text: req.body.message
     }
 

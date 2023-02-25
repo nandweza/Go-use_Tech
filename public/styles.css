@@ -2,7 +2,6 @@
 
 * {
     box-sizing: border-box;
-    /* overflow-x: hidden; */
     margin:0;
     padding:0;
 }
@@ -117,7 +116,7 @@ nav .login {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    align-items: left;
+    align-items: center;
     width: 100vw;
     height: 100vh;
     margin: 0;
@@ -128,19 +127,19 @@ nav .login {
 
 }
 
-.main-home {
+/* .main-home {
     height: 100vh;
     text-align: left;
     margin-top: 250px;
     padding-bottom: 250px;
-}
+} */
 
-.main-home .text {
+/* .main-home .text {
     margin-left: -250px;
-}
+} */
 
 .main-home h1 {
-    font-size: 5rem;
+    font-size: 5vw;
     font-weight: 800;
     border-bottom: 1px solid var(--main-white);
     margin-bottom: 20px;
@@ -148,18 +147,18 @@ nav .login {
 }
 
 .main-home p {
-    font-size: 1.5rem;
+    font-size: 2.7vmin;
     margin-bottom: 10px;
     color: var(--main-white);
 }
 
-.home-btn {
+/* .home-btn {
     margin-left: -250px;
-}
+} */
 
 .home-btn .main-btn {
     padding: 8px;
-    font-size: 1.5rem;
+    font-size: 3vmin;
 }
 
 .home-btn .main-btn a {
@@ -182,39 +181,32 @@ nav .login {
     margin-top: 50px;
     text-align: center;
     height: 100vh;
+    margin-bottom: 20px;
 }
 
 .about h1 {
-    font-size: 4rem;
+    font-size: 4vw;
     font-weight: 800;
     color: var(--main-blue);
 }
 
-.about .underline {
-    width: 300px;
-    height: 2px;
-    margin-top: 20px;
-    background-color: var(--main-blue);
-    margin: 0 auto;
-}
-
 .abt-wrapper {
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: repeat(2, 1fr);
     grid-gap: 2rem;
     place-items: center;
-    margin-top: 70px;
+    margin-top: 20px;
     padding: 20px 100px;
 }
 
-.abt-wrapper .one {
-    width: 500px;
-}
+/* .abt-wrapper .one {
+    width: 100%;
+} */
 
 .abt-wrapper .left {
     text-align: left;
     padding: 40px;
-    font-size: 1.1rem;
+    font-size: 2vmin;
     /* background-color: white; */
     border: 1px solid var(--main-black);
     border-top-right-radius: 25%;
@@ -224,6 +216,7 @@ nav .login {
 .abt-wrapper .left h2 {
     text-align: center;
     font-weight: 600;
+    font-size: 2vw;
 }
 
 .right .wrapper {
@@ -244,12 +237,12 @@ nav .login {
 
 /*team section*/
 .team {
-    margin: 0 auto;
-    padding-top: 20px;
+    height: auto;
+    margin-top: 90px;
 }
 
 .team h2 {
-    font-size: 3rem;
+    font-size: 3vw;
     font-weight: 700;
     text-align: center;
     padding-bottom: 20px;
@@ -257,7 +250,7 @@ nav .login {
 
 .team-grid {
     display: grid;
-    grid-template-columns: auto auto auto;
+    grid-template-columns: repeat(3, 1fr);
     grid-gap: 4rem;
     place-items: center;
 }
@@ -267,14 +260,22 @@ nav .login {
     height: 300px;
 }
 
+@media screen and (min-width: 1500px) {
+    .team-member img {
+      width: 500px;
+      height: 500px;
+    }
+  }
+  
+
 .team-member h4 {
-    font-size: 2.2rem;
+    font-size: 1.8vw;
     font-weight: 600;
     text-align: center;
 }
 
 .team-member p {
-    font-size: 1.5rem;
+    font-size: 1.3vw;
     font-weight: 500;
     text-align: center;
 }
@@ -290,15 +291,16 @@ nav .login {
 .contact h2 {
     padding-top: 50px;
     text-align: center;
-    font-size: 3rem;
+    font-size: 3.5vw;
     font-weight: 800;
     color: var(--main-white);
 }
 
 .contact-wrapper {
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: repeat(2, 1fr);
     place-items: center;
+    grid-gap: 2rem;
     margin: 20px;
     margin-bottom: 0;
     padding-bottom: 100px;
@@ -306,12 +308,12 @@ nav .login {
 
 .contact-wrapper .left {
     background-color: white;
-    margin: 0 auto;
+    /* margin: 0 auto; */
     padding: 50px;
     border-top-left-radius: 25%;
     border-bottom-right-radius: 25%;
-    width: 80%;
-    margin-left: 100px;
+    width: 100%;
+    /* margin-left: 100px; */
 }
 
 .contact-wrapper .left h3 {
@@ -347,8 +349,8 @@ input[type=submit] {
     margin: 0 auto;
     padding: 50px;
     background-color: white;
-    margin-right: 100px;
-    width: 80%;
+    /* margin-right: 100px; */
+    width: 100%;
     border-top-right-radius: 25%;
     border-bottom-left-radius: 25%;
 }
