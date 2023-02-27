@@ -145,7 +145,7 @@ nav .login {
         cursor: pointer;
         /* width: 100px; */
         background: none;
-        margin-top: 20px;
+        margin-top: 40px;
         margin-right: 40px;
     }
     .dropdown-nav {
@@ -193,34 +193,25 @@ nav .login {
 
 }
 
-/* .main-home {
-    height: 100vh;
-    text-align: left;
-    margin-top: 250px;
-    padding-bottom: 250px;
-} */
-
-/* .main-home .text {
-    margin-left: -250px;
-} */
-
 .main-home h1 {
     font-size: 5vw;
     font-weight: 800;
     border-bottom: 1px solid var(--main-white);
     margin-bottom: 20px;
     color: var(--main-white);
+    padding: 0 10px 0 20px;
 }
 
 .main-home p {
     font-size: 2.7vmin;
     margin-bottom: 10px;
     color: var(--main-white);
+    padding: 0 10px 0 20px;
 }
 
-/* .home-btn {
-    margin-left: -250px;
-} */
+.home-btn {
+    padding-left: 20px;
+}
 
 .home-btn .main-btn {
     padding: 8px;
