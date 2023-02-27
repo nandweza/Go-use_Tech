@@ -520,7 +520,7 @@ footer {
     padding-top: 15px;
     padding-bottom: 15px;
     font-size: 1vw;
-    padding: 0 20px;
+    padding: 20px;
 }
 
 footer .footer-icons {
@@ -535,11 +535,16 @@ footer .footer-icons a {
     color: white;
 }
 
+footer .footer-icons .fa {
+    font-size: 3vmin;
+}
+
 footer .footer-text {
     order: 1;
-    font-size: 1.7vw;
+    font-size: 3vmin;
     font-weight: lighter;
     color: white;
+    padding: 8px;
 }
 
 /* Blog */
