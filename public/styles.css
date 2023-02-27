@@ -50,7 +50,7 @@ a {
     text-decoration: none;
     font-weight: 600;
     padding: 10px;
-    padding-right: 30px;
+    /* padding-right: 30px; */
     color: var(--main-blue);
 }
 
@@ -88,7 +88,7 @@ a:hover {
     color: var(--main-blue);
     font-size: 1.6vw;
     text-align: center;
-    padding: 5px 30px;
+    padding: 5px 20px;
     padding-top: 15px;
     text-decoration: none;
     /*border-radius: 25px;*/
@@ -109,6 +109,72 @@ nav .logo {
 
 nav .login {
     margin-left: 150px;
+}
+
+.dropdown {
+    display: none;
+}
+
+@media (max-width: 1150px) {
+    .navbar {
+        display: none;
+    }
+
+    .dropdown {
+        width: 100%;
+        background: var(--main-white);
+        position: fixed;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+    .dropdown .logo {
+        margin-top: 10px;
+        margin-left: 40px;
+        width: 100px;
+        text-align: center;
+    }
+    .drop-btn {
+        /* float: left; */
+        /* text-align: center; */
+        padding: 0 8px;
+        font-size: 4vw;
+        border: none;
+        border-radius: 0;
+        cursor: pointer;
+        /* width: 100px; */
+        background: none;
+        margin-top: 20px;
+        margin-right: 40px;
+    }
+    .dropdown-nav {
+        right: 0;
+        display: none;
+        position: absolute;
+        padding: 12px 16px;
+        background-color: var(--main-white);
+        z-index: 1;
+        width: 100%;
+        text-align: center;
+    }
+    .dropdown-nav a {
+        /* color: var(--main-white); */
+        float: none;
+        display: block;
+        padding: 12px 16px;
+        text-decoration: none;
+    }
+    .dropdown:hover .dropdown-nav {
+        display: block;
+    }
+}
+
+@media (max-width: 820px) {
+    .dropdown .logo {
+        width: 70px;
+        margin-left: 20px;
+    }
 }
 
 /* home page */
@@ -196,7 +262,7 @@ nav .login {
     grid-gap: 2rem;
     place-items: center;
     margin-top: 20px;
-    padding: 20px 100px;
+    padding: 20px 50px;
 }
 
 /* .abt-wrapper .one {
@@ -261,6 +327,12 @@ nav .login {
 }
 
 @media screen and (min-width: 1500px) {
+    nav .logo {
+        margin-right: 900px;
+    }
+    nav .login {
+        margin-left: 50px;
+    }
     .team-member img {
       width: 500px;
       height: 500px;
@@ -315,6 +387,12 @@ nav .login {
     width: 100%;
     /* margin-left: 100px; */
 }
+
+/* @media screen and (max-width: 1280px) {
+    .contact-wrapper {
+        margin: 15px 20px;
+    }
+} */
 
 .contact-wrapper .left h3 {
     font-size: 2.5vw;
@@ -375,7 +453,7 @@ input[type=submit] {
 }
 
 .contact-wrapper .right span {
-    font-size: 1.8vw;
+    font-size: 2.2vmin;
     margin-left: 50px;
     margin-bottom: 50px;
     color: var(--main-black);
