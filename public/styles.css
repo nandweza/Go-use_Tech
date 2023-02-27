@@ -318,7 +318,7 @@ nav .login {
 /*team section*/
 .team {
     height: auto;
-    margin-top: 90px;
+    margin-top: 50px;
 }
 
 .team h2 {
@@ -331,13 +331,23 @@ nav .login {
 .team-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-gap: 4rem;
+    grid-gap: 1.2rem;
     place-items: center;
 }
 
 .team-member img {
-    width: 300px;
-    height: 300px;
+    width: 20vw;
+    height: 30vh;
+}
+
+@media (max-width: 500px) {
+    .team-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .team-member img {
+        width: 120px;
+        height: 120px;
+    }
 }
 
 @media screen and (min-width: 1500px) {
