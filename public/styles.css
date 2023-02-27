@@ -292,6 +292,29 @@ nav .login {
     border-bottom-right-radius: 25%;
 }
 
+@media (max-width: 920px) {
+    .about {
+        height: auto;
+    }
+    .abt-wrapper {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+    .abt-wrapper .left {
+        border-radius: 0;
+        border: none;
+        text-align: center;
+        padding-top: 0;
+    }
+    .abt-wrapper .left h2 {
+        display: none;
+    }
+    .right .wrapper,
+    .right .wrapper img {
+        border-radius: 0;
+    }
+}
+
 /*team section*/
 .team {
     height: auto;
