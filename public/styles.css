@@ -650,22 +650,17 @@ footer .footer-text {
     font-weight: 400;
 }
 
-/* login */
+/* login and register */
 .login-main {
-    margin-top: 100px;
+    /* margin-top: 100px; */
 }
 
 .form-wrapper {
     background-color: white;
     padding: 50px 80px;
     border-radius: 25px;
+    opacity: 80%;
 }
-
-/* .form-wrapper form {
-    background-color: var(--main-black);
-    padding: 70px;
-    border-radius: 25px;
-} */
 
 .form-wrapper .back {
     text-align: center;
@@ -696,7 +691,7 @@ footer .footer-text {
     padding: 8px;
     font-size: 1rem;
     font-weight: 400;
-    margin: 10px;
+    margin: 10px 0;
 }
 
 .form-wrapper form button {
@@ -706,7 +701,7 @@ footer .footer-text {
 .form-wrapper form p {
     margin-top: 10px;
     text-align: center;
-    font-size: 1.5rem;
+    font-size: 2vmin;
 }
 
 .form-wrapper form a {
@@ -717,9 +712,31 @@ footer .footer-text {
     color: var(--main-blue);
 }
 
+@media (max-width: 500px) {
+    .form-wrapper {
+        padding: 40px;
+    }
+    .form-wrapper .back {
+        font-size: 1.7rem;
+    }
+    .form-wrapper form h3 {
+        font-size: 2rem;
+    }
+    .form-wrapper form input,
+    .form-wrapper form button {
+        padding: 5px;
+    }
+}
+
+@media (max-width: 340px) {
+    .form-wrapper {
+        padding: 20px;
+    }
+}
+
 /* register */
 .register-main {
-    margin: 50px;
+    /* margin: 50px; */
 }
 
 /* courses */
