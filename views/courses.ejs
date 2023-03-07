@@ -1,24 +1,34 @@
 <%- include('./partials/head.ejs') %>
 
     <body>
-        <nav class="course-nav">
-            <ul>
-                <li>
-                    <img class="logo" src="/images/go.png" alt="logo">
-                </li>
-                <li>
-                    <input type="search" id="search" name="search" placeholder="Search for a course">
-                </li>
-                <li>
-                    <a href="/logout">Logout</a>
-                </li>
-            </ul>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="">
+                <img class="logo" src="/images/go.png" alt="logo" width="75">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <!-- <li class="nav-item">
+                        <input type="search" id="search" name="search" placeholder="Search for a course">
+                    </li> -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout">Logout</a>
+                    </li>
+                    <form class="d-flex nav-item" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search...">
+                        <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>
+                    </form>
+                </ul>
+            </div>
         </nav>
-        <div class="main">
-            <div class="courses">
+        <div class="container">
+            <div class="courses row">
                 <% if (courses.length > 0) { %>
                     <% courses.forEach((course) => { %>
-                        <div class="single-course">
+                        <div class="single-course col-lg-4 col-md-6">
                             <div class="img-div">
                                 <video width="320" height="240" muted controls>
                                     <source src="<%= course.img %>" type="video/mp4">

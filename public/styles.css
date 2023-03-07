@@ -536,9 +536,6 @@ footer .footer-text {
 }
 
 /* login and register */
-.login-main {
-    /* margin-top: 100px; */
-}
 
 .form-wrapper {
     background-color: white;
@@ -619,37 +616,14 @@ footer .footer-text {
     }
 }
 
-/* register */
-.register-main {
-    /* margin: 50px; */
-}
-
-/* courses */
-.course-nav {
-    float: right;
-    padding-bottom: 20px;
-    position: fixed;
-    width: 100%;
-    box-shadow: 0px 4px 2px rgb(243, 239, 239), 0px -4px 2px rgb(238, 227, 227);
-}
-
-.course-nav ul {
-    padding: 10px;
-    margin-top: 10px;
-}
-
-.course-nav ul input {
-    margin-top: 15px;
-    margin-right: 50px;
-    padding: 8px;
-}
-
 /* ****Course Page**** */
 .courses {
-    margin: 250px 100px 20px 100px;
+    margin: 0 auto;
+    padding: 10% 2vw 5%;
+    /* margin: 250px 100px 20px 100px;
     display: grid;
     grid-template-columns: auto auto auto;
-    grid-gap: 4rem;
+    grid-gap: 4rem; */
     color: var(--main-black);
 }
 
