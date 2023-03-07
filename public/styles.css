@@ -664,7 +664,7 @@ footer .footer-text {
 
 /* admin page */
 
-.nav-wrapper {
+/* .nav-wrapper {
     display: flex;
     align-items: center;
     align-content: center;
@@ -711,23 +711,13 @@ footer .footer-text {
     border: 2px solid var(--main-blue);
 }
 
-.sidebar {
-    color: var(--main-black);
-    width: 200px;
-    flex: 1;
-    height: calc(100vh - 100px);
-    background-color: #f1f1f1;
-    position: fixed;
-    top: 100px;
-}
-
 .sidebar ul {
     margin-left: 0;
 }
 
 .sidebar a {
     color: var(--main-black);
-}
+} */
 
 /* .sidebar ul li .nav-header {
     width: 100%;
@@ -735,6 +725,15 @@ footer .footer-text {
     padding-right: 20px;
     background-color: azure;
 } */
+
+.sidebar {
+    color: var(--main-black);
+    width: 200px;
+    flex: 1;
+    height: 100%;
+    background-color: ;
+    position: fixed;
+}
 
 .sidebar ul li h3 {
     margin-left: 15px;
