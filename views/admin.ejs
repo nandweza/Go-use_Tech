@@ -4,8 +4,10 @@
         <%- include('./partials/admin-navbar.ejs') %>
 
         <main class="admin">
-            <div class="admin-grid">
-                <div class="admin-card">
+            <h3 class="dashboard mt-4 mb-2">Dashboard</h3>
+            <hr class="border">
+            <div class="admin-grid row">
+                <div class="admin-card col-lg-4 col-md-6 mx-3 my-2">
                     <div class="info">
                         <i class="fa fa-users"></i>
                         <div class="info-text">
@@ -13,7 +15,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="admin-card">
+                <div class="admin-card col-lg-4 col-md-6 mx-3 my-2">
                     <div class="info">
                         <i class="fa fa-book"></i>
                         <div class="info-text">
@@ -21,7 +23,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="admin-card">
+                <div class="admin-card col-lg-4 col-md-6 mx-3 my-2">
                     <div class="info">
                         <%= new Date().getHours(); %>:<%= new Date().getMinutes(); %>:<%= new Date().getSeconds(); %>
                         <br>
@@ -30,7 +32,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="admin-card">
+                <div class="admin-card col-lg-4 col-md-6 mx-3 my-2">
                     <div class="info">
                         <i class="fa fa-globe"></i>
                         <div class="info-text">
@@ -38,15 +40,15 @@
                         </div>
                     </div>
                 </div>
-                <div class="admin-card">
+                <div class="admin-card col-lg-4 col-md-6 mx-3 my-2">
                     <div class="info">
                         <i class="fa fa-list"></i>
                         <div class="info-text">
-                            <a href="/courses">Go to Courses</a>
+                            <a href="/allCourses">View Courses</a>
                         </div>
                     </div>
                 </div>
-                <div class="admin-card">
+                <div class="admin-card col-lg-4 col-md-6 mx-3 my-2">
                     <div class="info">
                         <i class="fa fa-newspaper-o"></i>
                         <div class="info-text">
@@ -54,7 +56,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="admin-card">
+                <div class="admin-card col-lg-4 col-md-6 mx-3 my-2">
                     <div class="info">
                         <i class="fa fa-plus"></i>
                         <div class="info-text">
@@ -62,7 +64,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="admin-card">
+                <div class="admin-card col-lg-4 col-md-6 mx-3 my-2">
                     <div class="info">
                         <i class="fa fa-plus"></i>
                         <div class="info-text">
@@ -70,7 +72,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="admin-card">
+                <div class="admin-card col-lg-4 col-md-6 mx-3 my-2">
                     <div class="info">
                         <i class="fa fa-users"></i>
                         <div class="info-text">
