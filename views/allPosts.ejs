@@ -5,15 +5,17 @@
     <body>
         <%- include('./partials/admin-navbar.ejs') %>
         <div class="admin">
+            <h3 class="dashboard mt-4 mb-2">Access & Update All Posts</h3>
+            <hr class="border">
             <div class="admin-wrapper">
                 <div class="posts-wrapper">
                     <% posts.forEach ( function (post) { %>
                     <form class="form-bt" action="/delete" method="post">
                         <div class="icons">
-                            <button>
+                            <button class="btn btn-outline-danger">
                                 <a href="/edit/<%= post._id %>" data-toggle="model"><i class="fa fa-edit" style="font-size: 30px; color: black;"></i></a>
                             </button>
-                            <button name="deleteBtn" value="<%=post._id%>" type="submit" class="danger-btn">
+                            <button name="deleteBtn" value="<%=post._id%>" type="submit" class="btn btn-outline-danger">
                                 <i class="fa fa-trash" style="font-size: 30px; color: black;"></i>
                             </button>
                         </div>

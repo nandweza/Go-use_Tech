@@ -508,31 +508,45 @@ footer .footer-text {
     margin-right: auto;
 }
 
-.singlePost .intro {
+.intro {
     text-align: center;
-    margin-bottom: 100px;
+    /* margin-bottom: 100px; */
     color: var(--main-orange);
-    font-size: 4rem;
+    font-size: 5vw;
     font-weight: bold;
 }
 
-.singlePost .posts-card {
+.posts-card {
     margin: 0 200px;
+    margin-bottom: 20px;
 }
 
-.singlePost .posts-card img {
+.posts-card img {
     width: 100%;
+    margin: 0 auto;
 }
 
-.singlePost .posts-card h2 {
+.posts-card h2 {
     font-size: 2rem;
     font-weight: 600;
     margin-top: 30px;
 }
 
-.singlePost .posts-card .desc {
+.posts-card .desc {
     font-size: 1.2rem;
     font-weight: 400;
+}
+
+@media (max-width: 912px) {
+    .posts-card {
+        margin: 0 50px;
+    }
+}
+
+@media (max-width: 540px) {
+    .posts-card {
+        margin: 10px;
+    }
 }
 
 /* login and register */
@@ -882,15 +896,18 @@ footer .footer-text {
 
 /* get all posts by admin */
 .admin-wrapper {
-    padding-top: 120px;
     padding-left: 30px;
     margin-right: 100px;
 }
 
 @media (max-width: 700px) {
+    .dashboard {
+        text-align: center;
+        margin: 0;
+        padding: 20px;
+    }
     .admin-wrapper {
-        padding-top: 20px;
-        padding-left: 10px;
+        padding-left: 0px;
         margin-right: 0px;
     }
     
@@ -898,7 +915,7 @@ footer .footer-text {
 
 .posts-wrapper,
 .course-wrapper {
-    padding: 50px;
+    padding: 10px;
 }
 
 .posts-wrapper form {
@@ -907,7 +924,8 @@ footer .footer-text {
 }
 
 .posts-wrapper .icons {
-    padding-bottom: 50px;
+    padding-bottom: 10px;
+    margin-top: 20px;
 }
 
 .posts-wrapper  img {
@@ -916,11 +934,12 @@ footer .footer-text {
 
 .posts-wrapper .title-text {
     margin-top: 20px;
-    font-size: 4rem;
+    font-size: 5vw;
     font-weight: bold;
 }
 
 .posts-wrapper.desc {
     font-size: 1.2rem;
     padding: 10px;
+    margin-bottom: 20px;
 }
