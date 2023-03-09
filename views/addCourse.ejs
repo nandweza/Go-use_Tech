@@ -2,12 +2,14 @@
 <body>
     <%- include('./partials/admin-navbar.ejs') %>
     <main class="admin">
+        <h3 class="dashboard mt-4 mb-2">Add Course</h3>
+        <hr class="border">
         <div class="container">
             <form action="/addCourse" method="post" class="course-form" enctype="multipart/form-data">
-                <input type="text" name="title" id="title" placeholder="Course Title">
-                <input type="file" name="img" id="img" placeholder="add video" multiple="multiple" accept="video/*">
-                <input type="text" name="author" id="author" placeholder="by Jon Doe">
-                <textarea name="desc" id="desc" cols="30" rows="15" placeholder="Course description"></textarea>
+                <input class="form-control" type="text" name="title" id="title" placeholder="Course Title">
+                <input class="form-control" type="file" name="img" id="img" placeholder="add video" multiple="multiple" accept="video/*">
+                <input class="form-control" type="text" name="author" id="author" placeholder="by Jon Doe">
+                <textarea class="form-control" name="desc" id="desc" cols="30" rows="15" placeholder="Course description"></textarea>
                 <button type="submit" class="btn btn-primary">Add Course</button>
             </form>
         </div>

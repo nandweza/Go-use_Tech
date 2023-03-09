@@ -801,7 +801,7 @@ footer .footer-text {
     }
     .dropdown-item:hover{
         color: var(--main-blue);
-    }    
+    } 
 }
   
 
@@ -847,11 +847,13 @@ footer .footer-text {
 
 /* add blog post */
 .admin .container {
-    padding-top: 120px;
+    padding-top: 20px;
 }
 
-.admin .container form {
-    margin: 0 100px;
+@media (max-width: 700px) {
+    .admin .container {
+        padding: 10px;
+    }
 }
 
 .admin .container form input[type="text"],
@@ -869,11 +871,29 @@ footer .footer-text {
     margin: 0 200px;
 }
 
+@media (max-width: 700px) {
+    .admin .container {
+        padding-top: 20px;
+    }
+    .admin .container .course-form {
+        margin: 0;
+    }
+}
+
 /* get all posts by admin */
 .admin-wrapper {
     padding-top: 120px;
     padding-left: 30px;
     margin-right: 100px;
+}
+
+@media (max-width: 700px) {
+    .admin-wrapper {
+        padding-top: 20px;
+        padding-left: 10px;
+        margin-right: 0px;
+    }
+    
 }
 
 .posts-wrapper,
