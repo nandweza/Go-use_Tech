@@ -3,52 +3,49 @@
     <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="">
-                <img class="logo" src="/images/go.png" alt="logo" width="75">
+                <img class="logo mylogo" src="/images/go.png" alt="logo" width="75">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
+                <form class="d-flex nav-item mx-auto" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search...">
+                    <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>
+                </form>
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <!-- <li class="nav-item">
-                        <input type="search" id="search" name="search" placeholder="Search for a course">
-                    </li> -->
                     <li class="nav-item">
                         <a class="nav-link" href="/logout">Logout</a>
                     </li>
-                    <form class="d-flex nav-item" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search...">
-                        <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>
-                    </form>
                 </ul>
             </div>
         </nav>
-        <div class="container">
-            <div class="courses row">
+        <div class="px-4">
+            <div class="course-header mt-5 mb-5">Explore the best Courses with us...</div>
+            <div class="courses row justify-content-md-center mx-2">
                 <% if (courses.length > 0) { %>
                     <% courses.forEach((course) => { %>
-                        <div class="single-course col-lg-4 col-md-6">
+                        <div class="single-course col-lg-4 col-md-6 mb-5">
                             <div class="img-div">
                                 <video width="320" height="240" muted controls>
                                     <source src="<%= course.img %>" type="video/mp4">
                                 </video>
                             </div>
-                        <span class="date">
-                            <%= course.createdAt %>
-                        </span>
-                        <br>
-                        <br>
-                        <div class="title">
-                            <%= course.title %>
+                            <span class="date">
+                                <%= course.createdAt.toLocaleString() %>
+                            </span>
+                            <br>
+                            <br>
+                            <div class="title">
+                                <%= course.title %>
+                            </div>
+                            <div class="desc">
+                                <p>
+                                    <%= course.desc.substring(0, 50) %>
+                                    <a href="/courses<%= courses._id %>" style="color: red;">Read more.</a>
+                                </p>
+                            </div>
                         </div>
-                        <div class="desc">
-                            <p>
-                              <%= course.desc.substring(0, 80) %>
-                              <a href="/courses<%= courses._id %>" style="color: red;">Read more.</a>
-                            </p>
-                        </div>
-                    </div>
                     <% }) %>
                 <% } else { %>
                 <div style="margin: auto;">There are no courses to display...</div>
