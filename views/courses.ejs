@@ -21,7 +21,12 @@
             </div>
         </nav>
         <div class="px-4">
-            <div class="course-header mt-5 mb-5">Explore the best Courses with us...</div>
+            <div class="course-header mt-5 mb-5 jumbotron" id="dynamic-heading">
+                <h1></h1>
+            </div>
+            <!-- <div class="jumbotron" id="dynamic-heading">
+                <h1></h1>
+            </div>               -->
             <div class="courses row justify-content-md-center mx-2">
                 <% if (courses.length > 0) { %>
                     <% courses.forEach((course) => { %>
@@ -53,3 +58,27 @@
             </div>
         </div>
     </body>
+
+    <script>
+        // Define an array of words to cycle through
+        var words = ["Explore the best Courses with us...", "From the tech experts....", "All you need from Graphics, excell programming...", "Lorem ipsum dolor sit amet", "Lorem dolor sit amet"];
+      
+        // Get a reference to the jumbotron element
+        var jumbotron = document.getElementById("dynamic-heading");
+      
+        // Define a function to update the heading text
+        function updateHeading() {
+          // Get a random word from the array
+          var word = words[Math.floor(Math.random() * words.length)];
+          
+          // Set the heading text to the random word
+          jumbotron.querySelector("h1").textContent = word;
+        }
+      
+        // Call the updateHeading function initially
+        updateHeading();
+      
+        // Call the updateHeading function every minute
+        setInterval(updateHeading, 5000);
+      </script>
+      
