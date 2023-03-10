@@ -12,7 +12,8 @@ const port = process.env.PORT || 8001;
 dotenv.config();
 
 mongoose.set('strictQuery', true);
-mongoose.connect(process.env.MONGO_URL)
+mongoose.connect(/*process.env.MONGO_URL*/
+                  "mongodb+srv://GoUseTech:GoUseTech123@cluster0.jm1barh.mongodb.net/s?retryWrites=true&w=majority")
   .then(() => console.log("DB Connected Successfully!"))
   .catch((err) => console.log(err));
 
