@@ -1,13 +1,13 @@
 <%- include('./partials/head.ejs') %>
 
     <body>
-
+        <%- include('./partials/nav.ejs') %>
         <div class="main">
             <div class="login-main">
                 <div class="form-wrapper">
-                    <a href="/">
+                    <!-- <a href="/">
                         <div class="back">BACK TO HOME</div>
-                    </a>
+                    </a> -->
                     <form action="/login" method="post">
                         <h3>Login</h3>
                         <label for="username">Username<span style="color: red;">*</span></label>
@@ -27,5 +27,5 @@
                 </div>
             </div>
         </div>
-
+        <%- include('./partials/footer.ejs') %>
     </body>

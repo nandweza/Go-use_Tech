@@ -144,7 +144,7 @@ a:hover {
 .about h1 {
     font-size: 4vw;
     font-weight: 800;
-    color: var(--main-blue);
+    color: var(--main-orange);
 }
 
 .abt-wrapper {
@@ -216,64 +216,19 @@ a:hover {
 }
 
 /*team section*/
-.team {
-    height: auto;
-    margin-top: 50px;
-}
 
-.team h2 {
-    font-size: 3vw;
-    font-weight: 700;
+.person {
+    background-color: var(--main-white);
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1);
     text-align: center;
     padding-bottom: 20px;
+    padding-top: 10px;
+    margin: 30px;
 }
 
-.team-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 1.2rem;
-    place-items: center;
-}
-
-.team-member img {
-    width: 20vw;
-    height: 30vh;
-}
-
-@media (max-width: 500px) {
-    .team-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    .team-member img {
-        width: 120px;
-        height: 120px;
-    }
-}
-
-@media screen and (min-width: 1500px) {
-    nav .logo {
-        margin-right: 900px;
-    }
-    nav .login {
-        margin-left: 50px;
-    }
-    .team-member img {
-      width: 500px;
-      height: 500px;
-    }
-  }
-  
-
-.team-member h4 {
-    font-size: 1.8vw;
-    font-weight: 600;
-    text-align: center;
-}
-
-.team-member p {
-    font-size: 1.3vw;
-    font-weight: 500;
-    text-align: center;
+.person img {
+    height: 300px;
+    width: 300px;
 }
 
 /*contact section*/
@@ -281,7 +236,7 @@ a:hover {
 .contact {
     margin-top: 50px;
     height: auto;
-    background-color: var(--main-black);
+    background-color: var(--main-white);
 }
 
 .contact h2 {
@@ -289,7 +244,7 @@ a:hover {
     text-align: center;
     font-size: 3.5vw;
     font-weight: 800;
-    color: var(--main-white);
+    color: var(--main-orange);
 }
 
 .contact-wrapper {
@@ -297,17 +252,14 @@ a:hover {
     grid-template-columns: repeat(2, 1fr);
     place-items: center;
     grid-gap: 4rem;
-    margin: 20px 50px;
+    /* margin: 20px 50px; */
     margin-bottom: 0;
     padding-bottom: 50px;
 }
 
 .contact-wrapper .left {
-    background-color: white;
-    padding: 50px;
-    border-top-left-radius: 25%;
-    border-bottom-right-radius: 25%;
-    width: 100%;
+    width: 80%;
+    color: var(--main-black);
 }
 
 .contact-wrapper .left h3 {
@@ -322,7 +274,7 @@ a:hover {
     margin-bottom: 0;
 }
 
-input[type=text], input[type=email], textarea {
+/* input[type=text], input[type=email], textarea {
     width: 100%;
     padding: 5px;
     border-radius: 5px;
@@ -337,17 +289,17 @@ input[type=submit] {
     font-size: 1.5rem;
     font-weight: 800;
     cursor: pointer;
-}
+} */
 
 .contact-wrapper .right {
     margin: 0 auto;
     padding: 50px;
-    height: 100%;
-    background-color: white;
+    /* height: 100%; */
+    /* background-color: white; */
     /* margin-right: 100px; */
-    width: 100%;
-    border-top-right-radius: 25%;
-    border-bottom-left-radius: 25%;
+    width: 80%;
+    /* border-top-right-radius: 25%; */
+    /* border-bottom-left-radius: 25%; */
 }
 
 .contact-wrapper .right h3 {
@@ -413,7 +365,13 @@ input[type=submit] {
 }
 
 /* footer */
-footer {
+
+footer .footer-text {
+    /* order: 1; */
+    font-size: 3vmin;
+    font-weight: lighter;
+}
+/* footer {
     display: flex;
     flex-direction: row-reverse;
     background-color: var(--main-black);
@@ -446,7 +404,7 @@ footer .footer-text {
     color: white;
     padding: 8px;
 }
-
+*/
 /* Blog */
 
 .blog-header,
