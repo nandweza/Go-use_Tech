@@ -1,37 +1,67 @@
 <%- include('./partials/head.ejs') %>
 <body>
     <%- include('./partials/nav.ejs') %>
-    <div class="container px-4">
-        <!-- <div class="main"> -->
-            <div class="blog-header mt-5 mb-5">Go-use Tech Blog</div>
-            <div class="row mb-5 gx-5">
-                <% if (posts.length > 0) { %>
-                    <% posts.forEach((post) => { %>
-                        <div class="fblog col-6 col-md-4 mb-4">
-                            <div class="img-div">
-                                <img src="<%= post.img %>" class="img-responsive"/>
-                            </div>
-                            <span class="date">
-                                <%= post.createdAt %>
-                            </span>
-                            <br>
-                            <br>
-                            <div class="title">
-                                <%= post.title %>
-                            </div>
-                            <div class="desc">
-                                <p>
-                                  <%= post.content.substring(0, 180) + "..." %>
-                                  <a href="/blog/<%= post._id %>" style="color: red;">Read more.</a>
-                                </p>
-                            </div>
-                        </div>
-                    <% }) %>
-                <% } else { %>
-                <div style="margin: auto;">There are no blog posts to display...</div>
-                <% } %>
+    <div class="blog-c">
+
+      <div id="blog-carousel" class="carousel slide d-flex justify-content-center align-items-center" data-bs-ride="carousel" style="height: 75vh;">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <div class="text-center">
+              <h3 class="blog-header fs-*">Go-use Tech Blog</h3>
+              <em class="carousel-em fs-*">Revolutionizing the Tech Industry: Cutting-Edge Innovations You Can't Miss</em>
             </div>
+          </div>
+          <div class="carousel-item">
+            <div class="text-center">
+              <h3 class="blog-header fs-*">Go-use Tech Blog</h3>
+              <em class="carousel-em fs-*">The Future is Here: Exploring the Latest Breakthroughs in Tech</em>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="text-center">
+              <h3 class="blog-header fs-*">Go-use Tech Blog</h3>
+              <em class="carousel-em fs-*">From AI to AR: Uncovering the Hottest Trends in Technology Today</em>
+            </div>
+          </div>
         </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#blog-carousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#blog-carousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+    <div class="container px-4">
+      <div class="row mb-5 gx-5 mt-5">
+        <% if (posts.length > 0) { %>
+          <% posts.forEach((post) => { %>
+            <div class="fblog col-lg-4 col-md-6 mb-4">
+              <div class="img-div">
+                <img src="<%= post.img %>" class="img-responsive"/>
+              </div>
+              <span class="date">
+                <%= post.createdAt %>
+              </span>
+              <br>
+              <br>
+              <div class="title">
+                <%= post.title %>
+              </div>
+              <div class="desc">
+                <p>
+                  <%= post.content.substring(0, 180) + "..." %>
+                  <a href="/blog/<%= post._id %>" style="color: red;">Read more.</a>
+                </p>
+              </div>
+            </div>
+          <% }) %>
+        <% } else { %>
+          <div style="margin: auto;">There are no blog posts to display...</div>
+        <% } %>
+      </div>
     </div>
 
     <%- include('./partials/footer.ejs') %>
