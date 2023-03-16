@@ -221,7 +221,12 @@ a:hover {
 
 /*team section*/
 
+.team-boxed {
+    background-color: var(--main-black);
+}
+
 .team-header {
+    padding-top: 3%;
     font-size: 3rem;
     font-weight: 600;
     color: var(--main-orange);
@@ -234,11 +239,21 @@ a:hover {
     padding-bottom: 20px;
     padding-top: 10px;
     margin: 30px;
+    border-radius: 25px;
 }
 
 .person img {
     height: 300px;
     width: 300px;
+}
+
+.person .fa {
+    color: var(--main-orange);
+    font-size: 2rem;
+}
+
+.person .fa:hover {
+    color: var(--main-blue);
 }
 
 /*contact section*/
