@@ -2,30 +2,51 @@
 
     <body>
         <%- include('./partials/nav.ejs') %>
-        <div class="main">
-            <div class="login-main">
-                <div class="form-wrapper">
-                    <!-- <a href="/">
-                        <div class="back">BACK TO HOME</div>
-                    </a> -->
-                    <form action="/login" method="post">
-                        <h3>Login</h3>
+        <div class="login-main">
+            <div class="container">
+                <form action="/login" method="post">
+                    <h2>LOGIN</h2>
+                    <div class="input-group">
                         <label for="username">Username<span style="color: red;">*</span></label>
-                        <br>
-                        <input type="text" id="username" name="username" placeholder="eg Jon Doe" required>
-                        <br>
+                        <input class="form-control input-adjust" type="text" id="username" name="username" placeholder="eg Jon Doe" required>
+                    </div>
+                    <div class="input-group">
                         <label for="password">Password<span style="color: red;">*</span></label>
-                        <br>
-                        <input type="password" id="password" name="password" required>
-                        <br>
-                        <button type="submit">LOGIN</button>
-                        <br>
-                        <p class="register">
-                            Not a member? <a href="/register">Register here</a>
-                        </p>
-                    </form>
-                </div>
+                        <input class="form-control input-adjust" type="password" id="password" name="password" required>
+                        <button type="button" id="btnToggle" class="toggle">
+                            <i id="eyeIcon" class="fa fa-eye"></i>
+                        </button>
+                    </div>
+                    <button class="btn btn-lg btn-primary btn-block button-adjust" type="submit">LOGIN</button>
+                    <div class="register fs-*">
+                        Not a member? <a href="/register">Sign up</a>
+                    </div>
+                </form>
             </div>
         </div>
         <%- include('./partials/footer.ejs') %>
     </body>
+
+    <script>
+
+        let passwordInput = document.getElementById('password'),
+            toggle = document.getElementById('btnToggle'),
+            icon = document.getElementById('eyeIcon');
+
+            function togglePassword() {
+                if (passwordInput.type === 'password') {
+                    passwordInput.type = 'text';
+                    icon.classList.add("fa-eye-slash");
+                } else {
+                    passwordInput.type = 'password';
+                    icon.classList.remove("fa-eye-slash");
+                }
+            }
+
+            function checkInput() {
+
+            }
+
+            toggle.addEventListener('click', togglePassword, false);
+            passwordInput.addEventListener('keyup', checkInput, false);
+    </script>

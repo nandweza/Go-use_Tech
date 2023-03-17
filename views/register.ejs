@@ -1,34 +1,54 @@
 <%- include('./partials/head.ejs') %>
 
     <body>
-        <div class="main">
-            <div class="register-main">
-                <div class="form-wrapper">
-                    <form action="/register" method="post">
-                        <h3>Register</h3>
+        <div class="login-main register-main">
+            <div class="container">
+                <form action="/register" method="post">
+                    <h2>REGISTER</h2>
+                    <div class="input-group">
                         <label for="username">Username<span style="color: red;">*</span></label>
-                        <br>
-                        <input type="text" id="username" name="username" placeholder="eg Jon Doe">
-                        <br>
+                        <input class="form-control input-adjust" type="text" id="username" name="username" placeholder="eg Jon Doe" required>
+                    </div>
+                    <div class="input-group">
                         <label for="email">Email<span style="color: red;">*</span></label>
-                        <br>
-                        <input type="email" id="email" name="email" placeholder="eg jondoe@gmail.com">
-                        <br>
-                        <label for="password">Password<span style="color: red;">*</span></label>
-                        <br>
-                        <input type="password" id="password" name="password" >
-                        <br>
-                        <label for="cpassword">Confirm password<span style="color: red;">*</span></label>
-                        <br>
-                        <input type="password" id="cpassword" name="cpassword" >
-                        <br>
-                        <button type="submit">REGISTER</button>
-                        <br>
-                        <p class="register">
-                            Already a member? <a href="/login">Login here</a>
-                        </p>
-                    </form>
-                </div>
+                        <input class="form-control input-adjust" type="email" id="email" name="email" placeholder="eg jondoe@gmail.com" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="password">Password<span style="color: red;">*</span><span class="fs-5 text-muted pass-min">(6 characters minimun)</span></label>
+                        <input class="form-control input-adjust" type="password" id="password" name="password" required>
+                        <button type="button" id="btnToggle" class="toggle">
+                            <i id="eyeIcon" class="fa fa-eye"></i>
+                        </button>
+                    </div>
+                    <button class="btn btn-lg btn-primary btn-block button-adjust" type="submit">REGISTER</button>
+                    <div class="register fs-*">
+                        Already a member?<a href="/login">Sign in</a>
+                    </div>
+                </form>
             </div>
         </div>
     </body>
+
+    <script>
+
+        let passwordInput = document.getElementById('password'),
+            toggle = document.getElementById('btnToggle'),
+            icon = document.getElementById('eyeIcon');
+
+            function togglePassword() {
+                if (passwordInput.type === 'password') {
+                    passwordInput.type = 'text';
+                    icon.classList.add("fa-eye-slash");
+                } else {
+                    passwordInput.type = 'password';
+                    icon.classList.remove("fa-eye-slash");
+                }
+            }
+
+            function checkInput() {
+
+            }
+
+            toggle.addEventListener('click', togglePassword, false);
+            passwordInput.addEventListener('keyup', checkInput, false);
+    </script>

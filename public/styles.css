@@ -511,7 +511,93 @@ footer .footer-text {
 
 /* login and register */
 
-.form-wrapper {
+.login-main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 70vh;
+}
+
+.register-main {
+    height: 100vh;
+}
+
+.login-main .container form {
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    margin: 0 auto;
+    max-width: 400px;
+    padding: 45px 35px;
+    box-shadow: 0 3rem 5rem -2rem rgba(0, 0, 0, 0.3);
+}
+
+.login-main .container form h2 {
+    color: var(--main-blue);
+    margin-bottom: 0.75rem;
+    text-align: center;
+}
+
+.login-main .container form .input-group {
+    position: relative;
+    width: 100%;
+    margin-bottom: 1.25rem;
+}
+
+.login-main .container form .input-group label {
+    font-size: 1.5rem;
+}
+
+.input-adjust {
+    width: 100% !important;
+    border-radius: 1px;
+    box-sizing: border-box;
+    font-size: 1.25rem;
+    height: auto;
+    padding: 0.5rem;
+}
+
+.toggle {
+    background-color: none;
+    border: none;
+    font-weight: 600;
+    position: absolute;
+    right: 0.75rem;
+    top: 2.50rem;
+    z-index: 9;
+}
+
+.toggle .fa {
+    font-size: 2rem;
+    color: var(--main-orange);
+    font-weight: 500;
+}
+
+.button-adjust {
+    margin-top: 1.75rem;
+    width: 100%;
+    background-color: var(--main-orange);
+    border: none;
+}
+
+.register {
+    font-size: 1.2rem;
+    margin-top: 2.5rem;
+    text-align: center;
+}
+
+@media (max-width: 340px) {
+    .login-main .container form {
+        padding: 40px 15px;
+    }
+    .login-main .container form .input-group label {
+        font-size: 1.2rem;
+    }
+    .pass-min {
+        font-size: 1rem !important;
+    }
+}
+
+/* .form-wrapper {
     background-color: white;
     padding: 50px 80px;
     border-radius: 25px;
@@ -588,7 +674,7 @@ footer .footer-text {
     .form-wrapper {
         padding: 20px;
     }
-}
+} */
 
 /* ****Course Page**** */
 .courses {

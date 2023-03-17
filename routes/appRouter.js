@@ -88,15 +88,10 @@ router.post("/register", async (req, res) => {
         email: req.body.email,
         role: req.body.role,
         password: (await bcrypt.hash(req.body.password, salt)),
-        cpassword: (await bcrypt.hash(req.body.cpassword, salt)),
     });
 
     if (req.body.password.length < 6) {
         return res.status(400).json({ message: "Password must be at least 6 characters long" })
-    }
-
-    if (req.body.password !== req.body.cpassword) {
-        return res.status({ message: 'password does not match' })
     }
 
     try {
