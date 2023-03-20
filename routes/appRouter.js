@@ -225,7 +225,8 @@ router.get("/courses/:id", async (req, res) => {
     try {
         const { id } = req.params;
         const course = await Course.findOne({ _id: id });
-        res.render("singleCourse", { course: course });
+        const courses = await Course.find().sort({createdAt: -1}).limit(3);
+        res.render("singleCourse", { course: course, courses: courses });
     } catch (err) {
         res.status(500).send("Course not found");
     }

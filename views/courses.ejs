@@ -34,8 +34,11 @@
                     <% courses.forEach((course) => { %>
                         <div class="single-course col-lg-4 col-md-6 mb-5">
                             <div class="card">
-                                <div class="img-div">
+                                <div class="img-div position-relative">
                                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAsK6oIKzeSCKiqpjv5cuoC4ZC_hJ0FxNkvQ&usqp=CAU" class="card-img-top" alt="..." width="100%" height="225">
+                                    <div class="position-absolute top-50 start-50 translate-middle text-center">
+                                        <h2 class="fw-bold" style="color: #fff;">Go-use Tech</h2>
+                                    </div>
                                 </div>
                                 <div class="card-body course-content">
                                     <h4 class="card-title fw-bold">
@@ -48,7 +51,7 @@
                                         <span class="date col mt-3">
                                             <%= course.createdAt.toDateString() %>
                                         </span>
-                                        <a href="/courses<%= courses._id %>" class="col btn btn-primary">View Course</a>
+                                        <a href="/courses/<%= course._id %>" class="col btn btn-primary">View Course</a>
                                     </div>
                                 </div>
                             </div>
@@ -63,7 +66,7 @@
     <%- include('./partials/footer.ejs') %>
     <script>
         // Define an array of words to cycle through
-        var words = ["Explore the best Courses with us...", "From the tech experts....", "All you need from Graphics, excell programming...", "Lorem ipsum dolor sit amet", "Lorem dolor sit amet"];
+        var words = ["Explore the best Courses with us...", "From the tech experts....", "All you need from Graphics, programming..."];
       
         // Get a reference to the jumbotron element
         var jumbotron = document.getElementById("dynamic-heading");
