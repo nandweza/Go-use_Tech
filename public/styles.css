@@ -600,85 +600,6 @@ footer .footer-text {
     }
 }
 
-/* .form-wrapper {
-    background-color: white;
-    padding: 50px 80px;
-    border-radius: 25px;
-    opacity: 80%;
-}
-
-.form-wrapper .back {
-    text-align: center;
-    border: 1px solid var(--main-black);
-    font-size: 2rem;
-    background: var(--main-orange);
-    color: var(--main-black);
-    border-radius: 25px;
-}
-
-.form-wrapper form h3 {
-    text-align: center;
-    font-size: 3rem;
-    font-weight: 800;
-}
-
-.form-wrapper form label {
-    margin-bottom: 0;
-    margin-top: 5px;
-    font-size: 1.2rem;
-    margin-left: 10px;
-}
-
-.form-wrapper form input,
-.form-wrapper form button {
-    width: 100%;
-    border-radius: 25px;
-    padding: 8px;
-    font-size: 1rem;
-    font-weight: 400;
-    margin: 10px 0;
-}
-
-.form-wrapper form button {
-    background-color: var(--main-orange);
-}
-
-.form-wrapper form p {
-    margin-top: 10px;
-    text-align: center;
-    font-size: 2vmin;
-}
-
-.form-wrapper form a {
-    color: var(--main-orange);
-}
-
-.form-wrapper form a:hover {
-    color: var(--main-blue);
-}
-
-@media (max-width: 500px) {
-    .form-wrapper {
-        padding: 40px;
-    }
-    .form-wrapper .back {
-        font-size: 1.7rem;
-    }
-    .form-wrapper form h3 {
-        font-size: 2rem;
-    }
-    .form-wrapper form input,
-    .form-wrapper form button {
-        padding: 5px;
-    }
-}
-
-@media (max-width: 340px) {
-    .form-wrapper {
-        padding: 20px;
-    }
-} */
-
 /* ****Course Page**** */
 .courses {
     margin: 0 auto;
@@ -751,15 +672,16 @@ footer .footer-text {
 
 }
 
-.single-course {
-    /* width: 400px; */
+.course-content {
+    text-align: left;
 }
 
 .single-course .img-div video {
     border-radius: 10px;
 }
 
-.single-course .date {
+.date {
+    text-align: left;
     opacity: 70%;
     padding: 0 10px;
 }
