@@ -30,35 +30,37 @@
             <div class="col">
 
                 <div>
-                    <iframe width="800" height="500" src=<%= "https://www.youtube.com/watch?v=GMLtkhNcJmU" %>></iframe>
+                    <iframe width="800" height="500" src="/uploads/0.mp4"></iframe>
                 </div>
-                <h2 class="title-text">
+                <h2 class="title-text fw-bold mt-5">
                     <%= course.title %>
                 </h2>
-                <div id="desc" class="desc mt-2">
+                <div id="desc" class="desc mt-2 mb-3">
                     <%= course.desc %>
+                </div>
+                <hr>
+                <h3 id="author" class="author mt-5 mb-3">
+                    <%= course.author %>
+                </h3>
+                <div id="abtAuthor" class="abtAuthor mt-2 mb-3">
+                    <%= course.abtAuthor %>
                 </div>
             </div>
             <div class="col">
                 <div class="title-text">
-                    <h3>Latest Courses</h3>
+                    <h3 class="mt-2 mb-2 fw-bold">Recent Courses</h3>
                     <div class="latest-courses">
                         <% if (courses.length > 0) { %>
                             <% courses.forEach((course) => { %>
-                                <div class="single-course">
+                                <div class="single-course mb-2">
                                     <div class="card">
-                                        <div class="img-div position-relative">
-                                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAsK6oIKzeSCKiqpjv5cuoC4ZC_hJ0FxNkvQ&usqp=CAU" class="card-img-top" alt="..." width="100%" height="225">
-                                            <div class="position-absolute top-50 start-50 translate-middle text-center">
-                                                <h2 class="fw-bold" style="color: #fff;">Go-use Tech</h2>
-                                            </div>
-                                        </div>
+                                        <img src="<%= course.img %>" class="card-img-top" alt="..." width="100%" height="225">
                                         <div class="card-body course-content">
                                             <h4 class="card-title fw-bold">
                                                 <%= course.title %>
                                             </h4>
                                             <p class="card-text">
-                                                <%= course.desc.substring(0, 150) %>
+                                                <%= course.desc.substring(0, 150) + "..." %>
                                             </p>
                                             <div class="row mt-3">
                                                 <span class="date col mt-3">

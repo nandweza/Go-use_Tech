@@ -202,14 +202,15 @@ router.get('/addCourse', (req, res) => {
 
 //post course
 router.post('/addCourse', upload, (req, res) => {
-    const { title, desc, author } = req.body;
+    const { title, desc, author, abtAuthor } = req.body;
     const img = req.file.filename;
+    const video = req.file.filename;
 
     if (!title || !desc || !author || !img) {
         return res.redirect('/addCourse');
     }
 
-    const courses = new Course({ title, desc, author, img })
+    const courses = new Course({ title, desc, author, img, video, abtAuthor })
 
     courses
       .save()
