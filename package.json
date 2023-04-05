@@ -27,5 +27,13 @@
     "nodemailer": "^6.9.1",
     "nodemon": "^2.0.20",
     "path": "^0.12.7"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://nandweza: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@github.com/nandweza/Go-use_Tech.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nandweza/Go-use_Tech/issues"
+  },
+  "homepage": "https://github.com/nandweza/Go-use_Tech#readme"
 }
