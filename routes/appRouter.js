@@ -11,19 +11,6 @@ const Post = require('../models/Post');
 const fs = require('fs');
 const nodemailer = require('nodemailer');
 
-// const initializeApp = require('firebase/app');
-// const getStorage =  require('firebase/storage');
-// const ref =  require('firebase/storage');
-// const uploadBytes =  require('firebase/storage');
-// const getDownloadURL =  require('firebase/storage');
-// const config = require('../config/config');
-
-// //initialize a firebase app
-// initializeApp(config.firebaseConfig);
-
-// //initialize cloud storage and get a reference to the service
-// const storage = getStorage();
-
 let posts = [];
 let courses = [];
 
@@ -36,12 +23,39 @@ const Storage = multer.diskStorage({
 
 const upload = multer({ storage: Storage }).single('img');
 
-//home routes
+/*          ***home routes***             */
+
 router.get('/', (req, res) => {
     res.render('home');
 });
 
-//contact
+/*          ***about routes***           */
+
+router.get('/about', (req, res) => {
+    res.render('about');
+});
+
+/*         ***blog routes***           */
+
+//get blog posts
+router.get('/blog', async (req, res) => {
+    posts = await Post.find().sort({createdAt: -1});
+    res.render('blog', { posts: posts });
+})
+
+//get single blog post
+router.get("/blog/:id", async (req, res) => {
+    try {
+        const { id } = req.params;
+        const post = await Post.findOne({ _id: id });
+        res.render("singlePost", { post: post });
+    } catch (err) {
+        res.status(500).send("Blog not found");
+    }
+});
+
+/*         ***contact routes***        */
+
 router.post('/contact', (req, res) => {
     console.log(req.body);
     // const name = req.body.name;
@@ -76,6 +90,8 @@ router.post('/contact', (req, res) => {
 });
 
 /* ----- register routes ----- */
+
+//get register page
 router.get('/register', (req, res) => {
     res.render('register');
 });
@@ -104,6 +120,8 @@ router.post("/register", async (req, res) => {
 });
 
 /* ----- login routes -----*/
+
+// get login page
 router.get('/login', (req, res) => {
     res.render('login');
 });
@@ -130,11 +148,20 @@ router.post("/login", async (req, res) => {
         // res.status(400).json({ error: "Invalid Password" });
       }
     }
-  });  
+  });
 
-//admin routes
+/*              ***admin routes***            */
+
+//get admin page
 router.get('/admin', (req, res) => {
-    res.render('admin');
+    const hrs = new Date().getHours();
+    const min = new Date().getMinutes();
+    const sec = new Date().getSeconds();
+    const day = new Date().getDate();
+    const month = new Date().getMonth();
+    const year = new Date().getFullYear();
+    res.render('admin', { hrs: hrs, min: min, sec: sec,
+                          day: day, month: month, year: year });
 })
 
 /* *** add blog posts routes *** */
@@ -163,23 +190,6 @@ router.post('/addPost', upload, (req, res) => {
       })
       .catch((err) => console.log(err));
 })
-
-//get blog posts
-router.get('/blog', async (req, res) => {
-    posts = await Post.find().sort({createdAt: -1});
-    res.render('blog', { posts: posts });
-})
-
-//get single blog post
-router.get("/blog/:id", async (req, res) => {
-    try {
-        const { id } = req.params;
-        const post = await Post.findOne({ _id: id });
-        res.render("singlePost", { post: post });
-    } catch (err) {
-        res.status(500).send("Blog not found");
-    }
-});
 
 //get all posts by admin
 router.get('/allPosts', async (req, res) => {
