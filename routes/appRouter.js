@@ -25,8 +25,9 @@ const upload = multer({ storage: Storage }).single('img');
 
 /*          ***home routes***             */
 
-router.get('/', (req, res) => {
-    res.render('home');
+router.get('/', async (req, res) => {
+    const courses = await Course.find().sort({createdAt: -1}).limit(6);
+    res.render('home', { courses: courses });
 });
 
 /*          ***about routes***           */
@@ -36,6 +37,31 @@ router.get('/about', (req, res) => {
 });
 
 /*         ***blog routes***           */
+
+//get addPost page
+router.get('/addPost', (req, res) => {
+    res.render('addPost');
+})
+
+//post blog post
+router.post('/addPost', upload, (req, res) => {
+    const { title, content } = req.body;
+    const img = req.file.filename;
+
+    if (!title || !content || !img) {
+        return res.redirect('/addPost');
+    }
+
+    const posts = new Post({ title, content, img })
+
+    posts
+      .save()
+      .then(() => {
+        console.log('Post Created!');
+        res.redirect('/admin');
+      })
+      .catch((err) => console.log(err));
+})
 
 //get blog posts
 router.get('/blog', async (req, res) => {
@@ -162,33 +188,6 @@ router.get('/admin', (req, res) => {
     const year = new Date().getFullYear();
     res.render('admin', { hrs: hrs, min: min, sec: sec,
                           day: day, month: month, year: year });
-})
-
-/* *** add blog posts routes *** */
-
-//get addPost page
-router.get('/addPost', (req, res) => {
-    res.render('addPost');
-})
-
-//post blog post
-router.post('/addPost', upload, (req, res) => {
-    const { title, content } = req.body;
-    const img = req.file.filename;
-
-    if (!title || !content || !img) {
-        return res.redirect('/addPost');
-    }
-
-    const posts = new Post({ title, content, img })
-
-    posts
-      .save()
-      .then(() => {
-        console.log('Post Created!');
-        res.redirect('/admin');
-      })
-      .catch((err) => console.log(err));
 })
 
 //get all posts by admin

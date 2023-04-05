@@ -13,7 +13,7 @@
         </P>
         <div class="home-btn">
           <button class="main-btn left">
-            <a href="#about">ABOUT US</a>
+            <a href="/about">ABOUT US</a>
           </button>
           <button class="main-btn right">
             <a href="/register">GET STARTED</a>
@@ -22,126 +22,75 @@
       </div>
     </div>
 
-    <div class="about" id="about">
-      <!-- <h2>About Us</h2>
-      <hr size="5" noshade=""> -->
-      <div class="abt-wrapper">
-        <div class="one left">
-          <h2>About Go-use Tech</h2>
-          <p>
-            Our mission is to bridge the gap between education and technology, providing a 
-            platform for educators and learners to stay up-to-date with the latest advancements 
-            and techniques in teaching and learning.
-          </P>
-          <br>
-          <P>
-            We are committed to offering a diverse range of resources, from articles and tutorials 
-            to webinars and podcasts, to help you learn and grow in the field of education and technology. 
-            Our content is created by experienced professionals in the industry who have a deep understanding 
-            of the challenges and opportunities that exist in the modern world of education.
-          </P>
-          <br>
-          <P>
-            We also believe that education and technology should be accessible to everyone, regardless 
-            of their background or financial situation. That's why we offer our content for free, so that 
-            anyone can benefit from our resources and contribute to the community.
-          </P>
-          <br>
-          <p>
-            We invite you to explore our website and join our community of learners, educators, and technologists. 
-            Together, we can create a brighter future for education and technology, one step at a time.
+    <div class="statements container">
+      <div class="row">
+        <div class="col-lg-4 col-sm-12">
+          <div class="d-flex justify-content-center align-items-center">
+            <i class="fa fa-bullseye" style="font-size: 50px; color: rgb(233, 107, 34)"></i>
+          </div>
+          <h3 class="text-center mt-4">Our Mission</h3>
+          <p class="text-center">
+            Lorem ipsum, dolor sit amet consectetur adipisicing
+            elit. Dolores nam deserunt quos optio sapiente.
           </p>
         </div>
-        <div class="one right">
-          <div class="wrapper">
-            <img src="https://media.istockphoto.com/id/1403897241/photo/university-students-studying-together-in-the-library.jpg?b=1&s=170667a&w=0&k=20&c=ovuOKldshFMyYkV3n_Wa5eFVnly8Ab3iRBs_XtFinNg=">
+        <div class="col-lg-4 col-sm-12">
+          <div class="d-flex justify-content-center align-items-center">
+            <i class="fa fa-key" style="font-size: 50px; color:rgb(233, 107, 34);"></i>
           </div>
+          <h3 class="text-center mt-4">Our Core Values</h3>
+          <ul class="text-center">
+            <li>Excellence</li>
+            <li>Integrity</li>
+            <li>Respect</li>
+            <li>Diversity</li>
+            <li>Innovation</li>
+            <li>Leadership</li>
+          </ul>
+        </div>
+        <div class="col-lg-4 col-sm-12">
+          <div class="d-flex justify-content-center align-items-center">
+            <i class="fa fa-eye" style="font-size: 50px; color: rgb(233, 107, 34)"></i>
+          </div>
+          <h3 class="text-center mt-4">Our Vision</h3>
+          <p class="text-center mt-2">
+            To become regional leader in consultancy, innovative
+            market research andadvanced analytical solutions.
+          </p>
         </div>
       </div>
     </div>
-    <!-- <hr class="border" size="5" noshade=""> -->
-    <!-- <div class="team-boxed">
-      <div class="container">
-          <div class="intro">
-              <h2 class="text-center mt-5 mb-3 team-header">Meet our team</h2>
-          </div>
-          <div class="row people">
-              <div class="col-md-6 col-lg-4 item">
-                  <div class="box person"><img class="rounded-circle img-fluid" data-bs-hover-animate="pulse" src="/images/Jonathan.png">
-                      <h3 class="name">Nabasa Jonathan</h3>
-                      <p class="title">Data Analyst, Graphics Designer, Video Editor</p>
-                      <p class="description"><br>Founder and C.E.O @Go-use Tech, Uganda<br><br></p>
-                      <div class="social"><a href="#" target="_blank"><i class="fa fa-facebook-official"></i></a><a href="#" target="_blank"><i class="fa fa-twitter"></i></a><a href="#" target="_blank"><i class="fa fa-linkedin"></i></a></div>
+
+    <div class="featured-courses">
+      <div class="container">  
+        <h2 class="mb-5 pt-5 featured-title">Featured Courses</h2>
+        <div class="row">
+          <% if (courses.length > 0) { %>
+            <% courses.forEach((course) => { %>
+              <div class="single-course col-lg-4 col-md-6 mb-5">
+                <div class="card">
+                  <img src="<%= course.img %>" class="card-img-top" alt="..." width="100%" height="225">
+                  <div class="card-body course-content">
+                    <h4 class="card-title fw-bold">
+                      <%= course.title %>
+                    </h4>
+                    <p class="card-text">
+                      <%= course.desc.substring(0, 150) %>
+                    </p>
+                    <div class="row mt-3">
+                      <a href="/register" class="col btn btn-primary">Get Started</a>
+                    </div>
                   </div>
-              </div>
-              <div class="col-md-6 col-lg-4 item">
-                  <div class="box person"><img class="rounded-circle img-fluid" data-bs-hover-animate="pulse" src="/images/Esam.png">
-                      <h3 class="name">Esam Lasheen</h3>
-                      <p class="title">CyberSecurity Engineer</p>
-                      <p class="description"><br>Co-founder and Tutor @Go-use Tech, Egypt<br><br></p>
-                      <div class="social"><a href="#" target="_blank"><i class="fa fa-facebook-official"></i></a><a href="#" target="_blank"><i class="fa fa-twitter"></i></a><a href="#" target="_blank"><i class="fa fa-linkedin"></i></a></div>
-                  </div>
-              </div>
-              <div class="col-md-6 col-lg-4 item">
-                  <div class="box person"><img class="rounded-circle img-fluid" data-bs-hover-animate="pulse" src="/images/Jarif.png">
-                      <h3 class="name">Jarif Mohammad Nahin</h3>
-                      <p class="title">Digital Marketer, S.E.O Expert</p>
-                      <p class="description"><br>Co-founder and Tutor @Go-use Tech, Bangladesh<br><br></p>
-                      <div class="social"><a href="https://www.facebook.com/profile.php?id=100063851235836&mibextid=ZbWKwL" target="_blank"><i class="fa fa-facebook-official"></i></a><a href="#" target="_blank"><i class="fa fa-twitter"></i></a><a href="#" target="_blank"><i class="fa fa-linkedin"></i></a></div>
-                  </div>
-              </div>
-              <div class="col-md-6 col-lg-4 item">
-                <div class="box person"><img class="rounded-circle img-fluid" data-bs-hover-animate="pulse" src="/images/Maruf.png">
-                    <h3 class="name">Md. Marut Hossain</h3>
-                    <p class="title">Software Engineer</p>
-                    <p class="description"><br>Co-founder and Tutor @Go-use Tech, Bangladesh<br><br></p>
-                    <div class="social"><a href="#" target="_blank"><i class="fa fa-facebook-official"></i></a><a href="#" target="_blank"><i class="fa fa-twitter"></i></a><a href="#" target="_blank"><i class="fa fa-linkedin"></i></a></div>
                 </div>
-            </div>
-            <div class="col-md-6 col-lg-4 item">
-                <div class="box person"><img class="rounded-circle img-fluid" data-bs-hover-animate="pulse" src="/images/Ruusa.png">
-                    <h3 class="name">Ruusa Tulela Nuuyoma</h3>
-                    <p class="title">Electrical Engineer</p>
-                    <p class="description"><br>Co-founder and Tutor @Go-use Tech, Namibia<br><br></p>
-                    <div class="social"><a href="https://www.facebook.com/ruusa.nuuyoma.3" target="_blank"><i class="fa fa-facebook-official"></i></a><a href="#" target="_blank"><i class="fa fa-twitter"></i></a><a href="#" target="_blank"><i class="fa fa-linkedin"></i></a></div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 item">
-                <div class="box person"><img class="rounded-circle img-fluid" data-bs-hover-animate="pulse" src="/images/Wabule.png">
-                    <h3 class="name">Wabule Peace Wokoli</h3>
-                    <p class="title">Networking, Sales & Marketing Agent</p>
-                    <p class="description"><br>Co-founder and Tutor @Go-use Tech, Uganda<br><br></p>
-                    <div class="social"><a href="https://www.facebook.com/profile.php?id=100069297874465" target="_blank"><i class="fa fa-facebook-official"></i></a><a href="#" target="_blank"><i class="fa fa-twitter"></i></a><a href="#" target="_blank"><i class="fa fa-linkedin"></i></a></div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-4 item">
-              <div class="box person"><img class="rounded-circle img-fluid" data-bs-hover-animate="pulse" src="/images/Allan.png">
-                  <h3 class="name">Nandweza Allan</h3>
-                  <p class="title">Software Engineer, IT Specialist, Codeprenuer</p>
-                  <p class="description"><br>Co-founder @Go-use Tech, Uganda<br><br></p>
-                  <div class="social"><a href="https://www.facebook.com/profile.php?id=100088310495889" target="_blank"><i class="fa fa-facebook-official"></i></a><a href="https://twitter.com/allannandweza" target="_blank"><i class="fa fa-twitter"></i></a><a href="https://www.linkedin.com/in/nandwezaallan/" target="_blank"><i class="fa fa-linkedin"></i></a></div>
               </div>
-          </div>
-          <div class="col-md-6 col-lg-4 item">
-              <div class="box person"><img class="rounded-circle img-fluid" data-bs-hover-animate="pulse" src="/images/Isaac.png">
-                  <h3 class="name">Mehmood Issack</h3>
-                  <p class="title">Junior Networking Engineer</p>
-                  <p class="description"><br>Co-founder and Tutor @Go-use Tech, Kenya<br><br></p>
-                  <div class="social"><a href="#" target="_blank"><i class="fa fa-facebook-official"></i></a><a href="#" target="_blank"><i class="fa fa-twitter"></i></a><a href="#" target="_blank"><i class="fa fa-linkedin"></i></a></div>
-              </div>
-          </div>
-          <div class="col-md-6 col-lg-4 item">
-              <div class="box person"><img class="rounded-circle img-fluid" data-bs-hover-animate="pulse" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDTWtZjV_YXCgbJr1SNLAA_Px-nz8eacMrlw&usqp=CAU">
-                  <h3 class="name">Anamika Mondol</h3>
-                  <p class="title">Software Developer, Freelencer</p>
-                  <p class="description"><br>Co-founder and Tutor @Go-use Tech, Bangladesh<br><br></p>
-                  <div class="social"><a href="https://www.facebook.com/profile.php?id=100085232790471" target="_blank"><i class="fa fa-facebook-official"></i></a><a href="#" target="_blank"><i class="fa fa-twitter"></i></a><a href="#" target="_blank"><i class="fa fa-linkedin"></i></a></div>
-              </div>
-          </div>
-          </div>
+              <% }) %>
+              <% } else { %>
+                <div style="margin: auto;">There are no courses to display...</div>
+              <% } %>
+        </div>
       </div>
-    </div> -->
-    <!-- <hr class="border"> -->
+    </div>
+
     <div class="contact">
       <h2>Contact Us</h2>
       <div class="contact-wrapper">

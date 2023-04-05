@@ -163,6 +163,21 @@ a:hover {
     border: none;
 }
 
+.statements {
+    padding: 7% 15%;
+}
+
+.featured-courses {
+    background-color: var(--main-black);
+}
+
+.featured-title {
+    color: var(--main-white);
+    font-weight: 600;
+    font-size: 2.5rem;
+    border-left: 5px solid #fff;
+}
+
 /* about section */
 
 .about {
@@ -221,43 +236,6 @@ a:hover {
         text-align: center;
         padding-top: 0;
     }
-}
-
-/*team section*/
-
-.team-boxed {
-    background-color: var(--main-black);
-}
-
-.team-header {
-    padding-top: 3%;
-    font-size: 3rem;
-    font-weight: 600;
-    color: var(--main-orange);
-}
-
-.person {
-    background-color: var(--main-white);
-    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    padding-bottom: 20px;
-    padding-top: 10px;
-    margin: 30px;
-    border-radius: 25px;
-}
-
-.person img {
-    height: 300px;
-    width: 300px;
-}
-
-.person .fa {
-    color: var(--main-orange);
-    font-size: 2rem;
-}
-
-.person .fa:hover {
-    color: var(--main-blue);
 }
 
 /*contact section*/
