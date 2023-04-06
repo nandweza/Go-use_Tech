@@ -123,6 +123,7 @@ a:hover {
 
 .main-home p {
     font-size: 2rem;
+    font-weight: bold;
     margin-bottom: 10px;
     color: var(--main-white);
     padding: 0 10px 0 20px;
@@ -167,8 +168,23 @@ a:hover {
     padding: 7% 15%;
 }
 
+.statements h3 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: var(--main-black);
+}
+
+.stext {
+    font-size: 1.2rem;
+}
+
+.stext li {
+    font-size: 1.7rem;
+    font-weight: 500;
+}
+
 .featured-courses {
-    background-color: var(--main-black);
+    background-color: var(--main-orange);
 }
 
 .featured-title {
@@ -176,6 +192,60 @@ a:hover {
     font-weight: 600;
     font-size: 2.5rem;
     border-left: 5px solid #fff;
+}
+
+.white-text {
+    color: var(--main-white);
+}
+
+.ftitle {
+    font-size: 2rem;
+}
+
+.ftext {
+    font-size: 1.5rem;
+}
+
+.fbtn {
+    padding: 2%;
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+.featured-blog {
+    padding: 2%;
+}
+
+.featured-blog h3 {
+    color: var(--main-orange);
+    font-size: 2.5rem;
+    font-weight: 600;
+    border-left: 5px solid var(--main-orange);
+}
+
+.fblog-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+.fblog-desc {
+    font-size: 1.2rem;
+}
+
+@media (max-width: 400px) {
+    .fblog-img {
+        width: 260px;
+    }
+}
+
+@media (max-width: 300px) {
+    .fblog-img {
+        width: 200px;
+    }
+}
+
+.events h3 {
+    font-size: 2rem;
 }
 
 /* about section */

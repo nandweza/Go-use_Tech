@@ -27,7 +27,8 @@ const upload = multer({ storage: Storage }).single('img');
 
 router.get('/', async (req, res) => {
     const courses = await Course.find().sort({createdAt: -1}).limit(6);
-    res.render('home', { courses: courses });
+    const posts = await Post.find().sort({ createdAt: 1 }).limit(2);
+    res.render('home', { courses: courses, posts: posts });
 });
 
 /*          ***about routes***           */
