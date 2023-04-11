@@ -178,11 +178,6 @@ a:hover {
     font-size: 1.2rem;
 }
 
-.stext li {
-    font-size: 1.7rem;
-    font-weight: 500;
-}
-
 .featured-courses {
     background-color: var(--main-orange);
 }
@@ -411,14 +406,29 @@ a:hover {
 
 /* footer */
 
-footer .footer-text {
-    font-size: 1.2rem;
+.footer-container {
+    background-color: var(--main-black);
+    color: var(--main-white);
+}
+
+.footerLinks {
+    font-size: 1.3rem;
+}
+
+.footerLinks a {
+    color: var(--main-white);
     font-weight: normal;
 }
 
+footer .footer-text {
+    font-size: 1.5rem;
+    font-weight: normal;
+    color: var(--main-white);
+}
+
 .f-adjust .fa {
-    font-size: 1.2rem;
-    color: var(--main-black);
+    font-size: 1.5rem;
+    color: var(--main-white);
 }
 
 /* Blog */

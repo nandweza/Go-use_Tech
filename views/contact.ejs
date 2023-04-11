@@ -1,0 +1,84 @@
+<%- include('./partials/head.ejs'); %>
+<body>
+  <%- include('./partials/nav.ejs'); %>
+  <div class="contact">
+    <div class="container">
+      <h2>Contact Us</h2>
+      <div class="row">
+        <div class="col">
+          <form action="/contact" method="post" class="contact-Form">
+            <h3>Send us a message</h3>
+            <div class="form-group">  
+              <label for="name">Name<span style="color: red;">*</span></label>
+              <br>
+              <input class="form-control" type="text" id="name" name="name" placeholder="eg Jon Doe">
+            </div>
+            <div class="form-group">  
+              <label for="email">Email<span style="color: red;">*</span></label>
+              <br>
+              <input class="form-control" type="email" id="email" name="email" placeholder="eg jondoe@gmail.com">
+            </div>
+            <div class="form-group">
+              <label for="subject">Subject<span style="color: red;">*</span></label>
+              <br>
+              <input class="form-control" type="text" id="subject" name="subject">
+            </div>
+            <div class="form-group">
+              <label for="message">Message<span style="color: red;">*</span></label>
+              <br>
+              <textarea class="form-control" cols="7" rows="5" id="message" name="message"></textarea>
+            </div>
+            <br>
+            <input class="btn btn-primary btn-adjust" type="submit" value="Submit">
+          </form>
+        </div>
+        <div class="col">
+          <h3>Get in touch</h3>
+          <i class="fa fa-phone-square"></i>
+          <span>+256779113920</span>
+          <br>
+          <i class="fa fa-map-marker"></i>
+          <span>Kampala, Uganda</span>
+          <br>
+          <i class="fa fa-envelope"></i>
+          <span>usetech.go@gmail.com</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%- include('./partials/footer.ejs'); %>
+</body>
+
+<script>
+  const contactForm = document.querySelector('.contact-Form');
+  let name = document.getElementById('name');
+  let email = document.getElementById('email');
+  let subject = document.getElementById('subject');
+  let message = document.getElementById('message');
+  contactForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    let formData = {
+      name: name.value,
+      email: email.value,
+      subject: subject.value,
+      message: message.value
+    }
+    // console.log(formData);
+    let xhr = new XMLHttpRequest();
+    xhr.open('POST', '/contact');
+    xhr.setRequestHeader('content-type', 'application/json');
+    xhr.onload = () => {
+      console.log(xhr.responseText);
+      if(xhr.responseText == 'success') {
+        alert('Email sent successfully!');
+        name.value = '';
+        email.value = '';
+        subject.value = '';
+        message.value = '';
+      } else {
+        alert('something went wrong!');
+      }
+    }
+    xhr.send(JSON.stringify(formData));
+  })
+</script>

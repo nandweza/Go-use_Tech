@@ -26,7 +26,7 @@ const upload = multer({ storage: Storage }).single('img');
 /*          ***home routes***             */
 
 router.get('/', async (req, res) => {
-    const courses = await Course.find().sort({createdAt: -1}).limit(6);
+    const courses = await Course.find().sort({createdAt: -1}).limit(3);
     const posts = await Post.find().sort({ createdAt: 1 }).limit(2);
     res.render('home', { courses: courses, posts: posts });
 });
@@ -82,6 +82,10 @@ router.get("/blog/:id", async (req, res) => {
 });
 
 /*         ***contact routes***        */
+
+router.get('/contact', (req, res) => {
+    res.render('contact');
+});
 
 router.post('/contact', (req, res) => {
     console.log(req.body);
