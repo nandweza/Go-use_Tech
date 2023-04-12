@@ -1,17 +1,42 @@
 <%- include('./partials/head.ejs') %>
 <body>
     <%- include('./partials/nav.ejs') %>
+    <div id="about-carousel" class="carousel slide d-flex justify-content-center align-items-center" data-bs-ride="carousel" style="height: 75vh;">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <div class="text-center">
+            <h3 class="about-header fs-*">About us ...</h3>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="text-center">
+            <em class="carousel-em fs-*">Discover more about us</em>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="text-center">
+            <em class="carousel-em fs-*">Lorem ipsum dolor sit yet</em>
+          </div>
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#about-carousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#about-carousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </div>
     <div class="container">
         <div class="row">
-            <div class="col text-center">
-                <h2 class="">About us ...</h2>
-            </div> 
             <div class="about" id="about">
                 <!-- <h2>About Us</h2>
                 <hr size="5" noshade=""> -->
                 <div class="abt-wrapper">
                   <div class="one left">
-                    <h2>About Go-use Tech</h2>
+                    <h2>Our Story</h2>
                     <p>
                       Our mission is to bridge the gap between education and technology, providing a 
                       platform for educators and learners to stay up-to-date with the latest advancements 
@@ -44,6 +69,75 @@
                 </div>
               </div>
         </div>
+    </div>
+    <div class="container about-statements">
+      <div class="row">
+        <div class="col p-5">
+          <div class="card p-3 text-center">
+            <i class="fa fa-eye" style="font-size: 50px;"></i>
+            <h3>Our Vision</h3>
+            <p>
+              To become regional leader in consultancy, 
+              innovative market research and advanced analytical 
+              solutions.
+              <br>
+              <br>
+            </p>
+          </div>
+        </div>
+        <div class="col p-5">
+          <div class="card p-3 text-center">
+            <i class="fa fa-bullseye" style="font-size: 50px;"></i>
+            <h3>Our Mission</h3>
+            <p>
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit. 
+              Aliquid facilis dolores consequuntur quae, amet a delectus 
+              rem quia eum tenetur voluptatum
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container px-5 about-statements">
+      <div class="row px-5 pb-4">
+        <div class="col px-5">
+          <div class="card p-5 ">
+            <i class="fa fa-key text-center" style="font-size: 50px;"></i>
+            <h3 class="text-center">Our Core Values</h3>
+            <ul>
+              <li>
+                <strong>Excellence:</strong> In every aspect of operations the excellence is continuously pursued to maintain
+                the effectiveness of inefficiency. Either it’s training or research, scholarship or creative
+                endeavors or student services we ensure to maintain excellence.
+              </li>
+              <li>
+                <strong>Integrity:</strong> At SITM, we maintain the Integrity through academic freedom, responsibility;
+                Ethical behavior; Shared governance; honest communications, and accountability for words.
+              </li>
+              <li>
+                <strong>Respect:</strong> Each person at SITM is treated with respect and dignity and is to be treated
+                equitably in all situations.
+              </li>
+              <li>
+                <strong>Diversity:</strong> We welcome a diversity of people and their ideas as it is necessary for quality
+                education in global interdependency. Students at SITM also get the experience of existence
+                in a diversified environment where the talent of each individual is recognized.
+              </li>
+              <li>
+                <strong>Innovation:</strong> Go usetech always encourages and supports its team members, staff, and
+                students in all forms of productive discoveries and application of knowledge in every sphere
+                of life especially in developing innovative products and processes.
+              </li>
+              <li>
+                <strong>Leadership:</strong> Go usetech conducts special sessions of our clients, students and staff members
+                to enhance their personality development and leadership skills so that they always remain
+                leaders in their fields.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
 
     <%- include('./partials/footer.ejs') %>

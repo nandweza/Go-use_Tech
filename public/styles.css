@@ -63,6 +63,10 @@ a:hover {
     color: blue;
 }
 
+nav {
+    background: transparent;
+}
+
 .navbar-toggler {
     margin-right: 15px;
     padding: 10px;
@@ -245,6 +249,12 @@ a:hover {
 
 /* about section */
 
+#about-carousel {
+    background-color: var(--main-orange);
+    background-image: url('https://images.unsplash.com/photo-1485988412941-77a35537dae4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTV8fGNvbXB1dGVyJTIwb25saW5lJTIwY2xhc3NlcyUyMHdlYnNpdGUlMjBiYWNrZ3JvdW5kJTIwaW1hZ2V8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60');
+    background-size: cover;
+}
+
 .about {
     margin-top: 20px;
     text-align: center;
@@ -301,6 +311,24 @@ a:hover {
         text-align: center;
         padding-top: 0;
     }
+}
+
+.about-statements .fa {
+    color: var(--main-orange);
+}
+
+.about-statements h3 {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.about-statements p {
+    font-size: 1.3rem;
+}
+
+.about-statements ul li {
+    font-size: 1.3rem;
+    padding: 5px;
 }
 
 /*contact section*/
