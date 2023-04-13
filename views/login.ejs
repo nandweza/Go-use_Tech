@@ -1,31 +1,31 @@
 <%- include('./partials/head.ejs') %>
 
-    <body>
-        <%- include('./partials/nav.ejs') %>
-        <div class="login-main">
-            <div class="container">
-                <form action="/login" method="post">
-                    <h2>LOGIN</h2>
-                    <div class="input-group">
-                        <label for="username">Username<span style="color: red;">*</span></label>
-                        <input class="form-control input-adjust" type="text" id="username" name="username" placeholder="eg Jon Doe" required>
-                    </div>
-                    <div class="input-group">
-                        <label for="password">Password<span style="color: red;">*</span></label>
-                        <input class="form-control input-adjust" type="password" id="password" name="password" required>
-                        <button type="button" id="btnToggle" class="toggle">
-                            <i id="eyeIcon" class="fa fa-eye"></i>
-                        </button>
-                    </div>
-                    <button class="btn btn-lg btn-primary btn-block button-adjust" type="submit">LOGIN</button>
-                    <div class="register fs-*">
-                        Not a member? <a href="/register">Sign up</a>
-                    </div>
-                </form>
-            </div>
+<body>
+    <%- include('./partials/nav.ejs') %>  
+    <div class="login-main">
+        <div class="container">
+            <form action="/login" method="post">
+                <h2>LOGIN</h2>
+                <div class="input-group">
+                    <label for="username">Username<span style="color: red;">*</span></label>
+                    <input class="form-control input-adjust" type="text" id="username" name="username" placeholder="eg Jon Doe" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Password<span style="color: red;">*</span></label>
+                    <input class="form-control input-adjust" type="password" id="password" name="password" required>
+                    <button type="button" id="btnToggle" class="toggle">
+                        <i id="eyeIcon" class="fa fa-eye"></i>
+                    </button>
+                </div>
+                <button class="btn btn-lg btn-primary btn-block button-adjust" type="submit">LOGIN</button>
+                <div class="register fs-*">
+                    Not a member? <a href="/register">Sign up</a>
+                </div>
+            </form>
         </div>
-        <%- include('./partials/footer.ejs') %>
-    </body>
+    </div>
+    <%- include('./partials/footer.ejs') %>
+</body>
 
     <script>
 

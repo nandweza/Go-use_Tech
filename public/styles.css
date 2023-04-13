@@ -51,7 +51,6 @@ a {
     font-weight: 600;
     padding: 10px;
     padding-right: 30px;
-    color: var(--main-blue);
 }
 
 .nav-link:hover {
@@ -78,6 +77,7 @@ nav {
     text-align: center; 
     font-size: 2rem; 
     padding: 15px;
+    color: var(--main-white);
 }
 
 .m-adjust {
@@ -114,7 +114,6 @@ nav {
     background-color: var(--main-white);
     background-size: cover;
     background-image: url("/images/main-home.jpg");
-
 }
 
 .main-home h1 {
@@ -249,17 +248,28 @@ nav {
 
 /* about section */
 
-#about-carousel {
+.intro {
     background-color: var(--main-orange);
-    background-image: url('https://images.unsplash.com/photo-1485988412941-77a35537dae4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTV8fGNvbXB1dGVyJTIwb25saW5lJTIwY2xhc3NlcyUyMHdlYnNpdGUlMjBiYWNrZ3JvdW5kJTIwaW1hZ2V8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60');
+    background-image: url('/images/b2.jpg');
     background-size: cover;
 }
 
+.intro h3 {
+    font-size: 6.5vw;
+    font-weight: 800;
+    color: var(--main-orange);
+}
+
+.intro em {
+    font-size: 5vw;
+    color: var(--main-orange);
+}
+/* 
 .about {
     margin-top: 20px;
     text-align: center;
     height: auto;
-}
+} */
 
 .abt-wrapper {
     display: grid;
@@ -313,8 +323,18 @@ nav {
     }
 }
 
+.about-statements .card:hover {
+    background-color: var(--main-blue);
+    cursor: pointer;
+    color: var(--main-white);
+}
+
 .about-statements .fa {
     color: var(--main-orange);
+}
+
+.about-statements .fa:hover {
+    color: var(--main-white);
 }
 
 .about-statements h3 {
@@ -327,109 +347,65 @@ nav {
 }
 
 .about-statements ul li {
+    list-style-type: disc;
     font-size: 1.3rem;
     padding: 5px;
 }
 
 /*contact section*/
 
-.contact {
+.contact-main {
     height: auto;
-    background-color: var(--main-white);
 }
 
-.contact h2 {
-    text-align: center;
+.contact-title {
+    background-color: var(--main-blue);
+    height: 15vh;
+    border-bottom-left-radius: 25%;
+    border-bottom-right-radius: 25%;
+}
+
+.contact-us {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+.get-in-touch span {
+    font-size: 2rem;
+    color: var(--main-white);
+}
+
+.get-in-touch .fa {
     font-size: 3rem;
-    font-weight: 600;
-    color: var(--main-orange);
-    padding-top: 3%;
+    color: var(--main-white);
 }
 
-.contact-wrapper {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    place-items: center;
-    grid-gap: 4rem;
-    margin: 20px 50px;
+.get-in-touch .black {
+    background-color: var(--main-black);
 }
 
-.contact-wrapper .left {
-    width: 80%;
-    color: var(--main-black);
+.get-in-touch .black:hover {
+    background-color: var(--main-blue);
 }
 
-.contact-wrapper .left h3 {
-    font-size: 2.5vw;
-    margin-bottom: 20px;
-    text-align: center;
+.get-in-touch .blue {
+    background-color: var(--main-blue);
 }
 
-.contact-wrapper .left label {
-    font-size: 1.2rem;
-    margin-top: 10px;
-    margin-bottom: 0;
-}
-
-.contact-wrapper .right {
-    margin: 0 auto;
-    width: 80%;
-}
-
-.contact-wrapper .right h3 {
-    font-size: 2.5vw;
-    font-weight: 500;
-    margin-top: 50px;
-    margin-bottom: 30px;
-    color: var(--main-black);
-    text-align: center;
-}
-
-.contact-wrapper .right .fa {
-    color: var(--main-orange);
-    font-size: 4vw;
-    font-weight: 800;
-    margin-bottom: 20px;
-    margin-top: 20px;
-    padding-left: 20px;
-}
-
-.contact-wrapper .right span {
-    font-size: 2.2vmin;
-    margin-left: 5px;
-    margin-bottom: 50px;
-    color: var(--main-black);
-}
-
-.btn-adjust {
+.get-in-touch .blue:hover {
     background-color: var(--main-orange);
-    border: var(--main-orange);
 }
 
-@media (max-width: 920px) {
-    .contact-wrapper {
-        margin: 20px auto;
-    }
+.get-in-touch .orange {
+    background-color: var(--main-orange);
 }
 
-@media (max-width: 480px) {
-    .contact-wrapper {
-        display: flex;
-        flex-direction: column-reverse;
-    }
-    .contact-wrapper .left h3,
-    .contact-wrapper .right h3 {
-        font-size: 1.5rem;
-    }
-    .contact-wrapper .right {
-        text-align: center;
-    }
-    .contact-wrapper .right span {
-        font-size: 1.2rem;
-    }
-    .contact-wrapper .right .fa {
-        font-size: 2rem;
-    }
+.get-in-touch .orange:hover {
+    background-color: var(--main-black);
 }
 
 /* footer */
@@ -467,13 +443,6 @@ footer .footer-text {
     font-size: 3.5rem;
     font-weight: 600;
     font-style: italic;
-}
-
-.blog-c {
-    /* background-image: url('https://images.unsplash.com/photo-1432821596592-e2c18b78144f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8YmxvZyUyMGJhY2tncm91bmR8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60');
-    background-repeat: no-repeat;
-    background-size: cover; */
-    background-color: var(--main-orange);
 }
 
 .carousel-item {
