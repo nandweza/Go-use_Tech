@@ -277,7 +277,7 @@ nav {
     grid-gap: 2rem;
     place-items: center;
     margin: 20px 50px 0 50px;
-    padding: 20px;
+    padding: 2% 1%;
 }
 
 .abt-wrapper .left {
@@ -346,10 +346,24 @@ nav {
     font-size: 1.3rem;
 }
 
+.about-statements {
+    padding: 2% 15%;
+}
+
 .about-statements ul li {
     list-style-type: disc;
     font-size: 1.3rem;
     padding: 5px;
+}
+
+@media (max-width: 768px) {
+    .about-statements {
+        padding: 1.5% 7%;
+    }
+}
+
+@media (screen) {
+    
 }
 
 /*contact section*/
@@ -365,6 +379,13 @@ nav {
     border-bottom-right-radius: 25%;
 }
 
+.contact-title h3 {
+    font-size: 3rem;
+    font-weight: 600;
+    color: var(--main-white);
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
 .contact-us {
     height: auto;
     display: flex;
@@ -372,6 +393,10 @@ nav {
     align-items: center;
     justify-content: center;
     padding: 10px;
+}
+
+.btn-adjust {
+    font-size: 1.5rem;
 }
 
 .get-in-touch span {
@@ -406,6 +431,15 @@ nav {
 
 .get-in-touch .orange:hover {
     background-color: var(--main-black);
+}
+
+@media (max-width: 410px) {
+    .contact-title h3 {
+        font-size: 2rem;
+    }
+    .get-in-touch span {
+        font-size: 1.2rem;
+    }
 }
 
 /* footer */
@@ -509,7 +543,7 @@ footer .footer-text {
     margin-right: auto;
 }
 
-.intro {
+.singlePost-intro {
     font-style: normal;
     font-size: 5vw;
     font-weight: bold;
@@ -670,7 +704,25 @@ footer .footer-text {
 
 /* course landing page */
 .course-wrapper {
-    padding: 7% 15%;
+    padding: 2% 1.2%;
+}
+
+@media (max-width: 540px) {
+    .embed-responsive-item {
+        height: 315;
+    }
+}
+
+@media (max-width: 400px) {
+    .embed-responsive-item {
+        height: 220;
+    }
+}
+
+@media (max-width: 300px) {
+    .embed-responsive-item {
+        height: 180;
+    }
 }
 
 /* admin page */
@@ -830,8 +882,7 @@ footer .footer-text {
     
 }
 
-.posts-wrapper,
-.course-wrapper {
+.posts-wrapper {
     padding: 10px;
 }
 
