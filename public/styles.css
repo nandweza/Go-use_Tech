@@ -453,13 +453,6 @@ nav {
     font-size: 1.3rem;
 }
 
-/* @media (max-width: 992px) {
-    .footerLinks a {
-        color: red;
-        font-size: 1rem;
-    }
-} */
-
 .footerLinks a {
     color: var(--main-white);
     font-weight: normal;
