@@ -159,10 +159,10 @@ router.get('/login', (req, res) => {
 
 // Login User
 router.post("/login", async (req, res) => {
-    const username = req.body.username;
+    const email = req.body.email;
     const password = req.body.password;
 
-    const user = await User.findOne({ username: username });
+    const user = await User.findOne({ email: email });
     if (user) {
       // check user password with hashed password stored in the database
       const validPassword = bcrypt.compare(password, user.password);

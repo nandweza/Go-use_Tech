@@ -246,10 +246,64 @@ nav {
     font-size: 2rem;
 }
 
+.clients-header h5 {
+    font-size: 1.5rem;
+}
+
+.clients-header h3 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--main-orange);
+}
+
+.clients-header p {
+    font-size: 1.2rem;
+    font-style: italic;
+}
+
+.clients .text {
+    color: #181719;
+}
+
+.clients img {
+    border-radius: 50%;
+}
+
+.clients h4 {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.clients h5 {
+    font-size: 1.2rem;
+}
+
+.clients .fa {
+    color: var(--main-orange);
+    font-size: 2rem;
+}
+
+.clients p {
+    font-size: 1rem;
+    font-style: italic;
+}
+
+@media (max-width: 991px) {
+    .false-md {
+        display: none;
+    }
+}
+
+@media (max-width: 767px) {
+    .false-sm {
+        display: none;
+    }
+}
+
 /* about section */
 
 .intro {
-    background-color: var(--main-orange);
+    /* background-color: var(--main-orange); */
     background-image: url('/images/b2.jpg');
     background-size: cover;
 }
