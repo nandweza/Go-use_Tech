@@ -742,6 +742,9 @@ footer .footer-text {
     .register-main {
         height: 150vh;
     }
+    .signup-img {
+        display: none;
+    }
 }
 
 .login-main .container form {
