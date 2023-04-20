@@ -3,28 +3,63 @@
     <body>
         <div class="login-main register-main">
             <div class="container">
-                <form action="/register" method="post">
-                    <h2>REGISTER</h2>
-                    <div class="input-group">
-                        <label for="username">Username<span style="color: red;">*</span></label>
-                        <input class="form-control input-adjust" type="text" id="username" name="username" placeholder="eg Jon Doe" required>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <form action="/register" method="post">
+                            <h2>Sign Up</h2>
+                            <div class="input-group">
+                                <label for="username">Username<span style="color: red;">*</span></label>
+                                <input class="form-control input-adjust" type="text" id="username" name="username" placeholder="eg Jon Doe" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="email">Email<span style="color: red;">*</span></label>
+                                <input class="form-control input-adjust" type="email" id="email" name="email" placeholder="eg jondoe@gmail.com" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="password">Password<span style="color: red;">*</span><span class="fs-5 text-muted pass-min">(6 characters minimun)</span></label>
+                                <input class="form-control input-adjust" type="password" id="password" name="password" required>
+                                <button type="button" id="btnToggle" class="toggle">
+                                    <i id="eyeIcon" class="fa fa-eye"></i>
+                                </button>
+                            </div>
+                            <button class="btn btn-lg btn-primary btn-block button-adjust" type="submit">REGISTER</button>
+                            <div class="register fs-*">
+                                Already a member?<a href="/login">Sign in</a>
+                            </div>
+                            <div class="text-center pt-3 back-home">
+                                <a href="/">
+                                    <i class="fa fa-arrow-left px-2"></i>
+                                    <span>Back to Go UseTech</span>
+                                </a>
+                            </div>
+                        </form>
                     </div>
-                    <div class="input-group">
-                        <label for="email">Email<span style="color: red;">*</span></label>
-                        <input class="form-control input-adjust" type="email" id="email" name="email" placeholder="eg jondoe@gmail.com" required>
+                    <div class="col-lg-6 col-md-6 col-sm-12 p-5 oauth-login">
+                        <h3 class="text-center fw-bold pt-5">Or Sign Up with</h3>
+                        <div class="row text-center d-flex justify-content-center align-items-center p-5">
+                            <div class="col-lg-6 col-md-12 col-sm-12 p-3 google-oauth">
+                                <div class="card">
+                                  <div class="card-body">
+                                    <a class="btn btn-block" href="/auth/google" role="button">
+                                      <i class="fa fa-google"></i>
+                                      <span class="px-2">Google</span>
+                                    </a>
+                                  </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-12 col-sm-12 p-3 facebook-oauth">
+                                <div class="card">
+                                  <div class="card-body">
+                                    <a class="btn btn-block" href="/auth/facebook" role="button">
+                                      <i class="fa fa-facebook-square"></i>
+                                      <span class="px-2">Facebook</span>
+                                    </a>
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="input-group">
-                        <label for="password">Password<span style="color: red;">*</span><span class="fs-5 text-muted pass-min">(6 characters minimun)</span></label>
-                        <input class="form-control input-adjust" type="password" id="password" name="password" required>
-                        <button type="button" id="btnToggle" class="toggle">
-                            <i id="eyeIcon" class="fa fa-eye"></i>
-                        </button>
-                    </div>
-                    <button class="btn btn-lg btn-primary btn-block button-adjust" type="submit">REGISTER</button>
-                    <div class="register fs-*">
-                        Already a member?<a href="/login">Sign in</a>
-                    </div>
-                </form>
+                </div>
             </div>
         </div>
     </body>

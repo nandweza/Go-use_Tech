@@ -4,24 +4,53 @@
     <%- include('./partials/nav.ejs') %>  
     <div class="login-main">
         <div class="container">
-            <form action="/login" method="post">
-                <h2>LOGIN</h2>
-                <div class="input-group">
-                    <label for="email">Email<span style="color: red;">*</span></label>
-                    <input class="form-control input-adjust" type="email" id="email" name="email" placeholder="eg jondoe@gmail.com" required>
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <form action="/login" method="post">
+                        <h2>Sign In</h2>
+                        <div class="input-group">
+                            <label for="email">Email<span style="color: red;">*</span></label>
+                            <input class="form-control input-adjust" type="email" id="email" name="email" placeholder="eg jondoe@gmail.com" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="password">Password<span style="color: red;">*</span></label>
+                            <input class="form-control input-adjust" type="password" id="password" name="password" required>
+                            <button type="button" id="btnToggle" class="toggle">
+                                <i id="eyeIcon" class="fa fa-eye"></i>
+                            </button>
+                        </div>
+                        <button class="btn btn-lg btn-primary btn-block button-adjust" type="submit">LOGIN</button>
+                        <div class="register fs-*">
+                            Not a member? <a href="/register">Sign up</a>
+                        </div>
+                    </form>
                 </div>
-                <div class="input-group">
-                    <label for="password">Password<span style="color: red;">*</span></label>
-                    <input class="form-control input-adjust" type="password" id="password" name="password" required>
-                    <button type="button" id="btnToggle" class="toggle">
-                        <i id="eyeIcon" class="fa fa-eye"></i>
-                    </button>
+                <div class="col-lg-6 col-md-6 col-sm-12 p-5 oauth-login">
+                    <h3 class="text-center fw-bold pt-5">Or Sign In with</h3>
+                    <div class="row text-center d-flex justify-content-center align-items-center p-5">
+                        <div class="col-lg-6 col-md-12 col-sm-12 p-3 google-oauth">
+                            <div class="card">
+                              <div class="card-body">
+                                <a class="btn btn-block" href="/auth/google" role="button">
+                                  <i class="fa fa-google"></i>
+                                  <span class="px-2">Google</span>
+                                </a>
+                              </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-12 col-sm-12 p-3 facebook-oauth">
+                            <div class="card">
+                              <div class="card-body">
+                                <a class="btn btn-block" href="/auth/facebook" role="button">
+                                  <i class="fa fa-facebook-square"></i>
+                                  <span class="px-2">Facebook</span>
+                                </a>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <button class="btn btn-lg btn-primary btn-block button-adjust" type="submit">LOGIN</button>
-                <div class="register fs-*">
-                    Not a member? <a href="/register">Sign up</a>
-                </div>
-            </form>
+            </div>
         </div>
     </div>
     <%- include('./partials/footer.ejs') %>

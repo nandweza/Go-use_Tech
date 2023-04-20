@@ -22,10 +22,25 @@
       </div>
 
     <div class="statements container">
+      <!-- <h3 class="text-center">Our Slogan</h3> -->
+      <div class="d-flex justify-content-center align-items-center pb-2">
+        <i class="fa fa-quote-left"></i>
+      </div>
+      <p class="text-center pb-5">"Data-driven transformation, changing lives where it's needed most."</p>
       <div class="row">
         <div class="col-lg-4 col-sm-12">
           <div class="d-flex justify-content-center align-items-center">
-            <i class="fa fa-bullseye" style="font-size: 70px; color: rgb(233, 107, 34)"></i>
+            <i class="fa fa-eye"></i>
+          </div>
+          <h3 class="text-center mt-4">Our Vision</h3>
+          <p class="text-center mt-2 stext">
+            To become regional leader in consultancy, innovative
+            market research and advanced analytical solutions.
+          </p>
+        </div>
+        <div class="col-lg-4 col-sm-12">
+          <div class="d-flex justify-content-center align-items-center">
+            <i class="fa fa-bullseye"></i>
           </div>
           <h3 class="text-center mt-4">Our Mission</h3>
           <p class="text-center stext">
@@ -36,21 +51,11 @@
         </div>
         <div class="col-lg-4 col-sm-12">
           <div class="d-flex justify-content-center align-items-center">
-            <i class="fa fa-key" style="font-size: 70px; color:rgb(233, 107, 34);"></i>
+            <i class="fa fa-key"></i>
           </div>
           <h3 class="text-center mt-4">Our Core Values</h3>
           <p class="text-center stext">
             Excellence, Innovation, Leadership, Respect, Integrity, Diversity
-          </p>
-        </div>
-        <div class="col-lg-4 col-sm-12">
-          <div class="d-flex justify-content-center align-items-center">
-            <i class="fa fa-eye" style="font-size: 70px; color: rgb(233, 107, 34)"></i>
-          </div>
-          <h3 class="text-center mt-4">Our Vision</h3>
-          <p class="text-center mt-2 stext">
-            To become regional leader in consultancy, innovative
-            market research and advanced analytical solutions.
           </p>
         </div>
       </div>
@@ -60,6 +65,7 @@
       <div class="container">  
         <h2 class="mb-5 pt-5 featured-title">Featured Courses</h2>
         <div class="row">
+          <% if (courses.length > 0) { %>
             <% courses.forEach((course) => { %>
               <div class="col-lg-4 col-md-6 mb-5">
                 <div class="card bg-transparent border-0">
@@ -78,6 +84,9 @@
                 </div>
               </div>
             <% }) %>
+          <% } else { %>
+            <span class="text-center fw-bold" style="font-size: 18px; color: whitesmoke;">No Course yet.</span>
+          <% } %>
         </div>
       </div>
     </div>
@@ -88,24 +97,28 @@
           <div class="col-lg-8">
             <div class="card p-5">
               <h3 class="mt-4 mb-4">Latest Posts</h3>
-              <% posts.forEach((post) => { %>
-                <div class="row mb-4 pb-4 border-bottom">
-                  <div class="col-lg-6 col-md-12">
-                    <img src="<%= post.img %>" class="img-responsive fblog-img" width="300"/>
-                  </div>
-                  <div class="col-lg-6 col-md-12">
-                    <div class="fblog-title">
-                      <%= post.title %>
+              <% if (posts.length > 0) { %> 
+                <% posts.forEach((post) => { %>
+                  <div class="row mb-4 pb-4 border-bottom">
+                    <div class="col-lg-6 col-md-12">
+                      <img src="<%= post.img %>" class="img-responsive fblog-img" width="300"/>
                     </div>
-                    <div class="fblog-desc">
-                      <p>
-                        <%= post.content.substring(0, 240) + "..." %>
-                        <a href="/blog/<%= post._id %>" style="color: red;">Read more.</a>
-                      </p>
+                    <div class="col-lg-6 col-md-12">
+                      <div class="fblog-title">
+                        <%= post.title %>
+                      </div>
+                      <div class="fblog-desc">
+                        <p>
+                          <%= post.content.substring(0, 240) + "..." %>
+                          <a href="/blog/<%= post._id %>" style="color: red;">Read more.</a>
+                        </p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              <% }) %>
+                  <% }) %>
+                <% } else { %>
+                  <span class="text-center fw-bold" style="font-size: 18px;">No Post yet.</span>
+                <% } %>
             </div>
           </div>
           <div class="col-lg-4 events">
@@ -126,7 +139,6 @@
       <div class="clients-header">
         <h5 class="text-center pb-4">TESTIMONIALS</h5>
         <h3 class="text-center pb-2">WHAT CLIENTS SAY</h3>
-        <p class="text-center">"Data-driven transformation, changing lives where it's needed most."</p>
       </div>
       <div id="clients-carousel" class="carousel slide d-flex justify-content-center align-items-center" data-bs-ride="carousel" style="height: 70vh;">
         <div class="carousel-inner">

@@ -8,6 +8,7 @@ const flash = require('connect-flash');
 const User = require('../models/User');
 const Course = require('../models/Course');
 const Post = require('../models/Post');
+const Comment = require('../models/Comment');
 const fs = require('fs');
 const nodemailer = require('nodemailer');
 
@@ -233,7 +234,21 @@ router.post('/addCourse', upload, (req, res) => {
         res.redirect('/admin');
       })
       .catch((err) => console.log(err));
-})
+});
+
+//post a comment
+router.post('/comment', (req, res) => {
+    const comments = new Comment({
+        content: req.body.content
+    })
+    comments
+      .save()
+      .then(() => {
+        console.log('Comment posted successfully');
+        // res.render('/singleCourse');
+    })
+    .catch((err) => console.log(err));
+});
 
 //get single course
 router.get("/courses/:id", async (req, res) => {
@@ -241,7 +256,8 @@ router.get("/courses/:id", async (req, res) => {
         const { id } = req.params;
         const course = await Course.findOne({ _id: id });
         const courses = await Course.find().sort({createdAt: -1}).limit(3);
-        res.render("singleCourse", { course: course, courses: courses });
+        const comments = await Comment.find().sort({createdAt: -1});
+        res.render("singleCourse", { course: course, courses: courses, comments: comments });
     } catch (err) {
         res.status(500).send("Course not found");
     }
@@ -251,7 +267,7 @@ router.get("/courses/:id", async (req, res) => {
 router.get('/allCourses', async (req, res) => {
     courses = await Course.find().sort({createdAt: -1});
     res.render('allCourses', { courses: courses });
-})
+});
 
 //logout
 router.get('/logout', (req, res) => {

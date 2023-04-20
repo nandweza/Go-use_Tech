@@ -1,6 +1,6 @@
 <%- include('./partials/head.ejs') %>
 
-<body>
+<body class="course-body">
     <div class="bg-light">
         <nav class="container navbar navbar-expand-lg navbar-light">
             <a class="navbar-brand" href="">
@@ -25,7 +25,7 @@
             </div>
         </nav>
     </div>
-    <div class="container">
+    <div class="container pb-4">
         <div class="row pt-4">
             <div class="col-lg-8 col-sm-12">
 
@@ -45,6 +45,32 @@
                 <div id="abtAuthor" class="abtAuthor mt-2 mb-3">
                     <%= course.abtAuthor %>
                 </div>
+                <!-- <div class="comment-section">
+                    <form action="/comment" method="post" class="pb-5">
+                        <legend>
+                            <div class="comment-header">
+                                <i class="fa fa-comment"></i>
+                                <span>Comments<span>
+                            </div>
+                        </legend>
+                        <div class="form-group pb-4">
+                            <textarea class="form-control" name="content" cols="30" rows="5" placeholder="add comment"></textarea>
+                        </div>
+                        <input type="submit" value="Comment" class="btn btn-primary">
+                    </form>
+                    <div class="container comments">
+                        <% if (comments.length > 0) { %>
+                            <% comments.forEach((comment) => { %>
+                                <div class="py-3">
+                                    <%= comment.content %>
+                                </div>
+                                <hr class="w-30">
+                            <% }) %>
+                        <% } else { %>
+                            <span class="text-center fw-bold" style="font-size: 14px;">No comment yet.</span>
+                        <% } %>
+                    </div>
+                </div> -->
             </div>
             <div class="col-lg-4 px-3">
                 <div class="title-text">
