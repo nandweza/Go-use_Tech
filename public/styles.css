@@ -1111,3 +1111,61 @@ footer .footer-text {
     padding: 10px;
     margin-bottom: 20px;
 }
+
+.subscribe-main {
+    padding: 15% 10%;
+
+}
+
+.subscribe-main .fa {
+    text-align: center;
+    font-size: 10rem;
+    color: var(--main-orange);
+}
+
+.subscribe-main h2 {
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.subscribe-main p {
+    font-size: 2rem;
+    font-style: italic;
+}
+
+.subscribe-main form button {
+    font-weight: bold;
+    font-size: 2rem;
+    color: var(--main-white);
+    background-color: var(--main-orange);
+}
+
+@media (max-width: 767px) {
+    .subscribe-main .fa {
+        font-size: 7rem;
+    }
+    .subscribe-main h2 {
+        font-size: 2rem;
+    }
+    .subscribe-main p {
+        font-size: 1.2rem;
+    }
+    .subscribe-main form button {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 407px) {
+    .subscribe-main .fa {
+        font-size: 5rem;
+    }
+    .subscribe-main h2 {
+        font-size: 1.7rem;
+    }
+    .subscribe-main p {
+        font-size: 1rem;
+    }
+    .subscribe-main form button {
+        font-size: 1.2rem;
+    }
+}

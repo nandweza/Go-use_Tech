@@ -1,16 +1,21 @@
 const express = require('express');
 const router = express.Router();
-const bcrypt = require('bcrypt');
+const bodyParser = require('body-parser');
+// const bcrypt = require('bcrypt');
 const multer = require('multer');
 const multiparty = require('multiparty');
-const session = require('express-session');
-const flash = require('connect-flash');
 const User = require('../models/User');
 const Course = require('../models/Course');
 const Post = require('../models/Post');
 const Comment = require('../models/Comment');
 const fs = require('fs');
 const nodemailer = require('nodemailer');
+const https = require('https');
+
+const session = require('express-session');
+const passport = require('passport');
+const LocalStrategy = require('passport-local');
+
 
 let posts = [];
 let courses = [];
@@ -129,26 +134,76 @@ router.get('/register', (req, res) => {
 });
 
 //Register User.
-router.post("/register", async (req, res) => {
-    const salt = await bcrypt.genSalt(10);
-    const newUser = new User({
-        username: req.body.username,
-        email: req.body.email,
-        role: req.body.role,
-        password: (await bcrypt.hash(req.body.password, salt)),
+// router.post("/register", async (req, res) => {
+//     const salt = await bcrypt.genSalt(10);
+//     const newUser = new User({
+//         username: req.body.username,
+//         email: req.body.email,
+//         role: req.body.role,
+//         password: (await bcrypt.hash(req.body.password, salt)),
+//     });
+
+//     if (req.body.password.length < 6) {
+//         return res.status(400).json({ message: "Password must be at least 6 characters long" })
+//     }
+
+//     try {
+//         await newUser.save();
+//         // res.status(201).json(user);
+//         res.redirect('/login');
+//     } catch (err) {
+//         res.status(500).json(err);
+//     }
+// });
+
+// passport.use(User.createStrategy());
+passport.use(new LocalStrategy({
+    usernameField: 'email', // this is where you do that
+    passwordField: 'password'
+},
+(email, password, done) => {
+    User.findOne({
+        email: email
+    }, (error, user) => {
+        if (error) {
+            return done(error);
+        }
+        if (!user) {
+            return done(null, false, {
+                message: 'Username or password incorrect'
+            });
+        }
+
+        // Do other validation/check if any
+
+        return done(null, user);
     });
+}
+));
 
-    if (req.body.password.length < 6) {
-        return res.status(400).json({ message: "Password must be at least 6 characters long" })
-    }
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
-    try {
-        await newUser.save();
-        // res.status(201).json(user);
-        res.redirect('/login');
-    } catch (err) {
-        res.status(500).json(err);
-    }
+router.post("/register", (req, res) => {
+    // const newUser = new User({
+    //     fName: req.body.firstname,
+    //     lName: req.body.lastname,
+    //     address: req.body.address,
+    //     role: req.body.role,
+    //     username: req.body.email
+    // });
+
+    User.register({username: req.body.email}, req.body.password, function(err, user) {
+        if (err) {
+            console.log('error registering the user.');
+            res.status(500).send(err);
+            res.redirect('/register');
+        } else {
+            passport.authenticate('local')(req, res, function() {
+                res.redirect('/courses');
+            });
+        }
+    });
 });
 
 /* ----- login routes -----*/
@@ -206,8 +261,13 @@ router.get('/allPosts', async (req, res) => {
 
 //courses routes
 router.get('/courses', async (req, res) => {
-    courses = await Course.find().sort({createdAt: -1});
-    res.render('courses', { courses: courses });
+    if (req.isAuthenticated()) {
+        courses = await Course.find().sort({createdAt: -1});
+        res.render('courses', { courses: courses });
+    } else {
+        console.log('User not authorized');
+        res.redirect('/login');
+    }
 });
 
 //get addCourse page
@@ -273,5 +333,53 @@ router.get('/allCourses', async (req, res) => {
 router.get('/logout', (req, res) => {
     res.redirect('/login');
 });
+
+//subscribe section
+router.post('/subscribe', (req, res) => {
+    const email = req.body.email;
+
+    const data = {
+        members: [
+            {
+                email_address: email,
+                status: "subscribed",
+            }
+        ]
+    };
+
+    const jsonData = JSON.stringify(data);
+
+    const url = "https://us7.api.mailchimp.com/3.0/lists/79f16ab678";
+
+    const options = {
+        method: "POST",
+        auth: "gousetech:c7c21c00556ea9190b6fbc556308e0b8-us7"
+    }
+
+    const request = https.request(url, options, function(response) {
+        if (response.statusCode === 200) {
+            res.render("success");
+        } else {
+            res.render("failure");
+        }
+        response.on("data", function(data){
+            console.log(JSON.parse(data));
+        })
+    })
+
+    request.write(jsonData);
+    request.end();
+
+});
+
+router.post('/failure', (req, res) => {
+    res.redirect('/');
+})
+
+//API KEY
+// c7c21c00556ea9190b6fbc556308e0b8-us7
+
+//List ID
+//79f16ab678
 
 module.exports = router;

@@ -1,0 +1,15 @@
+<%- include('./partials/head.ejs') %>
+
+<body>
+    <div class="container">
+        <div class="subscribe-main row justify-content-center">
+            <i class="fa fa-times-circle"></i>
+            <h2 class="text-center">Oops!</h2>
+            <p class="text-center">There was a problem signing you up. Please try again!</p>
+            
+            <form action="/failure" method="post" class="text-center p-3">
+                <button type="submit" class="btn btn-lg btn-warning p-3" name="button">Try Again</button>
+            </form>
+        </div>
+    </div>
+</body>
