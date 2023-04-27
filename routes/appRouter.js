@@ -353,7 +353,7 @@ router.post('/subscribe', (req, res) => {
 
     const options = {
         method: "POST",
-        auth: "gousetech:c7c21c00556ea9190b6fbc556308e0b8-us7"
+        auth: process.env.MAILCHIMP_NAME + ":" + process.env.MAILCHIMP_API
     }
 
     const request = https.request(url, options, function(response) {
@@ -375,11 +375,5 @@ router.post('/subscribe', (req, res) => {
 router.post('/failure', (req, res) => {
     res.redirect('/');
 })
-
-//API KEY
-// c7c21c00556ea9190b6fbc556308e0b8-us7
-
-//List ID
-//79f16ab678
 
 module.exports = router;
