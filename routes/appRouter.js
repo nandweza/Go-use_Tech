@@ -349,7 +349,7 @@ router.post('/subscribe', (req, res) => {
 
     const jsonData = JSON.stringify(data);
 
-    const url = "https://us7.api.mailchimp.com/3.0/lists/79f16ab678";
+    const url = "https://us21.api.mailchimp.com/3.0/lists/92f01d1b30";
 
     const options = {
         method: "POST",
