@@ -9,6 +9,7 @@
   "author": "Nandweza Allan",
   "license": "ISC",
   "dependencies": {
+    "@google-cloud/storage": "^6.10.0",
     "bcrypt": "^5.1.0",
     "body-parser": "^1.20.1",
     "connect-flash": "^0.1.1",
@@ -16,8 +17,8 @@
     "ejs": "^3.1.8",
     "express": "^4.18.2",
     "express-session": "^1.17.3",
-    "firebase": "^9.17.1",
-    "firebase-admin": "^11.5.0",
+    "firebase": "^9.21.0",
+    "firebase-admin": "^11.8.0",
     "fs": "^0.0.1-security",
     "is-empty": "^1.2.0",
     "jsonwebtoken": "^9.0.0",
