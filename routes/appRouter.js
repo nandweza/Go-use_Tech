@@ -12,9 +12,19 @@ const fs = require('fs');
 const nodemailer = require('nodemailer');
 const https = require('https');
 
-// const firebase = require('firebase/app');
 const { initializeApp } = require('firebase/app');
 const { getStorage, ref, uploadBytes, getDownloadURL } = require('firebase/storage');
+const admin = require("firebase-admin");
+
+const serviceAccount = require("../gocourses-49633-firebase-adminsdk-3qfkc-4dc12e4a09.json");
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  storageBucket: process.env.STORAGE_BUCKET,
+});
+
+const bucket = admin.storage().bucket();
+
 
 // const session = require('express-session');
 // const passport = require('passport');
@@ -23,35 +33,25 @@ const { getStorage, ref, uploadBytes, getDownloadURL } = require('firebase/stora
 
 let posts = [];
 let courses = [];
-let videos = [];
 
-// const firebaseConfig = {
-//     apiKey: process.env.API_KEY,
-//     authDomain: process.env.AUTH_DOMAIN,
-//     projectId: process.env.PROJECT_ID,
-//     storageBucket: process.env.STORAGE_BUCKET,
-//     messagingSenderId: process.env.MESSAGING_SENDER_ID,
-//     appId: process.env.APP_ID,
-//     measurementId: process.env.MEASUREMENT_ID
-// };
 const firebaseConfig = {
-    apiKey: "AIzaSyCxgqsK-VW1b6L0GCIUsvSeqfrtM6bv5Nk",
-    authDomain: "gocourses-49633.firebaseapp.com",
-    projectId: "gocourses-49633",
-    storageBucket: "gocourses-49633.appspot.com",
-    messagingSenderId: "14395137462",
-    appId: "1:14395137462:web:67862bbfb9723661a2f517",
-    measurementId: "G-Y8QRZ9899H"
+    apiKey: process.env.API_KEY,
+    authDomain: process.env.AUTH_DOMAIN,
+    projectId: process.env.PROJECT_ID,
+    storageBucket: process.env.STORAGE_BUCKET,
+    messagingSenderId: process.env.MESSAGING_SENDER_ID,
+    appId: process.env.APP_ID,
+    measurementId: process.env.MEASUREMENT_ID
 };
+
 const app = initializeApp(firebaseConfig);
 const storage = getStorage(app);
-// const storage = getStorage();
 const uploads = multer({storage: multer.memoryStorage()})
 
 
-router.post('/upload', uploads.single("video"), (req, res) => {
+router.post('/addCourse', uploads.single("video"), (req, res) => {
     const video = req.file;
-    const title = req.body
+    const {title, desc, author, abtAuthor} = req.body
 
     if (!video || !title) {
         res.status(400).send("No file uploaded");
@@ -62,12 +62,16 @@ router.post('/upload', uploads.single("video"), (req, res) => {
 
     const metadata = {
         contentType: 'video/mp4',
-        title: req.body.title,
+        customMetadata: {
+            title: title,
+            desc: desc,
+            author: author,
+            abtAuthor: abtAuthor
+        }
     };
     uploadBytes(StorageRef, req.file.buffer, metadata)
     .then(() => {
         getDownloadURL(StorageRef).then(url => {
-            // res.send({url})
             res.redirect("/addCourse");
         })
         .catch(err => {
@@ -77,18 +81,32 @@ router.post('/upload', uploads.single("video"), (req, res) => {
     })
 });
 
-router.get('/download/:filename', (req, res) => {
-    const filename = req.params.filename;
-    const StorageRef = ref(storage, filename);
 
-    getDownloadURL(StorageRef)
-        .then(url => {
-            res.redirect(url);
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(500).send(err);
-        });
+router.get('/courses', async (req, res) => {
+    try {
+      const [files] = await bucket.getFiles();
+  
+      const videoData = files.map(file => {
+        const url = `https://storage.googleapis.com/${bucket.name}/${file.name}`;
+        const metadata = file.metadata;
+        const createdAt = new Date(metadata.timeCreated);
+        const title = metadata.title || 'Untitled';
+        return{
+            url,
+            title,
+            description: metadata.description ? metadata.description.substring(0, 100) : '',
+            createdAt, //createdAt.toDateString(),
+        };
+      });
+
+      const sortedVideos = videoData.sort((a, b) => b.createdAt - a.createdAt);
+  
+      res.render('courses', { videoData: sortedVideos });
+      console.log("success");
+    } catch (error) {
+      console.error('Error retrieving videos:', error);
+      res.status(500).send('Error retrieving videos');
+    }
 });
 
 const Storage = multer.diskStorage({
@@ -100,25 +118,25 @@ const Storage = multer.diskStorage({
 
 const upload = multer({ storage: Storage }).single('img');
 
-router.post('/addCourse', upload, (req, res) => {
-    const { title, desc, author, abtAuthor } = req.body;
-    const img = req.file.filename;
-    // const video = req.file.filename;
+// router.post('/addCourse', upload, (req, res) => {
+//     const { title, desc, author, abtAuthor } = req.body;
+//     const img = req.file.filename;
+//     // const video = req.file.filename;
 
-    if (!title || !desc || !author || !img) {
-        return res.redirect('/addCourse');
-    }
+//     if (!title || !desc || !author || !img) {
+//         return res.redirect('/addCourse');
+//     }
 
-    const courses = new Course({ title, desc, author, img, abtAuthor })
+//     const courses = new Course({ title, desc, author, img, abtAuthor })
 
-    courses
-      .save()
-      .then(() => {
-        console.log('Course Created!');
-        res.redirect('/admin');
-      })
-      .catch((err) => console.log(err));
-});
+//     courses
+//       .save()
+//       .then(() => {
+//         console.log('Course Created!');
+//         res.redirect('/admin');
+//       })
+//       .catch((err) => console.log(err));
+// });
 
 /*          ***home routes***             */
 
@@ -363,10 +381,10 @@ router.get('/allPosts', async (req, res) => {
 //     }
 // });
 
-router.get('/courses', async (req, res) => {
-    courses = await Course.find().sort({ createdAt: -1 });
-    res.render('courses', {courses: courses});
-})
+// router.get('/courses', async (req, res) => {
+//     courses = await Course.find().sort({ createdAt: -1 });
+//     res.render('courses', {courses: courses});
+// })
 
 //get addCourse page
 router.get('/addCourse', (req, res) => {
