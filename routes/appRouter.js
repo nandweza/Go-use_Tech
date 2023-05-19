@@ -375,7 +375,7 @@ router.post("/login", async (req, res) => {
         if (user.role === 'Admin') {
             res.redirect('/admin');
         } else {
-            res.redirect('/admin');
+            res.redirect('/courses');
             console.log("login successfully");
             // res.status(200).json({ message: "Valid password" });
         }
