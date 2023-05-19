@@ -1169,3 +1169,18 @@ footer .footer-text {
         font-size: 1.2rem;
     }
 }
+
+.donate {
+    margin-left: 20px;
+    margin-right: -30px;
+    border: 1px solid var(--main-orange);
+    background-color: var(--main-orange);
+}
+
+.donate a {
+    color: var(--main-white);
+}
+
+.donate a:hover {
+    color: var(--main-black);
+}

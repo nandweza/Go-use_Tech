@@ -9,7 +9,7 @@
   "author": "Nandweza Allan",
   "license": "ISC",
   "dependencies": {
-    "@google-cloud/storage": "^6.10.0",
+    "@google-cloud/storage": "^6.10.1",
     "bcrypt": "^5.1.0",
     "body-parser": "^1.20.1",
     "connect-flash": "^0.1.1",

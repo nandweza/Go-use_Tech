@@ -7,7 +7,6 @@ const multiparty = require('multiparty');
 const User = require('../models/User');
 const Course = require('../models/Course');
 const Post = require('../models/Post');
-const Comment = require('../models/Comment');
 const fs = require('fs');
 const nodemailer = require('nodemailer');
 const https = require('https');
@@ -16,7 +15,10 @@ const { initializeApp } = require('firebase/app');
 const { getStorage, ref, uploadBytes, getDownloadURL } = require('firebase/storage');
 const admin = require("firebase-admin");
 
-const serviceAccount = require("../gocourses-49633-firebase-adminsdk-3qfkc-4dc12e4a09.json");
+// const { Storage } = require('@google-cloud/storage');
+// const storage = new Storage();
+
+const serviceAccount = require("../serviceAccountKey.json");
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
@@ -43,6 +45,7 @@ const firebaseConfig = {
     appId: process.env.APP_ID,
     measurementId: process.env.MEASUREMENT_ID
 };
+
 
 const app = initializeApp(firebaseConfig);
 const storage = getStorage(app);
@@ -95,7 +98,8 @@ router.get('/courses', async (req, res) => {
             url,
             title,
             description: metadata.description ? metadata.description.substring(0, 100) : '',
-            createdAt, //createdAt.toDateString(),
+            createdAt,
+            filename: file.name
         };
       });
 
@@ -109,14 +113,58 @@ router.get('/courses', async (req, res) => {
     }
 });
 
-const Storage = multer.diskStorage({
-    destination: "./public/uploads",
-    filename: (req, file, cb) => {
-        cb(null, file.originalname)
+// router.get('/courses', async (req, res) => {
+//     try {
+//       const [files] = await bucket.getFiles();
+    
+//       const videoData = files.map(file => {
+//         const url = `https://storage.googleapis.com/${bucket.name}/${file.name}`;
+//         const metadata = file.metadata;
+//         const createdAt = new Date(metadata.timeCreated);
+//         const title = metadata.title || 'Untitled';
+//         return {
+//           url,
+//           title,
+//           description: metadata.description ? metadata.description.substring(0, 100) : '',
+//           createdAt: createdAt.toDateString(),
+//           filename: file.name
+//         };
+//       });
+  
+//       const sortedVideos = videoData.sort((a, b) => b.createdAt - a.createdAt);
+    
+//       res.render('courses', { videoData: sortedVideos });
+//       console.log("success");
+//     } catch (error) {
+//       console.error('Error retrieving videos:', error);
+//       res.status(500).send('Error retrieving videos');
+//     }
+//   }); 
+  
+router.get('/singleCourse/:filename', async (req, res) => {
+    try {
+      const filename = req.params.filename;
+      const StorageRef = ref(storage, filename);
+      const url = await getDownloadURL(StorageRef);
+      const metadata = await getMetadata(StorageRef);
+      const title = metadata.customMetadata.title || 'Untitled';
+      const description = metadata.customMetadata.description || '';
+      res.render('singleCourse', { url, title, description });
+    } catch (error) {
+      console.log('Error retrieving video:', error);
+      res.render('singleCourse', { error: 'Error retrieving video' });
     }
 });
+  
 
-const upload = multer({ storage: Storage }).single('img');
+// const Storage = multer.diskStorage({
+//     destination: "./public/uploads",
+//     filename: (req, file, cb) => {
+//         cb(null, file.originalname)
+//     }
+// });
+
+// const upload = multer({ storage: Storage }).single('img');
 
 // router.post('/addCourse', upload, (req, res) => {
 //     const { title, desc, author, abtAuthor } = req.body;
@@ -160,24 +208,24 @@ router.get('/addPost', (req, res) => {
 })
 
 //post blog post
-router.post('/addPost', upload, (req, res) => {
-    const { title, content } = req.body;
-    const img = req.file.filename;
+// router.post('/addPost', upload, (req, res) => {
+//     const { title, content } = req.body;
+//     const img = req.file.filename;
 
-    if (!title || !content || !img) {
-        return res.redirect('/addPost');
-    }
+//     if (!title || !content || !img) {
+//         return res.redirect('/addPost');
+//     }
 
-    const posts = new Post({ title, content, img })
+//     const posts = new Post({ title, content, img })
 
-    posts
-      .save()
-      .then(() => {
-        console.log('Post Created!');
-        res.redirect('/admin');
-      })
-      .catch((err) => console.log(err));
-})
+//     posts
+//       .save()
+//       .then(() => {
+//         console.log('Post Created!');
+//         res.redirect('/admin');
+//       })
+//       .catch((err) => console.log(err));
+// })
 
 //get blog posts
 router.get('/blog', async (req, res) => {
@@ -246,10 +294,7 @@ router.get('/register', (req, res) => {
 router.post("/register", async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const newUser = new User({
-        firstname: req.body.firstname,
-        lastname: req.body.lastname,
-        address: req.body.address,
-        email: req.body.email,
+        email: req.body.username,
         role: req.body.role,
         password: (await bcrypt.hash(req.body.password, salt)),
     });
@@ -296,13 +341,6 @@ router.post("/register", async (req, res) => {
 // passport.deserializeUser(User.deserializeUser());
 
 // router.post("/register", (req, res) => {
-//     // const newUser = new User({
-//     //     fName: req.body.firstname,
-//     //     lName: req.body.lastname,
-//     //     address: req.body.address,
-//     //     role: req.body.role,
-//     //     username: req.body.email
-//     // });
 
 //     User.register({username: req.body.email}, req.body.password, function(err, user) {
 //         if (err) {
@@ -311,7 +349,7 @@ router.post("/register", async (req, res) => {
 //             res.redirect('/register');
 //         } else {
 //             passport.authenticate('local')(req, res, function() {
-//                 res.redirect('/courses');
+//                 res.redirect('/login');
 //             });
 //         }
 //     });
@@ -326,18 +364,18 @@ router.get('/login', (req, res) => {
 
 // Login User
 router.post("/login", async (req, res) => {
-    const email = req.body.email;
+    const email = req.body.username;
     const password = req.body.password;
 
-    const user = await User.findOne({ email: email });
+    const user = await User.findOne({ username: email });
     if (user) {
       // check user password with hashed password stored in the database
       const validPassword = bcrypt.compare(password, user.password);
       if (validPassword) {
-        if (user.role === 'admin') {
+        if (user.role === 'Admin') {
             res.redirect('/admin');
         } else {
-            res.redirect('/courses');
+            res.redirect('/admin');
             console.log("login successfully");
             // res.status(200).json({ message: "Valid password" });
         }
@@ -411,20 +449,6 @@ router.get('/addCourse', (req, res) => {
 //       })
 //       .catch((err) => console.log(err));
 // });
-
-//post a comment
-router.post('/comment', (req, res) => {
-    const comments = new Comment({
-        content: req.body.content
-    })
-    comments
-      .save()
-      .then(() => {
-        console.log('Comment posted successfully');
-        // res.render('/singleCourse');
-    })
-    .catch((err) => console.log(err));
-});
 
 //get single course
 router.get("/courses/:id", async (req, res) => {
