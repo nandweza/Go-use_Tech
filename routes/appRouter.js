@@ -18,7 +18,7 @@ const admin = require("firebase-admin");
 // const { Storage } = require('@google-cloud/storage');
 // const storage = new Storage();
 
-const serviceAccount = require("../serviceAccountKey.json");
+// const serviceAccount = require("../serviceAccountKey.json");
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
