@@ -12,20 +12,20 @@ const nodemailer = require('nodemailer');
 const https = require('https');
 
 const { initializeApp } = require('firebase/app');
-const { getStorage, ref, uploadBytes, getDownloadURL } = require('firebase/storage');
+const { getStorage, ref, uploadBytes, getDownloadURL, getMetadata } = require('firebase/storage');
 const admin = require("firebase-admin");
 
 // const { Storage } = require('@google-cloud/storage');
 // const storage = new Storage();
 
-// const serviceAccount = require("../serviceAccountKey.json");
+const serviceAccount = require("../serviceAccountKey.json");
 
-// admin.initializeApp({
-//   credential: admin.credential.cert(serviceAccount),
-//   storageBucket: process.env.STORAGE_BUCKET,
-// });
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  storageBucket: "",
+});
 
-// const bucket = admin.storage().bucket();
+const bucket = admin.storage().bucket();
 
 
 // const session = require('express-session');
@@ -34,7 +34,6 @@ const admin = require("firebase-admin");
 
 
 let posts = [];
-let courses = [];
 
 const firebaseConfig = {
     apiKey: process.env.API_KEY,
@@ -46,15 +45,14 @@ const firebaseConfig = {
     measurementId: process.env.MEASUREMENT_ID
 };
 
-
 const app = initializeApp(firebaseConfig);
 const storage = getStorage(app);
-const uploads = multer({storage: multer.memoryStorage()})
+const uploads = multer({storage: multer.memoryStorage()});
 
 
 router.post('/addCourse', uploads.single("video"), (req, res) => {
     const video = req.file;
-    const {title, desc, author, abtAuthor} = req.body
+    const {title, desc, author, abtAuthor, email, twitter, linkedin, facebook} = req.body
 
     if (!video || !title) {
         res.status(400).send("No file uploaded");
@@ -69,7 +67,11 @@ router.post('/addCourse', uploads.single("video"), (req, res) => {
             title: title,
             desc: desc,
             author: author,
-            abtAuthor: abtAuthor
+            abtAuthor: abtAuthor,
+            email: email,
+            twitter: twitter,
+            linkedin: linkedin,
+            facebook: facebook
         }
     };
     uploadBytes(StorageRef, req.file.buffer, metadata)
@@ -84,7 +86,6 @@ router.post('/addCourse', uploads.single("video"), (req, res) => {
     })
 });
 
-
 router.get('/courses', async (req, res) => {
     try {
       const [files] = await bucket.getFiles();
@@ -94,10 +95,11 @@ router.get('/courses', async (req, res) => {
         const metadata = file.metadata;
         const createdAt = new Date(metadata.timeCreated);
         const title = metadata.title || 'Untitled';
+        const description = metadata.desc ? metadata.desc.substring(0, 100) : '';
         return{
             url,
             title,
-            description: metadata.description ? metadata.description.substring(0, 100) : '',
+            description,
             createdAt,
             filename: file.name
         };
@@ -112,44 +114,26 @@ router.get('/courses', async (req, res) => {
       res.status(500).send('Error retrieving videos');
     }
 });
-
-// router.get('/courses', async (req, res) => {
-//     try {
-//       const [files] = await bucket.getFiles();
-    
-//       const videoData = files.map(file => {
-//         const url = `https://storage.googleapis.com/${bucket.name}/${file.name}`;
-//         const metadata = file.metadata;
-//         const createdAt = new Date(metadata.timeCreated);
-//         const title = metadata.title || 'Untitled';
-//         return {
-//           url,
-//           title,
-//           description: metadata.description ? metadata.description.substring(0, 100) : '',
-//           createdAt: createdAt.toDateString(),
-//           filename: file.name
-//         };
-//       });
   
-//       const sortedVideos = videoData.sort((a, b) => b.createdAt - a.createdAt);
-    
-//       res.render('courses', { videoData: sortedVideos });
-//       console.log("success");
-//     } catch (error) {
-//       console.error('Error retrieving videos:', error);
-//       res.status(500).send('Error retrieving videos');
-//     }
-//   }); 
-  
-router.get('/singleCourse/:filename', async (req, res) => {
+router.get('/courses/:filename', async (req, res) => {
     try {
       const filename = req.params.filename;
       const StorageRef = ref(storage, filename);
       const url = await getDownloadURL(StorageRef);
       const metadata = await getMetadata(StorageRef);
       const title = metadata.customMetadata.title || 'Untitled';
-      const description = metadata.customMetadata.description || '';
-      res.render('singleCourse', { url, title, description });
+      const description = metadata.customMetadata.desc || '';
+      const author = metadata.customMetadata.author || '';
+      const abtAuthor = metadata.customMetadata.abtAuthor || '';
+      const email = metadata.customMetadata.email || '';
+      const twitter = metadata.customMetadata.twitter || '';
+      const linkedin = metadata.customMetadata.linkedin || '';
+      const facebook = metadata.customMetadata.facebook || '';
+      res.render('singleCourse', 
+      { 
+        url, title, description, author, abtAuthor, email, twitter, linkedin, facebook 
+      });
+      console.log(url);
     } catch (error) {
       console.log('Error retrieving video:', error);
       res.render('singleCourse', { error: 'Error retrieving video' });

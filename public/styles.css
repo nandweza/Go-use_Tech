@@ -899,12 +899,28 @@ footer .footer-text {
 }
 
 /* course landing page */
-
-.course-body {
-    height: auto;
+.course-section h3 {
+    font-size: 2.5rem;
+    font-weight: 600;
 }
-.course-wrapper {
-    padding: 2% 1.2%;
+.course-section p {
+    font-size: 1.2rem;
+}
+.author-section .card {
+    height: 400;
+}
+
+.author-section h4 {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.author-section p {
+    font-size: 1.3rem;
+}
+
+.author-section .social span {
+    font-size: 1.5rem;
 }
 
 @media (max-width: 540px) {

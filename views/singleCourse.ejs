@@ -27,89 +27,52 @@
     </div>
     <div class="container pb-4">
         <div class="row pt-4">
-            <div class="col-lg-8 col-sm-12">
+            <div class="col-lg-8 col-md-12 col-sm-12 course-section">
                 <% if (url) { %>
-                    <h1><%= title %></h1>
-                    <p><%= description %></p>
-                    <video src="<%= url %>" controls></video>
+                    <div class="embed-responsive embed-responsive-16by9 pt-5">
+                        <video 
+                            class="embed-responsive-item"
+                            src="<%= url %>" 
+                            controls 
+                            width="100%" 
+                            height="400" 
+                            allowfullscreen 
+                            controlsList="nodownload" 
+                            oncontextmenu="return false;">
+                        </video>
+                    </div>
+                    <h3 class="py-5"><%= title %></h3>
+                    <p class="">
+                        <%= description %>
+                    </p>
                   <% } else { %>
                     <h1>Error</h1>
                     <p><%= error %></p>
                   <% } %>
-                  
-
-                <!-- <div class="embed-responsive embed-responsive-16by9">
-                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0" width="100%" height="400" allowfullscreen></iframe>
-                </div>
-                <h2 class="title-text fw-bold mt-5">
-                    <%= course.title %>
-                </h2>
-                <div id="desc" class="desc mt-2 mb-3">
-                    <%= course.desc %>
-                </div>
-                <hr>
-                <h3 id="author" class="author mt-5 mb-3">
-                    <%= course.author %>
-                </h3>
-                <div id="abtAuthor" class="abtAuthor mt-2 mb-3">
-                    <%= course.abtAuthor %>
-                </div> -->
-                <!-- <div class="comment-section">
-                    <form action="/comment" method="post" class="pb-5">
-                        <legend>
-                            <div class="comment-header">
-                                <i class="fa fa-comment"></i>
-                                <span>Comments<span>
-                            </div>
-                        </legend>
-                        <div class="form-group pb-4">
-                            <textarea class="form-control" name="content" cols="30" rows="5" placeholder="add comment"></textarea>
-                        </div>
-                        <input type="submit" value="Comment" class="btn btn-primary">
-                    </form>
-                    <div class="container comments">
-                        <% if (comments.length > 0) { %>
-                            <% comments.forEach((comment) => { %>
-                                <div class="py-3">
-                                    <%= comment.content %>
-                                </div>
-                                <hr class="w-30">
-                            <% }) %>
-                        <% } else { %>
-                            <span class="text-center fw-bold" style="font-size: 14px;">No comment yet.</span>
-                        <% } %>
-                    </div>
-                </div> -->
             </div>
-            <div class="col-lg-4 px-3">
-                <div class="title-text">
-                    <h3 class="mt-2 mb-2 fw-bold">Recent Courses</h3>
-                    <div class="latest-courses">
-                        <% if (courses.length > 0) { %>
-                            <% courses.forEach((course) => { %>
-                                <div class="single-course mb-2">
-                                    <div class="card">
-                                        <img src="<%= course.img %>" class="card-img-top" alt="..." width="100%" height="225">
-                                        <div class="card-body course-content">
-                                            <h4 class="card-title fw-bold">
-                                                <%= course.title %>
-                                            </h4>
-                                            <p class="card-text">
-                                                <%= course.desc.substring(0, 150) + "..." %>
-                                            </p>
-                                            <div class="row mt-3">
-                                                <span class="date col mt-3">
-                                                    <%= course.createdAt.toDateString() %>
-                                                </span>
-                                                <a href="/courses/<%= course._id %>" class="col btn btn-primary">View Course</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            <% }) %>
-                        <% } else { %>
-                        <div style="margin: auto;">There are no courses to display...</div>
-                        <% } %>
+            <div class="col-lg-4 col-md-12 col-sm-12">
+                <div class="pt-5 author-section">
+                    <div class="card">
+                        <h4 class="p-4 pb-0">
+                            <%= author %>
+                        </h4>
+                        <p class="p-4">
+                            <%= abtAuthor %>
+                        </p>
+                        <p class="p-4 fw-bold">
+                            <%= email %>
+                        </p>
+                        <div class="social px-3">
+                            <span class="fw-bold">
+                                <a href="<%= twitter %>">twitter</a>
+                            </span>
+                            <span class="fw-bold">
+                                <a href="<%= linkedin %>">linkedin</a>
+                            </span>
+                            <span class="fw-bold">
+                                <a href="<%= facebook %>">facebook</a>
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>
