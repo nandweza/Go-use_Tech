@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
+const passport = require('passport');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 const multer = require('multer');
 const multiparty = require('multiparty');
 const User = require('../models/User');
-const Course = require('../models/Course');
 const Post = require('../models/Post');
 const fs = require('fs');
 const nodemailer = require('nodemailer');
@@ -22,16 +22,10 @@ const serviceAccount = require("../serviceAccountKey.json");
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  storageBucket: "",
+  storageBucket: process.env.STORAGE_BUCKET,
 });
 
 const bucket = admin.storage().bucket();
-
-
-// const session = require('express-session');
-// const passport = require('passport');
-// const LocalStrategy = require('passport-local');
-
 
 let posts = [];
 
@@ -50,6 +44,168 @@ const storage = getStorage(app);
 const uploads = multer({storage: multer.memoryStorage()});
 
 
+// home route
+router.get('/', async (req, res) => {
+    // const courses = await Course.find().sort({createdAt: -1}).limit(3);
+    const posts = await Post.find().sort({ createdAt: 1 }).limit(2);
+    res.render('home', { posts: posts });
+});
+
+//about route
+router.get('/about', (req, res) => {
+    res.render('about');
+});
+
+//Blog Routes
+
+//get blog posts
+router.get('/blog', async (req, res) => {
+    posts = await Post.find().sort({createdAt: -1});
+    res.render('blog', { posts: posts });
+});
+
+//get single blog post
+router.get("/blog/:id", async (req, res) => {
+    try {
+        const { id } = req.params;
+        const post = await Post.findOne({ _id: id });
+        res.render("singlePost", { post: post });
+    } catch (err) {
+        res.status(500).send("Blog not found");
+    }
+});
+
+// contact routes
+
+//get contact page
+router.get('/contact', (req, res) => {
+    res.render('contact');
+});
+
+//post conatct message
+router.post('/contact', (req, res) => {
+    console.log(req.body);
+    const name = req.body.name;
+    const email = req.body.email;
+    const subject = req.body.subject;
+    const message = req.body.message;
+
+    const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: 'usetech.go@gmail.com',
+            pass: 'qubqkkmudpltverb'
+        }
+    });
+    
+    const mailOptions = {
+        from: req.body.email,
+        to: 'usetech.go@gmail.com',
+        subject: `Message from ${req.body.email}: ${req.body.subject}`,
+        text: req.body.message
+    }
+
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            console.log(error);
+            res.send('error');
+        } else {
+            console.log('Email sent: ' + info.response);
+            res.send('success');
+        }
+    })
+});
+
+// Authentication Routes
+
+// get login page
+router.get('/login', (req, res) => {
+    res.render('login');
+});
+
+//login user
+router.post('/login', (req, res, next) => {
+    passport.authenticate('local', (err, user, info) => {
+        if (err) {
+            return next(err);
+        }
+        if (!user) {
+            return res.redirect('/login');
+        }
+        req.logIn(user, (err) => {
+            if (err) {
+                return next(err);
+            }
+            if (user.isAdmin) {
+                return res.redirect('/admin');
+            } else {
+            if (req.session.redirectTo) {
+                const redirectTo = req.session.redirectTo;
+                delete req.session.redirectTo;
+                return res.redirect(redirectTo);
+            }
+            return res.redirect('/courses');
+            }
+        });
+    })(req, res, next);
+});
+
+//get register page
+router.get('/register', (req, res) => {
+    res.render('register');
+});
+
+//register user
+router.post("/register", (req, res) => {
+    const newUser = new User({
+        username: req.body.username,
+        isAdmin: false
+    });
+
+    User.register(newUser, req.body.password, (err, user) => {
+        if (err) {
+            res.status(500).send(err);
+        } else {
+            passport.authenticate('local')(req, res, () => {
+                res.redirect('/courses');
+            });
+        }
+    });
+});
+
+// Google Auth routes
+router.get("/auth/google",
+    passport.authenticate("google", { scope: ["profile"] })
+);
+
+router.get("/auth/google/secrets", 
+    passport.authenticate("google", { failureRedirect: "/login" }),
+    function(req, res) {
+        // Successful authentication, redirect home.
+        res.redirect("/courses");
+  });
+
+
+// Facebook Auth routes
+router.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email'] }));
+router.get('/auth/facebook/callback', passport.authenticate(
+    'facebook', { failureRedirect: '/login' }), (req, res) => {
+    res.redirect('/courses');
+});
+
+// Logout user
+router.get('/logout', (req, res, next) => {
+    req.logout((err) => {
+        if (err) {
+            return next(err);
+        }
+    });
+    res.redirect('/');
+});
+
+// Course Routes
+
+//post course video and metadata to firebase storage
 router.post('/addCourse', uploads.single("video"), (req, res) => {
     const video = req.file;
     const {title, desc, author, abtAuthor, email, twitter, linkedin, facebook} = req.body
@@ -86,6 +242,7 @@ router.post('/addCourse', uploads.single("video"), (req, res) => {
     })
 });
 
+//retrieve all course videos and metadata from firebase storage
 router.get('/courses', async (req, res) => {
     try {
       const [files] = await bucket.getFiles();
@@ -106,15 +263,20 @@ router.get('/courses', async (req, res) => {
       });
 
       const sortedVideos = videoData.sort((a, b) => b.createdAt - a.createdAt);
-  
-      res.render('courses', { videoData: sortedVideos });
+      
+      if (req.isAuthenticated()) {
+          res.render('courses', { videoData: sortedVideos });
+      } else {
+          res.render('login');
+      }
       console.log("success");
     } catch (error) {
       console.error('Error retrieving videos:', error);
       res.status(500).send('Error retrieving videos');
     }
 });
-  
+
+//retrieve single course video and metadata from firebase storage
 router.get('/courses/:filename', async (req, res) => {
     try {
       const filename = req.params.filename;
@@ -170,19 +332,6 @@ router.get('/courses/:filename', async (req, res) => {
 //       .catch((err) => console.log(err));
 // });
 
-/*          ***home routes***             */
-
-router.get('/', async (req, res) => {
-    const courses = await Course.find().sort({createdAt: -1}).limit(3);
-    const posts = await Post.find().sort({ createdAt: 1 }).limit(2);
-    res.render('home', { courses: courses, posts: posts });
-});
-
-/*          ***about routes***           */
-
-router.get('/about', (req, res) => {
-    res.render('about');
-});
 
 /*         ***blog routes***           */
 
@@ -211,166 +360,6 @@ router.get('/addPost', (req, res) => {
 //       .catch((err) => console.log(err));
 // })
 
-//get blog posts
-router.get('/blog', async (req, res) => {
-    posts = await Post.find().sort({createdAt: -1});
-    res.render('blog', { posts: posts });
-})
-
-//get single blog post
-router.get("/blog/:id", async (req, res) => {
-    try {
-        const { id } = req.params;
-        const post = await Post.findOne({ _id: id });
-        res.render("singlePost", { post: post });
-    } catch (err) {
-        res.status(500).send("Blog not found");
-    }
-});
-
-/*         ***contact routes***        */
-
-router.get('/contact', (req, res) => {
-    res.render('contact');
-});
-
-router.post('/contact', (req, res) => {
-    console.log(req.body);
-    const name = req.body.name;
-    const email = req.body.email;
-    const subject = req.body.subject;
-    const message = req.body.message;
-
-    const transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-            user: 'usetech.go@gmail.com',
-            pass: 'qubqkkmudpltverb'
-        }
-    });
-    
-    const mailOptions = {
-        from: req.body.email,
-        to: 'usetech.go@gmail.com',
-        subject: `Message from ${req.body.email}: ${req.body.subject}`,
-        text: req.body.message
-    }
-
-    transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-            console.log(error);
-            res.send('error');
-        } else {
-            console.log('Email sent: ' + info.response);
-            res.send('success');
-        }
-    })
-});
-
-/* ----- register routes ----- */
-
-//get register page
-router.get('/register', (req, res) => {
-    res.render('register');
-});
-
-//Register User.
-router.post("/register", async (req, res) => {
-    const salt = await bcrypt.genSalt(10);
-    const newUser = new User({
-        email: req.body.username,
-        role: req.body.role,
-        password: (await bcrypt.hash(req.body.password, salt)),
-    });
-
-    if (req.body.password.length < 6) {
-        return res.status(400).json({ message: "Password must be at least 6 characters long" })
-    }
-
-    try {
-        await newUser.save();
-        // res.status(201).json(user);
-        res.redirect('/login');
-    } catch (err) {
-        res.status(500).json(err);
-    }
-});
-
-// passport.use(User.createStrategy());
-// passport.use(new LocalStrategy({
-//     usernameField: 'email', // this is where you do that
-//     passwordField: 'password'
-// },
-// (email, password, done) => {
-//     User.findOne({
-//         email: email
-//     }, (error, user) => {
-//         if (error) {
-//             return done(error);
-//         }
-//         if (!user) {
-//             return done(null, false, {
-//                 message: 'Username or password incorrect'
-//             });
-//         }
-
-//         // Do other validation/check if any
-
-//         return done(null, user);
-//     });
-// }
-// ));
-
-// passport.serializeUser(User.serializeUser());
-// passport.deserializeUser(User.deserializeUser());
-
-// router.post("/register", (req, res) => {
-
-//     User.register({username: req.body.email}, req.body.password, function(err, user) {
-//         if (err) {
-//             console.log('error registering the user.');
-//             res.status(500).send(err);
-//             res.redirect('/register');
-//         } else {
-//             passport.authenticate('local')(req, res, function() {
-//                 res.redirect('/login');
-//             });
-//         }
-//     });
-// });
-
-/* ----- login routes -----*/
-
-// get login page
-router.get('/login', (req, res) => {
-    res.render('login');
-});
-
-// Login User
-router.post("/login", async (req, res) => {
-    const email = req.body.username;
-    const password = req.body.password;
-
-    const user = await User.findOne({ username: email });
-    if (user) {
-      // check user password with hashed password stored in the database
-      const validPassword = bcrypt.compare(password, user.password);
-      if (validPassword) {
-        if (user.role === 'Admin') {
-            res.redirect('/admin');
-        } else {
-            res.redirect('/courses');
-            console.log("login successfully");
-            // res.status(200).json({ message: "Valid password" });
-        }
-      } else {
-        res.redirect("/login");
-        // res.status(400).json({ error: "Invalid Password" });
-      }
-    }
-  });
-
-/*              ***admin routes***            */
 
 //get admin page
 router.get('/admin', (req, res) => {
@@ -390,23 +379,6 @@ router.get('/allPosts', async (req, res) => {
     res.render('allPosts', { posts: posts });
 })
 
-/* *** course routes *** */
-
-//courses routes
-// router.get('/courses', async (req, res) => {
-//     if (req.isAuthenticated()) {
-//         courses = await Course.find().sort({createdAt: -1});
-//         res.render('courses', { courses: courses });
-//     } else {
-//         console.log('User not authorized');
-//         res.redirect('/login');
-//     }
-// });
-
-// router.get('/courses', async (req, res) => {
-//     courses = await Course.find().sort({ createdAt: -1 });
-//     res.render('courses', {courses: courses});
-// })
 
 //get addCourse page
 router.get('/addCourse', (req, res) => {
@@ -451,11 +423,6 @@ router.get("/courses/:id", async (req, res) => {
 router.get('/allCourses', async (req, res) => {
     courses = await Course.find().sort({createdAt: -1});
     res.render('allCourses', { courses: courses });
-});
-
-//logout
-router.get('/logout', (req, res) => {
-    res.redirect('/login');
 });
 
 //subscribe section

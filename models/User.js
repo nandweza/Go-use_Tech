@@ -1,16 +1,18 @@
+require('dotenv').config();
 const mongoose = require('mongoose');
-// const findOrCreate = require('mongoose-findorcreate');
 const passportLocalMongoose = require('passport-local-mongoose');
+const findOrCreate = require('mongoose-findorcreate');
 
 const UserSchema = new mongoose.Schema(
     {
-        email: { type: String, required: true, unique: true },
-        password: { type: String, require: true,
-                    match:/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/, minlength: 6},
-        role: { type: String, default: "Basic", required: true },
+        username: {  type: String, unique: true },
+        password: { type: String },
+        isAdmin: { type: Boolean, default: false }
     },
     { timestamps: true }
 );
 
-// UserSchema.plugin(passportLocalMongoose, {usernameField: 'email'});
+UserSchema.plugin(passportLocalMongoose);
+UserSchema.plugin(findOrCreate);
 module.exports = mongoose.model("user", UserSchema);
+

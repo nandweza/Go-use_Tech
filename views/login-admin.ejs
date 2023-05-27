@@ -1,0 +1,25 @@
+<%- include('./partials/head.ejs') %>
+
+<body>
+    <div class="login-admin login-main">
+        <div class="container">
+            <form class="" method="post" action="/login-admin">
+                <a class="navbar-brand m-adjust pb-5" href="">
+                    <img src="/images/gousetech.png" alt="" class="logo pb-5" width="100">
+                </a>
+                <div class="input-group">
+                    <label for="username">Username:</label>
+                    <input class="form-control input-adjust" type="name" id="username" name="username" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Password:</label>
+                    <input class="form-control input-adjust" type="password" id="password" name="password" required>
+                </div>
+                <button type="submit" class="btn btn-lg btn-primary">Login</button>
+                <div class="pt-5 text-center back-home">
+                    <a href="/"><i class="fa fa-arrow-left px-3"></i>Go to Go UseTech</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
