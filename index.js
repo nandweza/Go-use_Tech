@@ -71,6 +71,7 @@ passport.use(new GoogleStrategy({
   clientID: process.env.CLIENT_ID,
   clientSecret: process.env.CLIENT_SECRET,
   callbackURL: "http://localhost:8001/auth/google/courses",
+  callbackURL: "https://go-use-tech.onrender.com/auth/google/courses",
   userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo"
 },
 function(accessToken, refreshToken, profile, cb) {
@@ -84,7 +85,8 @@ function(accessToken, refreshToken, profile, cb) {
 passport.use(new FacebookStrategy({
   clientID: process.env.FACEBOOK_APP_ID,
   clientSecret: process.env.FACEBOOK_APP_SECRET,
-  callbackURL: 'http://localhost:8001/auth/facebook/courses'
+  callbackURL: "http://localhost:8001/auth/facebook/courses",
+  callbackURL: "https://go-use-tech.onrender.com/auth/facebook/courses"
 },
 (accessToken, refreshToken, profile, done) => {
   User.findOrCreate({ facebookId: profile.id }, (err, user) => {
