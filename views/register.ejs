@@ -7,6 +7,24 @@
                     <div class="col-lg-6 col-md-6 col-sm-12">
                         <form id="signup-form" method="post" action="/register">
                             <h2>Sign Up</h2>
+                            <div class="flex-names">
+                                <div class="input-group px-1">
+                                    <label for="fname">First Name<span style="color: red;">*</span></label>
+                                    <input class="form-control input-adjust" type="text" id="fname" name="fname" placeholder="eg Jon" required>
+                                </div>
+                                <div class="input-group px-1">
+                                    <label for="lname">Last Name<span style="color: red;">*</span></label>
+                                    <input class="form-control input-adjust" type="text" id="lname" name="lname" placeholder="eg Doe" required>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <label for="country">Country<span style="color: red;">*</span></label>
+                                <input class="form-control input-adjust" type="text" id="country" name="country" placeholder="eg Jon" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="profession">Profession<span style="color: red;">*</span></label>
+                                <input class="form-control input-adjust" type="text" id="profession" name="profession" placeholder="eg Jon" required>
+                            </div>
                             <div class="input-group">
                                 <label for="email">Email<span style="color: red;">*</span></label>
                                 <input class="form-control input-adjust" type="text" id="email" name="username" placeholder="eg jondoe@gmail.com" required>

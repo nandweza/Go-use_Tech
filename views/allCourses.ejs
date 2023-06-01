@@ -9,36 +9,38 @@
             <hr class="border">
             <div class="admin-wrapper">
                 <div class="course-wrapper">
-                    <% courses.forEach ( function (course) { %>
+                    <% videoData.forEach((video) => { %>
                     <form class="form-bt" action="/delete" method="post">
-                        <div class="icons-2">
+                        <div class="icons-2 pb-3">
                             <button class="btn btn-outline-danger">
-                                <a href="/edit/<%= course._id %>" data-toggle="model"><i class="fa fa-edit" style="font-size: 30px; color: black;"></i></a>
+                                <a href="/edit/<%= video._id %>" data-toggle="model">
+                                    <i class="fa fa-edit" style="font-size: 30px; color: black;"></i>
+                                </a>
                             </button>
-                            <button name="deleteBtn" value="<%=course._id%>" type="submit" class="btn btn-outline-danger">
+                            <button name="deleteBtn" value="<%=video._id%>" type="submit" class="btn btn-outline-danger">
                                 <i class="fa fa-trash" style="font-size: 30px; color: black;"></i>
                             </button>
                         </div>
-                            <div class="title-text">
-                                <%= course.title %>
-                            </div>
-                            <span>
-                                <%= course.createdAt %>
-                            </span>
-                            <div class="img-div">
-                                <video width="640" height="360" controls>
-                                    <source src="<%= course.img %>" type="video/mp4">
-                                </video>
-                            </div>
+                        <div class="img-div">
+                            <video width="640" height="360" controls>
+                                <source src="<%= video.url %>" type="video/mp4">
+                            </video>
+                        </div>
+                        <span>
+                            <%= video.createdAt %>
+                        </span>
+                        <div class="pb-5">
+                            <h3 class="title-text fw-bold pt-5 pb-3">
+                                <%= video.title %>
+                            </h3>
                             <div class="desc">
-                                <%= course.desc %>
+                                <%= video.desc %>
                             </div>
-                            <div class="icons">
-                            </div>
-                        </form>
+                        </div>
+                    </form>
                     <% }); %>
-                    </div>
                 </div>
             </div>
+        </div>
     </body>
 </html>

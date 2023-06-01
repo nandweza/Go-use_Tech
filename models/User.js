@@ -6,8 +6,12 @@ const findOrCreate = require('mongoose-findorcreate');
 const UserSchema = new mongoose.Schema(
     {
         username: {  type: String, unique: true },
-        password: { type: String },
-        isAdmin: { type: Boolean, default: false }
+        password: { type: String, match:/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/, minlength: 6 },
+        fname: { type: String },
+        lname: { type: String },
+        isAdmin: { type: Boolean, default: false },
+        country: { type: String },
+        profession: { type: String }
     },
     { timestamps: true }
 );

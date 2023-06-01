@@ -15,10 +15,12 @@ const port = process.env.PORT || 8001;
 dotenv.config();
 
 //register view engine
+
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
 //middleware and static files
+
 app.use(express.static('public'));
 app.use(express.static('public/uploads'));
 app.use(express.static('public/styles.css'));
@@ -47,9 +49,6 @@ mongoose.connect(process.env.MONGO_URL)
   .catch((err) => console.log(err));
 
 // Passport configuration
-// passport.use(new LocalStrategy(User.authenticate()));
-// passport.serializeUser(User.serializeUser());
-// passport.deserializeUser(User.deserializeUser());
 
 passport.use(User.createStrategy());
 
@@ -67,21 +66,11 @@ passport.deserializeUser(async function(id, done) {
 });
 
 // Passport configuration - Google Strategy
-// passport.use(new GoogleStrategy({
-//   clientID: 'YOUR_GOOGLE_CLIENT_ID',
-//   clientSecret: 'YOUR_GOOGLE_CLIENT_SECRET',
-//   callbackURL: 'http://localhost:8001/auth/google/callback'
-// },
-// (accessToken, refreshToken, profile, done) => {
-//   User.findOrCreate({ googleId: profile.id }, (err, user) => {
-//     return done(err, user);
-//   });
-// }
-// ));
+
 passport.use(new GoogleStrategy({
   clientID: process.env.CLIENT_ID,
   clientSecret: process.env.CLIENT_SECRET,
-  callbackURL: "http://localhost:8001/auth/google/secrets",
+  callbackURL: "http://localhost:8001/auth/google/courses",
   userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo"
 },
 function(accessToken, refreshToken, profile, cb) {
@@ -93,9 +82,9 @@ function(accessToken, refreshToken, profile, cb) {
 
 // Passport configuration - Facebook Strategy
 passport.use(new FacebookStrategy({
-  clientID: 'YOUR_FACEBOOK_APP_ID',
-  clientSecret: 'YOUR_FACEBOOK_APP_SECRET',
-  callbackURL: 'http://localhost:3000/auth/facebook/callback'
+  clientID: process.env.FACEBOOK_APP_ID,
+  clientSecret: process.env.FACEBOOK_APP_SECRET,
+  callbackURL: 'http://localhost:8001/auth/facebook/courses'
 },
 (accessToken, refreshToken, profile, done) => {
   User.findOrCreate({ facebookId: profile.id }, (err, user) => {

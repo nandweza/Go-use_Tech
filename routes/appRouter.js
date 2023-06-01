@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const dotenv = require('dotenv');
 const passport = require('passport');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
@@ -17,6 +18,8 @@ const admin = require("firebase-admin");
 
 // const { Storage } = require('@google-cloud/storage');
 // const storage = new Storage();
+
+dotenv.config();
 
 const serviceAccount = require("../serviceAccountKey.json");
 
@@ -94,7 +97,7 @@ router.post('/contact', (req, res) => {
         service: 'gmail',
         auth: {
             user: 'usetech.go@gmail.com',
-            pass: 'qubqkkmudpltverb'
+            pass: 'Jona1234@!'
         }
     });
     
@@ -159,7 +162,11 @@ router.get('/register', (req, res) => {
 router.post("/register", (req, res) => {
     const newUser = new User({
         username: req.body.username,
-        isAdmin: false
+        fname: req.body.fname,
+        lname: req.body.lname,
+        country: req.body.country,
+        profession: req.body.profession,
+        isAdmin: false,
     });
 
     User.register(newUser, req.body.password, (err, user) => {
@@ -178,17 +185,20 @@ router.get("/auth/google",
     passport.authenticate("google", { scope: ["profile"] })
 );
 
-router.get("/auth/google/secrets", 
+router.get("/auth/google/courses", 
     passport.authenticate("google", { failureRedirect: "/login" }),
     function(req, res) {
-        // Successful authentication, redirect home.
+        // Successful authentication, redirect to courses page.
         res.redirect("/courses");
   });
 
 
 // Facebook Auth routes
-router.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email'] }));
-router.get('/auth/facebook/callback', passport.authenticate(
+router.get('/auth/facebook',
+    passport.authenticate('facebook')
+);
+
+router.get('/auth/facebook/courses', passport.authenticate(
     'facebook', { failureRedirect: '/login' }), (req, res) => {
     res.redirect('/courses');
 });
@@ -205,7 +215,12 @@ router.get('/logout', (req, res, next) => {
 
 // Course Routes
 
-//post course video and metadata to firebase storage
+//get addCourse page
+router.get('/addCourse', (req, res) => {
+    res.render('addCourse');
+});
+
+//post course video and metadata to firebase storage by admin
 router.post('/addCourse', uploads.single("video"), (req, res) => {
     const video = req.file;
     const {title, desc, author, abtAuthor, email, twitter, linkedin, facebook} = req.body
@@ -242,7 +257,7 @@ router.post('/addCourse', uploads.single("video"), (req, res) => {
     })
 });
 
-//retrieve all course videos and metadata from firebase storage
+//retrieve all course videos and metadata from firebase storage to end user
 router.get('/courses', async (req, res) => {
     try {
       const [files] = await bucket.getFiles();
@@ -276,7 +291,7 @@ router.get('/courses', async (req, res) => {
     }
 });
 
-//retrieve single course video and metadata from firebase storage
+//retrieve single course video and metadata from firebase storage by end user
 router.get('/courses/:filename', async (req, res) => {
     try {
       const filename = req.params.filename;
@@ -301,6 +316,43 @@ router.get('/courses/:filename', async (req, res) => {
       res.render('singleCourse', { error: 'Error retrieving video' });
     }
 });
+
+//get all courses by admin
+router.get('/allCourses', async (req, res) => {
+    try {
+      const [files] = await bucket.getFiles();
+  
+      const videoData = files.map(file => {
+        const url = `https://storage.googleapis.com/${bucket.name}/${file.name}`;
+        const metadata = file.metadata;
+        const createdAt = new Date(metadata.timeCreated);
+        const title = metadata.title || 'Untitled';
+        const description = metadata.desc ? metadata.desc.substring(0, 100) : '';
+        return{
+            url,
+            title,
+            description,
+            createdAt,
+            filename: file.name
+        };
+      });
+
+      const sortedVideos = videoData.sort((a, b) => b.createdAt - a.createdAt);
+      
+      res.render('allCourses', { videoData: sortedVideos });
+
+      console.log("success");
+    } catch (error) {
+      console.error('Error retrieving videos:', error);
+      res.status(500).send('Error retrieving videos');
+    }
+});
+
+//get all posts by admin
+router.get('/allPosts', async (req, res) => {
+    posts = await Post.find().sort({createdAt: -1});
+    res.render('allPosts', { posts: posts });
+});
   
 
 // const Storage = multer.diskStorage({
@@ -311,26 +363,6 @@ router.get('/courses/:filename', async (req, res) => {
 // });
 
 // const upload = multer({ storage: Storage }).single('img');
-
-// router.post('/addCourse', upload, (req, res) => {
-//     const { title, desc, author, abtAuthor } = req.body;
-//     const img = req.file.filename;
-//     // const video = req.file.filename;
-
-//     if (!title || !desc || !author || !img) {
-//         return res.redirect('/addCourse');
-//     }
-
-//     const courses = new Course({ title, desc, author, img, abtAuthor })
-
-//     courses
-//       .save()
-//       .then(() => {
-//         console.log('Course Created!');
-//         res.redirect('/admin');
-//       })
-//       .catch((err) => console.log(err));
-// });
 
 
 /*         ***blog routes***           */
@@ -367,23 +399,11 @@ router.get('/admin', (req, res) => {
     const min = new Date().getMinutes();
     const sec = new Date().getSeconds();
     const day = new Date().getDate();
-    const month = new Date().getMonth();
+    const month = new Date().getMonth() + 1;
     const year = new Date().getFullYear();
     res.render('admin', { hrs: hrs, min: min, sec: sec,
                           day: day, month: month, year: year });
-})
-
-//get all posts by admin
-router.get('/allPosts', async (req, res) => {
-    posts = await Post.find().sort({createdAt: -1});
-    res.render('allPosts', { posts: posts });
-})
-
-
-//get addCourse page
-router.get('/addCourse', (req, res) => {
-    res.render('addCourse');
-})
+});
 
 //post course
 // router.post('/addCourse', upload, (req, res) => {
@@ -405,25 +425,6 @@ router.get('/addCourse', (req, res) => {
 //       })
 //       .catch((err) => console.log(err));
 // });
-
-//get single course
-router.get("/courses/:id", async (req, res) => {
-    try {
-        const { id } = req.params;
-        const course = await Course.findOne({ _id: id });
-        const courses = await Course.find().sort({createdAt: -1}).limit(3);
-        const comments = await Comment.find().sort({createdAt: -1});
-        res.render("singleCourse", { course: course, courses: courses, comments: comments });
-    } catch (err) {
-        res.status(500).send("Course not found");
-    }
-});
-
-//get all courses by admin
-router.get('/allCourses', async (req, res) => {
-    courses = await Course.find().sort({createdAt: -1});
-    res.render('allCourses', { courses: courses });
-});
 
 //subscribe section
 router.post('/subscribe', (req, res) => {
@@ -465,6 +466,41 @@ router.post('/subscribe', (req, res) => {
 
 router.post('/failure', (req, res) => {
     res.redirect('/');
-})
+});
+
+// Donate Section
+
+//get donate page
+router.get('/donate', (req, res) => {
+    res.render('donate');
+});
+
+//post a donation
+router.post('/donate', (req, res) => {
+    const { amount, phoneNumber } = req.body;
+  
+    axios
+      .post('https://api.mtnuganda.co.ug/collection/v1_0/requesttopay', {
+        amount,
+        currency: 'UGX',
+        externalId: '123', // Generate a unique ID for each payment request
+        payer: {
+          partyIdType: 'MSISDN',
+          partyId: phoneNumber,
+        },
+        payerMessage: 'Donation',
+        payeeNote: 'Donation',
+      })
+      .then((response) => {
+        // Handle the API response
+        console.log(response.data);
+        res.send('Payment request initiated successfully');
+      })
+      .catch((error) => {
+        // Handle any errors
+        console.error(error);
+        res.status(500).send('Error occurred while initiating payment');
+    });
+});  
 
 module.exports = router;

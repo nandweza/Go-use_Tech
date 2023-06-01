@@ -745,6 +745,11 @@ footer .footer-text {
     background-size: cover; */
 }
 
+.flex-names {
+    display: flex;
+    flex-direction: row;
+}
+
 @media (max-width: 767px) {
     .register-main {
         height: 150vh;
@@ -1200,3 +1205,22 @@ footer .footer-text {
 .donate a:hover {
     color: var(--main-black);
 }
+
+.donate-page {
+    height: 80vh;
+    width: 100wv;
+}
+
+.donate-page{
+    padding: 0 30%;
+}
+
+.donate-page h3 {
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.donate-page label {
+    font-size: 1.8rem;
+}
+
