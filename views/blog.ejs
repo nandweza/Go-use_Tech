@@ -45,8 +45,8 @@
               </div>
               <div class="desc">
                 <p>
-                  <%= post.content.substring(0, 300) + "..." %>
-                  <a href="/blog/<%= post._id %>" style="color: red;">Read more.</a>
+                  <%= post.content.substring(0, 200) + "..." %>
+                  <a href="/blog/<%= post.filename %>" style="color: red;">Read more.</a>
                 </p>
               </div>
             </div>

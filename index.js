@@ -8,6 +8,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
+const methodOverride = require('method-override');
 const User = require('./models/User');
 const appRouter = require('./routes/appRouter');
 
@@ -28,6 +29,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(methodOverride('_method', { methods: ['POST', 'DELETE', 'PUT'] }));
 
 app.use((req, res, next) => {
   res.locals.path = req.path;

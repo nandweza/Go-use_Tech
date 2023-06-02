@@ -13,7 +13,7 @@ const nodemailer = require('nodemailer');
 const https = require('https');
 
 const { initializeApp } = require('firebase/app');
-const { getStorage, ref, uploadBytes, getDownloadURL, getMetadata } = require('firebase/storage');
+const { getStorage, ref, uploadBytes, getDownloadURL, getMetadata, deleteObject, updateMetadata } = require('firebase/storage');
 const admin = require("firebase-admin");
 
 // const { Storage } = require('@google-cloud/storage');
@@ -74,87 +74,179 @@ router.get('/addPost', (req, res) => {
 });
 
 // Create a blog post
+// router.post('/addPost', upload.single('img'), async (req, res) => {
+//     try {
+//         const { title, content } = req.body;
+//         const img = req.file;
+  
+//         // Generate a unique filename for the blog post
+//         const filename = Date.now().toString();
+  
+//         // Upload the image to Firebase Storage
+//         const imageFile = bucket.file(`blog/${filename}-${img.originalname}`);
+//         const imageUploadStream = imageFile.createWriteStream();
+//         imageUploadStream.end(img.buffer);
+  
+//         // Upload the blog post content to Firebase Storage
+//         const contentFile = bucket.file(`blog/${filename}.txt`);
+//         await contentFile.save(content, {
+//             contentType: 'text/plain',
+//         });
+
+//         // Save the title to a separate file
+//         const titleFile = bucket.file(`blog/${filename}.txt`);
+//         await titleFile.save(title, {
+//             contentType: 'text/plain',
+//         });
+  
+//         // res.status(201).json({ message: 'Blog post created successfully' });
+//         res.redirect('/addPost');
+//     } catch (error) {
+//         console.error('Error creating blog post:', error);
+//         res.status(500).json({ error: 'Error creating blog post' });
+//     }
+// });
+
+// Create a blog post
 router.post('/addPost', upload.single('img'), async (req, res) => {
     try {
-        const { title, content } = req.body;
-        const img = req.file;
+      const { title, content } = req.body;
+      const img = req.file;
   
-        // Generate a unique filename for the blog post
-        const filename = Date.now().toString();
+      // Generate a unique filename for the blog post
+      const filename = Date.now().toString();
   
-        // Upload the image to Firebase Storage
-        const imageFile = bucket.file(`blog/${filename}-${img.originalname}`);
-        const imageUploadStream = imageFile.createWriteStream();
-        imageUploadStream.end(img.buffer);
+      // Upload the image to Firebase Storage
+      const imageFile = bucket.file(`blog/${filename}-${img.originalname}`);
+      const imageUploadStream = imageFile.createWriteStream();
+      imageUploadStream.end(img.buffer);
   
-        // Upload the blog post content to Firebase Storage
-        const contentFile = bucket.file(`blog/${filename}.txt`);
-        await contentFile.save(content, {
-            contentType: 'text/plain',
-        });
-
-        // Save the title to a separate file
-        const titleFile = bucket.file(`blog/${filename}.txt`);
-        await titleFile.save(title, {
-            contentType: 'text/plain',
-        });
+      // Save the title and content in the same file
+      const postFile = bucket.file(`blog/${filename}.txt`);
+      const postContent = `Title: ${title}\n\n${content}`;
+      await postFile.save(postContent, {
+        contentType: 'text/plain',
+      });
   
-        // res.status(201).json({ message: 'Blog post created successfully' });
-        res.redirect('/addPost');
+      res.redirect('/addPost');
     } catch (error) {
-        console.error('Error creating blog post:', error);
-        res.status(500).json({ error: 'Error creating blog post' });
-    }
-});
-
-//get blog posts
-router.get('/blog', async (req, res) => {
-    try {
-        // Get a list of files in the "blog" directory
-        const [files] = await bucket.getFiles({ prefix: 'blog/' });
-  
-        // Retrieve the content of each blog post
-        const posts = [];
-
-        for (const file of files) {
-            if (file.name.endsWith('.txt')) {
-                const [content] = await file.download();
-  
-                // Get the corresponding image file for each post
-                const imageFilename = file.name.replace('.txt', '');
-                const [imageFile] = await bucket.getFiles({ prefix: imageFilename });
-                const imageUrl = imageFile[0].publicUrl();
-  
-                // Get the title for each post
-                const titleFile = bucket.file(`${imageFilename}.txt`);
-                const [title] = await titleFile.download();
-  
-                posts.push({
-                    title: title.toString(),
-                    content: content.toString(),
-                    imageUrl,
-                });
-            }
-        }
-  
-        // Sort the posts array in reverse order based on creation timestamp
-        posts.sort((a, b) => b.createdAt - a.createdAt);
-  
-        res.render('blog', { posts });
-    } catch (error) {
-        console.error('Error retrieving blog posts:', error);
-        res.status(500).send('Error retrieving blog posts');
+      console.error('Error creating blog post:', error);
+      res.status(500).json({ error: 'Error creating blog post' });
     }
 });  
 
-//get single blog post
-router.get("/blog/:id", async (req, res) => {
+//get blog posts
+// router.get('/blog', async (req, res) => {
+//     try {
+//         // Get a list of files in the "blog" directory
+//         const [files] = await bucket.getFiles({ prefix: 'blog/' });
+  
+//         // Retrieve the content of each blog post
+//         const posts = [];
+
+//         for (const file of files) {
+//             if (file.name.endsWith('.txt')) {
+//                 const [content] = await file.download();
+//                 const imageFilename = file.name.replace('.txt', '');
+//                 const imageFile = bucket.file(`${imageFilename}.jpg`);
+//                 const imageUrl = await imageFile.getSignedUrl({
+//                     action: 'read',
+//                     expires: '03-17-2025', // Set an appropriate expiration date
+//                 });
+  
+//                 // Get the title for each post
+//                 const titleFile = bucket.file(`${imageFilename}.txt`);
+//                 const [title] = await titleFile.download();
+  
+//                 posts.push({
+//                     title: title.toString(),
+//                     content: content.toString(),
+//                     imageUrl: imageUrl
+//                 });
+//             }
+//         }
+  
+//         // Sort the posts array in reverse order based on creation timestamp
+//         posts.sort((a, b) => b.createdAt - a.createdAt);
+  
+//         res.render('blog', { posts });
+//     } catch (error) {
+//         console.error('Error retrieving blog posts:', error);
+//         res.status(500).send('Error retrieving blog posts');
+//     }
+// });
+
+// Get all blog posts
+router.get('/blog', async (req, res) => {
     try {
-        const { id } = req.params;
-        const post = await Post.findOne({ _id: id });
-        res.render("singlePost", { post: post });
-    } catch (err) {
-        res.status(500).send("Blog not found");
+      // Get a list of files in the "blog" directory
+      const [files] = await bucket.getFiles({ prefix: 'blog/' });
+  
+      // Retrieve the blog posts
+      const posts = [];
+  
+      for (const file of files) {
+        if (file.name.endsWith('.txt')) {
+          const [content] = await file.download();
+  
+          // Extract the title and content from the combined data
+          const lines = content.toString().split('\n');
+          const title = lines[0].substring(7); // Remove the "Title: " prefix
+          const postContent = lines.slice(2).join('\n'); // Combine remaining lines as post content
+  
+          // Get the corresponding image file for each post
+          const imageFilename = file.name.replace('.txt', '');
+          const [imageFile] = await bucket.getFiles({ prefix: imageFilename });
+          const imageUrl = imageFile[0].publicUrl();
+  
+          posts.push({
+            title,
+            content: postContent,
+            imageUrl,
+          });
+        }
+      }
+  
+      res.render('blog', { posts });
+    } catch (error) {
+      console.error('Error retrieving blog posts:', error);
+      res.status(500).send('Error retrieving blog posts');
+    }
+});  
+
+//get single blog post by filename 
+router.get('/blog/:filename', async (req, res) => {
+    try {
+        const { filename } = req.params;
+
+        // Get the content file for the specified filename
+        const contentFile = bucket.file(`blog/${filename}.txt`);
+        const [content] = await contentFile.download();
+
+        // Get the corresponding image file
+        const imageFile = bucket.file(`blog/${filename}`);
+        const imageUrl = imageFile.publicUrl();
+
+        // Get the title file
+        const titleFile = bucket.file(`blog/${filename}.txt`);
+        const [title] = await titleFile.download();
+
+        // Get the createdAt property
+        const createdAtFile = bucket.file(`blog/${filename}.txt`);
+        const [createdAt] = await createdAtFile.download();
+        const parsedCreatedAt = new Date(createdAt.toString());
+
+        const post = {
+            title: title.toString(),
+            content: content.toString(),
+            imageUrl,
+            createdAt: parsedCreatedAt,
+        };
+
+        res.render('singlePost', { post });
+    } catch (error) {
+        console.error('Error retrieving blog post:', error);
+        res.status(500).send('Error retrieving blog post');
     }
 });
 
@@ -340,36 +432,42 @@ router.post('/addCourse', uploads.single("video"), (req, res) => {
 //retrieve all course videos and metadata from firebase storage to end user
 router.get('/courses', async (req, res) => {
     try {
-      const [files] = await bucket.getFiles();
+        const [files] = await bucket.getFiles();
   
-      const videoData = files.map(file => {
-        const url = `https://storage.googleapis.com/${bucket.name}/${file.name}`;
-        const metadata = file.metadata;
-        const createdAt = new Date(metadata.timeCreated);
-        const title = metadata.title || 'Untitled';
-        const description = metadata.desc ? metadata.desc.substring(0, 100) : '';
-        return{
-            url,
-            title,
-            description,
-            createdAt,
-            filename: file.name
-        };
-      });
-
-      const sortedVideos = videoData.sort((a, b) => b.createdAt - a.createdAt);
-      
-      if (req.isAuthenticated()) {
-          res.render('courses', { videoData: sortedVideos });
-      } else {
-          res.render('login');
-      }
-      console.log("success");
+        const videoData = files.map(file => {
+            // Exclude files from the "blog" directory
+            if (!file.name.startsWith('blog/')) {
+                const url = `https://storage.googleapis.com/${bucket.name}/${file.name}`;
+                const metadata = file.metadata;
+                const createdAt = new Date(metadata.timeCreated);
+                const title = metadata.title || 'Untitled';
+                const description = metadata.desc ? metadata.desc.substring(0, 100) : '';
+                return {
+                    url,
+                    title,
+                    description,
+                    createdAt,
+                    filename: file.name
+                };
+            }
+        });
+  
+        // Remove any undefined entries
+        const filteredVideos = videoData.filter(video => video);
+  
+        const sortedVideos = filteredVideos.sort((a, b) => b.createdAt - a.createdAt);
+  
+        if (req.isAuthenticated()) {
+            res.render('courses', { videoData: sortedVideos });
+        } else {
+            res.render('login');
+        }
+        console.log("success");
     } catch (error) {
       console.error('Error retrieving videos:', error);
       res.status(500).send('Error retrieving videos');
     }
-});
+});  
 
 //retrieve single course video and metadata from firebase storage by end user
 router.get('/courses/:filename', async (req, res) => {
@@ -379,7 +477,7 @@ router.get('/courses/:filename', async (req, res) => {
       const url = await getDownloadURL(StorageRef);
       const metadata = await getMetadata(StorageRef);
       const title = metadata.customMetadata.title || 'Untitled';
-      const description = metadata.customMetadata.desc || '';
+      const desc = metadata.customMetadata.desc || '';
       const author = metadata.customMetadata.author || '';
       const abtAuthor = metadata.customMetadata.abtAuthor || '';
       const email = metadata.customMetadata.email || '';
@@ -388,7 +486,7 @@ router.get('/courses/:filename', async (req, res) => {
       const facebook = metadata.customMetadata.facebook || '';
       res.render('singleCourse', 
       { 
-        url, title, description, author, abtAuthor, email, twitter, linkedin, facebook 
+        url, title, desc, author, abtAuthor, email, twitter, linkedin, facebook 
       });
       console.log(url);
     } catch (error) {
@@ -400,31 +498,112 @@ router.get('/courses/:filename', async (req, res) => {
 //get all courses by admin
 router.get('/allCourses', async (req, res) => {
     try {
-      const [files] = await bucket.getFiles();
+        const [files] = await bucket.getFiles();
   
-      const videoData = files.map(file => {
-        const url = `https://storage.googleapis.com/${bucket.name}/${file.name}`;
-        const metadata = file.metadata;
-        const createdAt = new Date(metadata.timeCreated);
-        const title = metadata.title || 'Untitled';
-        const description = metadata.desc ? metadata.desc.substring(0, 100) : '';
-        return{
-            url,
-            title,
-            description,
-            createdAt,
-            filename: file.name
-        };
-      });
-
-      const sortedVideos = videoData.sort((a, b) => b.createdAt - a.createdAt);
-      
-      res.render('allCourses', { videoData: sortedVideos });
-
-      console.log("success");
+        const videoData = files.map(file => {
+            // Exclude files from the "blog" directory
+            if (!file.name.startsWith('blog/')) {
+                const url = `https://storage.googleapis.com/${bucket.name}/${file.name}`;
+                const metadata = file.metadata;
+                const createdAt = new Date(metadata.timeCreated);
+                const title = metadata.title || 'Untitled';
+                const desc = metadata.desc ? metadata.desc : '';
+                return {
+                    url,
+                    title,
+                    desc,
+                    createdAt,
+                    filename: file.name
+                };
+            }
+        });
+  
+        // Remove any undefined entries
+        const filteredVideos = videoData.filter(video => video);
+  
+        const sortedVideos = filteredVideos.sort((a, b) => b.createdAt - a.createdAt);
+  
+        res.render('allCourses', { videoData: sortedVideos });
+        console.log("success");
     } catch (error) {
       console.error('Error retrieving videos:', error);
       res.status(500).send('Error retrieving videos');
+    }
+});
+
+// GET update course page
+router.get('/courses/:filename/update', async (req, res) => {
+    try {
+        const filename = req.params.filename;
+        const StorageRef = ref(storage, filename);
+        const metadata = await getMetadata(StorageRef);
+        const title = metadata.customMetadata.title || '';
+        const desc = metadata.customMetadata.desc || '';
+        const author = metadata.customMetadata.author || '';
+        const abtAuthor = metadata.customMetadata.abtAuthor || '';
+        const email = metadata.customMetadata.email || '';
+        const twitter = metadata.customMetadata.twitter || '';
+        const linkedin = metadata.customMetadata.linkedin || '';
+        const facebook = metadata.customMetadata.facebook || '';
+        
+        res.render('updateCourse', {
+            filename,
+            video: filename,
+            title,
+            desc,
+            author,
+            abtAuthor,
+            email,
+            twitter,
+            linkedin,
+            facebook
+        });
+    } catch (error) {
+        console.log('Error retrieving video metadata:', error);
+        res.render('updateCourse', { error: 'Error retrieving video metadata' });
+    }
+});
+
+// Update course video metadata by admin
+router.put('/courses/:filename', async (req, res) => {
+    try {
+        const filename = req.params.filename;
+        const StorageRef = ref(storage, filename);
+        const metadata = await getMetadata(StorageRef);
+
+        const updatedMetadata = {
+            contentType: 'video/mp4',
+            customMetadata: {
+                title: req.body.title || metadata.customMetadata.title,
+                desc: req.body.desc || metadata.customMetadata.desc,
+                author: req.body.author || metadata.customMetadata.author,
+                abtAuthor: req.body.abtAuthor || metadata.customMetadata.abtAuthor,
+                email: req.body.email || metadata.customMetadata.email,
+                twitter: req.body.twitter || metadata.customMetadata.twitter,
+                linkedin: req.body.linkedin || metadata.customMetadata.linkedin,
+                facebook: req.body.facebook || metadata.customMetadata.facebook
+            }
+        };
+
+        await updateMetadata(StorageRef, updatedMetadata);
+        res.sendStatus(200);
+    } catch (error) {
+        console.log('Error updating video metadata:', error);
+        res.sendStatus(500);
+    }
+});
+
+// Delete course video and metadata from firebase storage by admin
+router.delete('/courses/:filename', async (req, res) => {
+    try {
+        const filename = req.params.filename;
+        const StorageRef = ref(storage, filename);
+        await deleteObject(StorageRef);
+        //res.sendStatus(200);
+        res.redirect('/allCourses');
+    } catch (error) {
+        console.log('Error deleting video:', error);
+        res.sendStatus(500);
     }
 });
 
