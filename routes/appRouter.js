@@ -44,8 +44,15 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const storage = getStorage(app);
-const uploads = multer({storage: multer.memoryStorage()});
+const uploads = multer({storage: multer.memoryStorage()});  //handling video storage
 
+// Multer configuration for handling image uploads
+const upload = multer({
+    storage: multer.memoryStorage(),
+    limits: {
+      fileSize: 5 * 1024 * 1024, // Limit file size to 5MB
+    },
+});
 
 // home route
 router.get('/', async (req, res) => {
@@ -61,11 +68,84 @@ router.get('/about', (req, res) => {
 
 //Blog Routes
 
+//get addPost page by admin
+router.get('/addPost', (req, res) => {
+    res.render('addPost');
+});
+
+// Create a blog post
+router.post('/addPost', upload.single('img'), async (req, res) => {
+    try {
+        const { title, content } = req.body;
+        const img = req.file;
+  
+        // Generate a unique filename for the blog post
+        const filename = Date.now().toString();
+  
+        // Upload the image to Firebase Storage
+        const imageFile = bucket.file(`blog/${filename}-${img.originalname}`);
+        const imageUploadStream = imageFile.createWriteStream();
+        imageUploadStream.end(img.buffer);
+  
+        // Upload the blog post content to Firebase Storage
+        const contentFile = bucket.file(`blog/${filename}.txt`);
+        await contentFile.save(content, {
+            contentType: 'text/plain',
+        });
+
+        // Save the title to a separate file
+        const titleFile = bucket.file(`blog/${filename}.txt`);
+        await titleFile.save(title, {
+            contentType: 'text/plain',
+        });
+  
+        // res.status(201).json({ message: 'Blog post created successfully' });
+        res.redirect('/addPost');
+    } catch (error) {
+        console.error('Error creating blog post:', error);
+        res.status(500).json({ error: 'Error creating blog post' });
+    }
+});
+
 //get blog posts
 router.get('/blog', async (req, res) => {
-    posts = await Post.find().sort({createdAt: -1});
-    res.render('blog', { posts: posts });
-});
+    try {
+        // Get a list of files in the "blog" directory
+        const [files] = await bucket.getFiles({ prefix: 'blog/' });
+  
+        // Retrieve the content of each blog post
+        const posts = [];
+
+        for (const file of files) {
+            if (file.name.endsWith('.txt')) {
+                const [content] = await file.download();
+  
+                // Get the corresponding image file for each post
+                const imageFilename = file.name.replace('.txt', '');
+                const [imageFile] = await bucket.getFiles({ prefix: imageFilename });
+                const imageUrl = imageFile[0].publicUrl();
+  
+                // Get the title for each post
+                const titleFile = bucket.file(`${imageFilename}.txt`);
+                const [title] = await titleFile.download();
+  
+                posts.push({
+                    title: title.toString(),
+                    content: content.toString(),
+                    imageUrl,
+                });
+            }
+        }
+  
+        // Sort the posts array in reverse order based on creation timestamp
+        posts.sort((a, b) => b.createdAt - a.createdAt);
+  
+        res.render('blog', { posts });
+    } catch (error) {
+        console.error('Error retrieving blog posts:', error);
+        res.status(500).send('Error retrieving blog posts');
+    }
+});  
 
 //get single blog post
 router.get("/blog/:id", async (req, res) => {
@@ -85,7 +165,7 @@ router.get('/contact', (req, res) => {
     res.render('contact');
 });
 
-//post conatct message
+//post contact message
 router.post('/contact', (req, res) => {
     console.log(req.body);
     const name = req.body.name;
@@ -366,11 +446,6 @@ router.get('/allPosts', async (req, res) => {
 
 
 /*         ***blog routes***           */
-
-//get addPost page
-router.get('/addPost', (req, res) => {
-    res.render('addPost');
-})
 
 //post blog post
 // router.post('/addPost', upload, (req, res) => {

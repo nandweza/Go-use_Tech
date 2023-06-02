@@ -36,11 +36,8 @@
           <% posts.forEach((post) => { %>
             <div class="fblog col-lg-4 col-md-6 mb-4">
               <div class="img-div">
-                <img src="<%= post.img %>" class="img-responsive"/>
+                <img src="<%= post.imageUrl %>" alt="Post Image" class="img-responsive">
               </div>
-              <span class="date">
-                <%= post.createdAt.toDateString() %>
-              </span>
               <br>
               <br>
               <div class="title">
@@ -48,7 +45,7 @@
               </div>
               <div class="desc">
                 <p>
-                  <%= post.content.substring(0, 180) + "..." %>
+                  <%= post.content.substring(0, 300) + "..." %>
                   <a href="/blog/<%= post._id %>" style="color: red;">Read more.</a>
                 </p>
               </div>
