@@ -10,13 +10,19 @@
             <div class="admin-wrapper">
                 <div class="course-wrapper">
                     <% videoData.forEach((video) => { %>
-                        <form action="/courses/<%= video.filename %>?_method=DELETE" method="POST" class="pb-3">
-                            <input type="hidden" name="_method" value="DELETE">
-                            <button type="submit" class="btn btn-primary btn-lg p-2">Delete</button>
-                        </form>
-                        <a href="/courses/<%= video.filename %>/update" class="pb-3">
-                            <button class="btn btn-primary btn-lg p-2">Update</button>
-                        </a>
+                        <div class="flex-btn">
+                            <div class="pb-3">
+                                <form action="/courses/<%= video.filename %>?_method=DELETE" method="POST" class="">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <button type="submit" class="btn btn-primary btn-lg p-2">Delete</button>
+                                </form>
+                            </div>
+                            <div class="pb-3">
+                                <a href="/courses/<%= video.filename %>/update" class="">
+                                    <button class="btn btn-primary btn-lg p-2">Update</button>
+                                </a>
+                            </div>
+                        </div>
                         <div class="img-div">
                             <video width="640" height="360" controls>
                                 <source src="<%= video.url %>" type="video/mp4">

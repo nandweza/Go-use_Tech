@@ -8,30 +8,35 @@
             <h3 class="dashboard mt-4 mb-2">Access & Update All Posts</h3>
             <hr class="border">
             <div class="admin-wrapper">
-                <div class="posts-wrapper">
-                    <% posts.forEach ( function (post) { %>
-                    <form class="form-bt" action="/delete" method="post">
-                        <div class="icons">
-                            <button class="btn btn-outline-danger">
-                                <a href="/edit/<%= post._id %>" data-toggle="model"><i class="fa fa-edit" style="font-size: 30px; color: black;"></i></a>
-                            </button>
-                            <button name="deleteBtn" value="<%=post._id%>" type="submit" class="btn btn-outline-danger">
-                                <i class="fa fa-trash" style="font-size: 30px; color: black;"></i>
-                            </button>
+                <div class="course-wrapper">
+                    <% posts.forEach((post) => { %>
+                        <div class="flex-btn">
+                            <div class="pb-3">
+                                <form action="" method="POST" class="">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <button type="submit" class="btn btn-primary btn-lg p-2">Delete</button>
+                                </form>
+                            </div>
+                            <div class="pb-3">
+                                <a href="" class="">
+                                    <button class="btn btn-primary btn-lg p-2">Update</button>
+                                </a>
+                            </div>
                         </div>
-                        <div>
-                            <img src="<%= post.img %>" />
+                        <div class="img-div">
+                            <img src="" alt="Post image">
                         </div>
-                        <span class="text-muted">
+                        <span>
                             <%= post.createdAt %>
                         </span>
-                        <div class="title-text">
-                            <%= post.title %>
+                        <div class="pb-5">
+                            <h3 class="title-text fw-bold pt-5 pb-3">
+                                <%= post.title %>
+                            </h3>
+                            <div class="desc">
+                                <%= post.content %>
+                            </div>
                         </div>
-                        <div class="desc">
-                            <%= post.content %>
-                        </div>
-                    </form>
                     <% }); %>
                 </div>
             </div>

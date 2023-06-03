@@ -11,7 +11,7 @@
                     <div class="info">
                         <i class="fa fa-users"></i>
                         <div class="info-text">
-                            10 Users
+                            <%= userCount %> Users
                         </div>
                     </div>
                 </div>
@@ -19,16 +19,16 @@
                     <div class="info">
                         <i class="fa fa-book"></i>
                         <div class="info-text">
-                            15 Courses
+                            <%= courseCount %> Courses
                         </div>
                     </div>
                 </div>
                 <div class="admin-card col-lg-4 col-md-6 mx-3 my-2">
                     <div class="info">
-                        <%= hrs %>:<%= min %>:<%= sec %>
+                        <span id="current-time"></span>
                         <br>
                         <div class="info-text">
-                            <%= day %>.<%= month %>.<%= year %>
+                            <span id="current-date"></span>
                         </div>
                     </div>
                 </div>
@@ -82,4 +82,26 @@
                 </div>
             </div>
         </main>
+
+        <script>
+            // Function to update the time and date on the page
+            function updateDateTime() {
+                const currentTimeElement = document.getElementById('current-time');
+                const currentDateElement = document.getElementById('current-date');
+              
+                const now = new Date();
+                const timeString = now.toLocaleTimeString();
+                const dateString = now.toDateString();
+        
+                currentTimeElement.textContent = timeString;
+                currentDateElement.textContent = dateString;
+            }
+        
+            // Update the time and date immediately
+            updateDateTime();
+        
+            // Update the time and date every second
+            setInterval(updateDateTime, 1000);
+        </script>
+          
     </body>

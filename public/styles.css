@@ -1133,6 +1133,18 @@ footer .footer-text {
     margin-bottom: 20px;
 }
 
+.flex-btn {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.flex-btn button {
+    background-color: var(--main-orange);
+    border: none;
+    font-size: 2rem;
+    font-weight: 500;
+}
+
 .subscribe-main {
     padding: 15% 10%;
 
@@ -1224,3 +1236,44 @@ footer .footer-text {
     font-size: 1.8rem;
 }
 
+/* 404 page */
+.not-found {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+}
+  
+.not-found h2 {
+    font-size: 5rem;
+    color: #333;
+}
+  
+.not-found p {
+    font-size: 2.5rem;
+    margin-top: 10px;
+    color: #666;
+}
+  
+.not-found a {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    color: var(--main-orange);
+    font-size: 2rem;
+}
+  
+.not-found a:hover {
+    color: var(--main-blue);
+}
+  
+.not-found .emoji {
+    font-size: 10rem;
+}
+
+.not-found .fa {
+    font-size: 2rem;
+    color: var(--main-orange);
+}
+
+.not-found .fa:hover {
+    color: var(--main-blue);
+}
