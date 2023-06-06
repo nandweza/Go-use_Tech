@@ -35,7 +35,8 @@
     "passport-google-oauth20": "^2.0.0",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^8.0.0",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "uuid": "^9.0.0"
   },
   "repository": {
     "type": "git",

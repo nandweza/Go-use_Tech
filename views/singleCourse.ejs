@@ -45,6 +45,22 @@
                     <p class="">
                         <%= desc %>
                     </p>
+                    <p class="card text-center">
+                        <!-- <p id="shareLinkContainer" style="display: none;">Share this course: <span id="shareLink"></span></p> -->
+
+                        <!-- Add a button to show the shareable link -->
+                        <button class="p-2 btn btn-primary btn-lg" id="showShareLinkBtn">
+                            <i class="fa fa-share"></i> Share
+                        </button>
+
+                        <!-- Add buttons for social media sharing -->
+                        <!-- <button class="p-2 btn btn-primary btn-lg" onclick="shareOnFacebook()">
+                            <i class="fab fa-facebook px-2"></i>
+                        </button>
+                        <button class="p-2 btn btn-primary btn-lg" onclick="shareOnTwitter()">
+                            <i class="fab fa-twitter px-2"></i>
+                        </button> -->
+                    </p>
                   <% } else { %>
                     <h1>Error</h1>
                     <p><%= error %></p>
@@ -61,18 +77,27 @@
                         <p class="p-4">
                             <%= abtAuthor %>
                         </p>
-                        <p class="p-4 fw-bold">
-                            <%= email %>
+                        <p class="p-3 pb-2">
+                            <span>
+                                <strong class="fw-bold px-2">Email:</strong> <%= email %>
+                            </span>
                         </p>
                         <div class="social px-3">
+                            <h3 class="px-2 pb-2 fw-bold">Social</h3>
                             <span class="fw-bold">
-                                <a href="<%= twitter %>">twitter</a>
+                                <a href="<%= twitter %>">
+                                    <i class="fab fa-twitter fa-2x"></i>
+                                </a>
                             </span>
                             <span class="fw-bold">
-                                <a href="<%= linkedin %>">linkedin</a>
+                                <a href="<%= linkedin %>">
+                                    <i class="fab fa-linkedin fa-2x"></i>
+                                </a>
                             </span>
                             <span class="fw-bold">
-                                <a href="<%= facebook %>">facebook</a>
+                                <a href="<%= facebook %>">
+                                    <i class="fab fa-facebook fa-2x"></i>
+                                </a>
                             </span>
                         </div>
                     </div>
@@ -81,5 +106,54 @@
         </div>
     </div>
     <%- include('./partials/footer.ejs') %>
+
+    <!-- Include the Facebook and Twitter JavaScript SDKs -->
+    <script async defer src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.3"></script>
+    <script async defer src="https://platform.twitter.com/widgets.js"></script>
+
+    <!-- Include your custom JavaScript file -->
+    <script>
+        // custom.js
+
+// Function to show the shareable link popup
+function showShareableLinkPopup() {
+  const shareableLink = document.getElementById('shareLink').textContent;
+
+  // Create a popup with the shareable link and share buttons
+  const popupHtml = `
+    <div class="popup-container">
+      <p class="share-link">Share this course:</p>
+      <p><input type="text" value="${shareableLink}" readonly></p>
+      <button class="share-button" onclick="shareOnFacebook()">Share on Facebook</button>
+      <button class="share-button" onclick="shareOnTwitter()">Share on Twitter</button>
+    </div>
+  `;
+
+  // Open the popup
+  const popupWindow = window.open('', 'SharePopup', 'width=500,height=300');
+  popupWindow.document.write(popupHtml);
+  popupWindow.document.close();
+}
+
+// Function to share on Facebook
+function shareOnFacebook() {
+  const shareableLink = document.getElementById('shareLink').textContent;
+
+  // Open the Facebook share dialog with the shareable link
+  window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareableLink)}`, '_blank');
+}
+
+// Function to share on Twitter
+function shareOnTwitter() {
+  const shareableLink = document.getElementById('shareLink').textContent;
+
+  // Open the Twitter share dialog with the shareable link
+  window.open(`https://twitter.com/intent/tweet?url=${encodeURIComponent(shareableLink)}`, '_blank');
+}
+
+// Attach event listener to the "Show Shareable Link" button
+document.getElementById('showShareLinkBtn').addEventListener('click', showShareableLinkPopup);
+
+    </script>
 </body>
  

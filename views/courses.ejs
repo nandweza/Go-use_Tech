@@ -11,8 +11,10 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <form class="d-flex nav-item mx-auto" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search...">
-                        <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>
+                        <input class="form-control me-2" type="text" id="searchInput" placeholder="Search...">
+                        <button class="btn btn-primary" type="submit" onclick="searchVideos()">
+                            <i class="fa fa-search"></i>
+                        </button>
                     </form>
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item">
@@ -24,6 +26,9 @@
                     </ul>
                 </div>
             </nav>
+        </div>
+        <div id="searchResultsContainer">
+            <!-- Search results will be dynamically populated here -->
         </div>
         <div class="container text-center px-4">
             <div class="course-header mt-5 mb-5 jumbotron" id="dynamic-heading">
@@ -83,5 +88,53 @@
       
         // Call the updateHeading function every minute
         setInterval(updateHeading, 5000);
-      </script>
+
+
+        // custom.js
+
+        function searchVideos() {
+            const query = document.getElementById('searchInput').value.trim();
+
+            if (query === '') {
+                // Clear the search results container if the query is empty
+                document.getElementById('searchResultsContainer').innerHTML = '';
+                return;
+            }
+
+        fetch(`/search?q=${encodeURIComponent(query)}`)
+            .then(response => response.json())
+            .then(searchResults => {
+                const resultsContainer = document.getElementById('searchResultsContainer');
+                resultsContainer.innerHTML = '';
+
+                if (searchResults.length === 0) {
+                    const noResultsMessage = document.createElement('p');
+                    noResultsMessage.textContent = 'No results found.';
+                    resultsContainer.appendChild(noResultsMessage);
+                } else {
+                    const ul = document.createElement('ul');
+
+                    searchResults.forEach(result => {
+                        const li = document.createElement('li');
+                        const title = document.createElement('h3');
+                        title.textContent = result.title;
+                        const videoUrl = document.createElement('p');
+                        const link = document.createElement('a');
+                        link.href = result.url;
+                        link.textContent = result.name;
+                        videoUrl.appendChild(link);
+                        li.appendChild(title);
+                        li.appendChild(videoUrl);
+                        ul.appendChild(li);
+                    });
+
+                    resultsContainer.appendChild(ul);
+                }
+            })
+            .catch(error => {
+                console.error('Error searching videos:', error);
+                document.getElementById('searchResultsContainer').textContent = 'An error occurred while searching videos.';
+            });
+        }
+    </script>
       

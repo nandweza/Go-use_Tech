@@ -11,6 +11,7 @@ const Post = require('../models/Post');
 const fs = require('fs');
 const nodemailer = require('nodemailer');
 const https = require('https');
+const { v4: uuidv4 } = require('uuid');
 
 const { initializeApp } = require('firebase/app');
 const { getStorage, ref, uploadBytes, getDownloadURL, getMetadata, deleteObject, updateMetadata } = require('firebase/storage');
@@ -73,40 +74,6 @@ router.get('/addPost', (req, res) => {
 });
 
 // Create a blog post
-// router.post('/addPost', upload.single('img'), async (req, res) => {
-//     try {
-//         const { title, content } = req.body;
-//         const img = req.file;
-  
-//         // Generate a unique filename for the blog post
-//         const filename = Date.now().toString();
-  
-//         // Upload the image to Firebase Storage
-//         const imageFile = bucket.file(`blog/${filename}-${img.originalname}`);
-//         const imageUploadStream = imageFile.createWriteStream();
-//         imageUploadStream.end(img.buffer);
-  
-//         // Upload the blog post content to Firebase Storage
-//         const contentFile = bucket.file(`blog/${filename}.txt`);
-//         await contentFile.save(content, {
-//             contentType: 'text/plain',
-//         });
-
-//         // Save the title to a separate file
-//         const titleFile = bucket.file(`blog/${filename}.txt`);
-//         await titleFile.save(title, {
-//             contentType: 'text/plain',
-//         });
-  
-//         // res.status(201).json({ message: 'Blog post created successfully' });
-//         res.redirect('/addPost');
-//     } catch (error) {
-//         console.error('Error creating blog post:', error);
-//         res.status(500).json({ error: 'Error creating blog post' });
-//     }
-// });
-
-// Create a blog post
 router.post('/addPost', upload.single('img'), async (req, res) => {
     try {
       const { title, content } = req.body;
@@ -132,48 +99,7 @@ router.post('/addPost', upload.single('img'), async (req, res) => {
       console.error('Error creating blog post:', error);
       res.status(500).json({ error: 'Error creating blog post' });
     }
-});  
-
-//get blog posts
-// router.get('/blog', async (req, res) => {
-//     try {
-//         // Get a list of files in the "blog" directory
-//         const [files] = await bucket.getFiles({ prefix: 'blog/' });
-  
-//         // Retrieve the content of each blog post
-//         const posts = [];
-
-//         for (const file of files) {
-//             if (file.name.endsWith('.txt')) {
-//                 const [content] = await file.download();
-//                 const imageFilename = file.name.replace('.txt', '');
-//                 const imageFile = bucket.file(`${imageFilename}.jpg`);
-//                 const imageUrl = await imageFile.getSignedUrl({
-//                     action: 'read',
-//                     expires: '03-17-2025', // Set an appropriate expiration date
-//                 });
-  
-//                 // Get the title for each post
-//                 const titleFile = bucket.file(`${imageFilename}.txt`);
-//                 const [title] = await titleFile.download();
-  
-//                 posts.push({
-//                     title: title.toString(),
-//                     content: content.toString(),
-//                     imageUrl: imageUrl
-//                 });
-//             }
-//         }
-  
-//         // Sort the posts array in reverse order based on creation timestamp
-//         posts.sort((a, b) => b.createdAt - a.createdAt);
-  
-//         res.render('blog', { posts });
-//     } catch (error) {
-//         console.error('Error retrieving blog posts:', error);
-//         res.status(500).send('Error retrieving blog posts');
-//     }
-// });
+});
 
 // Get all blog posts
 router.get('/blog', async (req, res) => {
@@ -183,7 +109,7 @@ router.get('/blog', async (req, res) => {
   
       // Retrieve the blog posts
       const posts = [];
-  
+
       for (const file of files) {
         if (file.name.endsWith('.txt')) {
           const [content] = await file.download();
@@ -530,9 +456,11 @@ router.get('/courses/:filename', async (req, res) => {
       const twitter = metadata.customMetadata.twitter || '';
       const linkedin = metadata.customMetadata.linkedin || '';
       const facebook = metadata.customMetadata.facebook || '';
+      const shareLink = `http://localhost:8001/share/${uuidv4()}`;
+
       res.render('singleCourse', 
       { 
-        url, title, desc, author, abtAuthor, email, twitter, linkedin, facebook 
+        url, title, desc, author, abtAuthor, email, twitter, linkedin, facebook, shareLink
       });
       console.log(url);
     } catch (error) {
@@ -654,11 +582,50 @@ router.delete('/courses/:filename', async (req, res) => {
     }
 });
 
+//search functionality
+async function searchVideos(query) {
+    const [files] = await bucket.getFiles();
+    const searchResults = [];
+  
+    for (const file of files) {
+        const [metadata] = await file.getMetadata();
+  
+        if (
+            typeof metadata.title === 'string' &&
+            typeof metadata.name === 'string' &&
+            (metadata.title.toLowerCase().includes(query.toLowerCase()) ||
+            metadata.name.toLowerCase().includes(query.toLowerCase()))
+        ) {
+            searchResults.push({
+                name: metadata.name,
+                title: metadata.title,
+                url: `https://storage.googleapis.com/${bucket.name}/${file.name}`,
+            });
+        }
+    }
+  
+    return searchResults;
+}
+
+//get search route
+router.get('/search', async (req, res) => {
+    const searchQuery = req.query.q;
+  
+    try {
+        const searchResults = await searchVideos(searchQuery);
+        res.json(searchResults);
+    } catch (error) {
+        console.error('Error searching videos:', error);
+        // res.status(500).json({ error: 'An error occurred while searching videos.' });
+        res.redirect('/404');
+    }
+});  
+
 //get admin page
 router.get('/admin', async (req, res) => {
     try {
         const [files] = await bucket.getFiles();
-  
+
         // Count the number of course files
         const courseCount = files.reduce((count, file) => {
             if (!file.name.startsWith('blog/')) {
@@ -677,7 +644,7 @@ router.get('/admin', async (req, res) => {
         console.log('Error retrieving files:', error);
         res.status(500).send('Error retrieving files');
     }
-});  
+});
 
 //subscribe section
 router.post('/subscribe', (req, res) => {
