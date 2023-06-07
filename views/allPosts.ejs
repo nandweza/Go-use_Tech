@@ -6,15 +6,13 @@
         <%- include('./partials/admin-navbar.ejs') %>
         <div class="admin">
             <h3 class="dashboard mt-4 mb-2">Access & Update All Posts</h3>
-            <hr class="border">
             <div class="admin-wrapper">
                 <div class="course-wrapper">
                     <% posts.forEach((post) => { %>
                         <div class="flex-btn">
                             <div class="pb-3">
-                                <form action="" method="POST" class="">
-                                    <input type="hidden" name="_method" value="DELETE">
-                                    <button type="submit" class="btn btn-primary btn-lg p-2">Delete</button>
+                                <form action="/delete" method="POST" class="">
+                                    <button name="deleteBtn" value="<%= post._id %>" type="submit" class="btn btn-primary btn-lg p-2">Delete</button>
                                 </form>
                             </div>
                             <div class="pb-3">
@@ -24,7 +22,7 @@
                             </div>
                         </div>
                         <div class="img-div">
-                            <img src="" alt="Post image">
+                            <img src="<%= post.blogimg %>" alt="Post image" width="100%" height="500">
                         </div>
                         <span>
                             <%= post.createdAt %>
@@ -33,7 +31,7 @@
                             <h3 class="title-text fw-bold pt-5 pb-3">
                                 <%= post.title %>
                             </h3>
-                            <div class="desc">
+                            <div class="desc pb-4 border-bottom">
                                 <%= post.content %>
                             </div>
                         </div>
