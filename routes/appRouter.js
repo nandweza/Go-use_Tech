@@ -120,7 +120,7 @@ router.get("/blog/:id", async (req, res) => {
     try {
         const { id } = req.params;
         const post = await Post.findOne({ _id: id });
-        const posts = await Post.find().sort({ createdAt: -1 }).limit(3);
+        const posts = await Post.find().limit(3);
         res.render("singlePost", { post: post, posts: posts });
     } catch (err) {
         res.status(500).send("Blog not found");
@@ -140,7 +140,7 @@ router.post('/edit/:id', (req, res) => {
     const { title, content } = req.body;
     const { blogimg } = req.file.filename;
 
-    Post.updateOne({ _id: id }, { title, blogimg,content })
+    Post.updateOne({ _id: id }, { title, blogimg, content })
         .then(() => {
             console.log("Blog Updated!");
             res.redirect("/allPosts");

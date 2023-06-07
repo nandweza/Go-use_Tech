@@ -659,6 +659,16 @@ footer .footer-text {
 }
 
 /* single post */
+#post {
+    padding: 2% 10%;
+}
+
+#post h3 {
+    font-size: 2rem;
+    color: var(--main-orange);
+    border-left: 5px solid var(--main-orange);
+}
+
 .single-post-text {
     color: var(--main-orange);
     font-size: 2vw;
@@ -666,50 +676,37 @@ footer .footer-text {
     padding: 0 8%;
 }
 
-@media (max-width: 540px) {
-    .post-text {
-        margin: 0 50px;
-        font-size: 1.5rem;
+.post-date {
+    font-size: 2vw;
+}
+
+.post-title {
+    font-size: 3vw;
+}
+
+.post-content {
+    font-size: 1.5vw;
+}
+
+.more-content {
+    font-size: 1.5rem;
+}
+
+@media (max-width: 991px) {
+    #post {
+        padding: 2% 8%;
+    }
+    .post-img img {
+        height: 400px;
     }
 }
 
-@media (max-width: 300px) {
-    .post-text {
-        margin: 0 20px;
-        font-size: 1.2rem;
+@media (max-width: 767px) {
+    #post {
+        padding: 2% 5%;
     }
-}
-
-.posts-card {
-    margin: 0 200px;
-    margin-bottom: 20px;
-}
-
-.posts-card img {
-    width: 100%;
-    margin: 0 auto;
-}
-
-.posts-card h2 {
-    font-size: 2rem;
-    font-weight: 600;
-    margin-top: 30px;
-}
-
-.posts-card .desc {
-    font-size: 1.2rem;
-    font-weight: 400;
-}
-
-@media (max-width: 912px) {
-    .posts-card {
-        margin: 0 50px;
-    }
-}
-
-@media (max-width: 540px) {
-    .posts-card {
-        margin: 10px;
+    .post-img img {
+        height: 250px;
     }
 }
 
