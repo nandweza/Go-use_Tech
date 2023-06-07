@@ -17,8 +17,8 @@ const { initializeApp } = require('firebase/app');
 const { getStorage, ref, uploadBytes, getDownloadURL, getMetadata, deleteObject, updateMetadata } = require('firebase/storage');
 const admin = require("firebase-admin");
 
-const { Storage } = require('@google-cloud/storage');
-const myStorage = new Storage();
+// const { Storage } = require('@google-cloud/storage');
+// const myStorage = new Storage();
 
 dotenv.config();
 
@@ -48,16 +48,25 @@ const storage = getStorage(app);
 const uploads = multer({storage: multer.memoryStorage()});  //handling video storage
 
 // Multer configuration for handling image uploads
-const upload = multer({
-    storage: multer.memoryStorage(),
-    limits: {
-      fileSize: 5 * 1024 * 1024, // Limit file size to 5MB
-    },
+// const upload = multer({
+//     storage: multer.memoryStorage(),
+//     limits: {
+//       fileSize: 5 * 1024 * 1024, // Limit file size to 5MB
+//     },
+// });
+
+const Storage = multer.diskStorage({
+    destination: "./public/uploads",
+    filename: (req, file, cb) => {
+        cb(null, file.originalname)
+    }
 });
+
+const upload = multer({ storage: Storage }).single('blogimg');
 
 // home route
 router.get('/', async (req, res) => {
-    const posts = await Post.find().sort({ createdAt: 1 }).limit(2);
+    const posts = await Post.find().sort({ createdAt: -1 }).limit(2);
     res.render('home', { posts: posts });
 });
 
@@ -66,154 +75,241 @@ router.get('/about', (req, res) => {
     res.render('about');
 });
 
-//Blog Routes
+/* BLOG ROUTES */
 
-//get addPost page by admin
+//get blog page
+router.get('/blog', async (req, res) => {
+    posts = await Post.find().sort({createdAt: -1});
+    res.render('blog', { posts: posts });
+});
+
+//get create blog page
 router.get('/addPost', (req, res) => {
     res.render('addPost');
 });
 
-// Create a blog post
-router.post('/addPost', upload.single('img'), async (req, res) => {
-    try {
-      const { title, content } = req.body;
-      const img = req.file;
-  
-      // Generate a unique filename for the blog post
-      const filename = Date.now().toString();
-  
-      // Upload the image to Firebase Storage
-      const imageFile = bucket.file(`blog/${filename}-${img.originalname}`);
-      const imageUploadStream = imageFile.createWriteStream();
-      imageUploadStream.end(img.buffer);
-  
-      // Save the title and content in the same file
-      const postFile = bucket.file(`blog/${filename}.txt`);
-      const postContent = `Title: ${title}\n\n${content}`;
-      await postFile.save(postContent, {
-        contentType: 'text/plain',
-      });
-  
-      res.redirect('/addPost');
-    } catch (error) {
-      console.error('Error creating blog post:', error);
-      res.status(500).json({ error: 'Error creating blog post' });
-    }
-});
-
-// Get all blog posts
-router.get('/blog', async (req, res) => {
-    try {
-      // Get a list of files in the "blog" directory
-      const [files] = await bucket.getFiles({ prefix: 'blog/' });
-  
-      // Retrieve the blog posts
-      const posts = [];
-
-      for (const file of files) {
-        if (file.name.endsWith('.txt')) {
-          const [content] = await file.download();
-  
-          // Extract the title and content from the combined data
-          const lines = content.toString().split('\n');
-          const title = lines[0].substring(7); // Remove the "Title: " prefix
-          const postContent = lines.slice(2).join('\n'); // Combine remaining lines as post content
-  
-          // Get the corresponding image file for each post
-          const imageFilename = file.name.replace('.txt', '');
-          const [imageFile] = await bucket.getFiles({ prefix: imageFilename });
-          const imageUrl = imageFile[0].publicUrl();
-  
-          posts.push({
-            title,
-            content: postContent,
-            imageUrl,
-          });
-        }
-      }
-  
-      res.render('blog', { posts });
-    } catch (error) {
-      console.error('Error retrieving blog posts:', error);
-    //   res.status(500).send('Error retrieving blog posts');
-    res.redirect('/404');
-    }
-});  
-
-//get single blog post by filename 
-router.get('/blog/:filename', async (req, res) => {
-    try {
-        const { filename } = req.params;
-
-        // Get the content file for the specified filename
-        const contentFile = bucket.file(`blog/${filename}.txt`);
-        const [content] = await contentFile.download();
-
-        // Get the corresponding image file
-        const imageFile = bucket.file(`blog/${filename}`);
-        const imageUrl = imageFile.publicUrl();
-
-        // Get the title file
-        const titleFile = bucket.file(`blog/${filename}.txt`);
-        const [title] = await titleFile.download();
-
-        // Get the createdAt property
-        const createdAtFile = bucket.file(`blog/${filename}.txt`);
-        const [createdAt] = await createdAtFile.download();
-        const parsedCreatedAt = new Date(createdAt.toString());
-
-        const post = {
-            title: title.toString(),
-            content: content.toString(),
-            imageUrl,
-            createdAt: parsedCreatedAt,
-        };
-
-        res.render('singlePost', { post });
-    } catch (error) {
-        console.error('Error retrieving blog post:', error);
-        // res.status(500).send('Error retrieving blog post');
-        res.redirect('/404');
-    }
-});
-
 //get all posts by admin
 router.get('/allPosts', async (req, res) => {
+    posts = await Post.find().sort({ createdAt: -1});
+    res.render('allPosts', {posts: posts});
+});
+
+//create blog post
+router.post("/addPost", upload, (req, res) => {
+    const { title, content } = req.body;
+    const blogimg = req.file.filename;
+    
+
+    if (!title || !content) {
+        return res.redirect("/createPost");
+    }
+
+    const posts = new Post({ title, content, blogimg });
+
+    posts
+        .save()
+        .then(() => {
+            console.log("Article created!!!");
+            res.redirect('/admin');
+        })
+        .catch ((err) => console.log(err));
+    });
+
+//get single blog post
+router.get("/blog/:id", async (req, res) => {
     try {
-      // Get a list of files in the "blog" directory
-      const [files] = await bucket.getFiles({ prefix: 'blog/' });
-  
-      // Retrieve the blog posts
-      const posts = [];
-  
-      for (const file of files) {
-        if (file.name.endsWith('.txt')) {
-          const [content] = await file.download();
-  
-          // Extract the title and content from the combined data
-          const lines = content.toString().split('\n');
-          const title = lines[0].substring(7); // Remove the "Title: " prefix
-          const postContent = lines.slice(2).join('\n'); // Combine remaining lines as post content
-  
-          // Get the corresponding image file for each post
-          const imageFilename = file.name.replace('.txt', '');
-          const [imageFile] = await bucket.getFiles({ prefix: imageFilename });
-          const imageUrl = imageFile[0].publicUrl();
-  
-          posts.push({
-            title,
-            content: postContent,
-            imageUrl,
-          });
-        }
-      }
-  
-      res.render('allPosts', { posts });
-    } catch (error) {
-      console.error('Error retrieving blog posts:', error);
-      res.status(500).send('Error retrieving blog posts');
+        const { id } = req.params;
+        const post = await Post.findOne({ _id: id });
+        const posts = await Post.find().sort({ createdAt: -1 }).limit(3);
+        res.render("singlePost", { post: post, posts: posts });
+    } catch (err) {
+        res.status(500).send("Blog not found");
     }
 });
+
+//get edit page
+router.get('/edit/:id', async (req, res) => {
+    const { id } = req.params;
+    const getData = await Post.findOne({ _id: id });
+    res.render('edit', { post: getData });
+})
+
+//update blog
+router.post('/edit/:id', (req, res) => {
+    const { id } = req.params;
+    const { title, content } = req.body;
+    const { blogimg } = req.file.filename;
+
+    Post.updateOne({ _id: id }, { title, blogimg,content })
+        .then(() => {
+            console.log("Blog Updated!");
+            res.redirect("/allPosts");
+        })
+        .catch((err) => console.log(err));
+});
+
+//delete blog post
+router.post('/delete', (req, res) => {
+    const deletedItemId = req.body.deleteBtn;
+
+    Post.findByIdAndDelete(deletedItemId, (err) => {
+        if (!err) {
+            console.log("deletion success!");
+            res.redirect("/allPosts");
+        } else {
+            console.log(err);
+        }
+    });
+});
+
+//Blog Routes
+
+//get addPost page by admin
+// router.get('/addPost', (req, res) => {
+//     res.render('addPost');
+// });
+
+// Create a blog post
+// router.post('/addPost', upload.single('img'), async (req, res) => {
+//     try {
+//       const { title, content } = req.body;
+//       const img = req.file;
+  
+//       // Generate a unique filename for the blog post
+//       const filename = Date.now().toString();
+  
+//       // Upload the image to Firebase Storage
+//       const imageFile = bucket.file(`blog/${filename}-${img.originalname}`);
+//       const imageUploadStream = imageFile.createWriteStream();
+//       imageUploadStream.end(img.buffer);
+  
+//       // Save the title and content in the same file
+//       const postFile = bucket.file(`blog/${filename}.txt`);
+//       const postContent = `Title: ${title}\n\n${content}`;
+//       await postFile.save(postContent, {
+//         contentType: 'text/plain',
+//       });
+  
+//       res.redirect('/addPost');
+//     } catch (error) {
+//       console.error('Error creating blog post:', error);
+//       res.status(500).json({ error: 'Error creating blog post' });
+//     }
+// });
+
+// // Get all blog posts
+// router.get('/blog', async (req, res) => {
+//     try {
+//       // Get a list of files in the "blog" directory
+//       const [files] = await bucket.getFiles({ prefix: 'blog/' });
+  
+//       // Retrieve the blog posts
+//       const posts = [];
+
+//       for (const file of files) {
+//         if (file.name.endsWith('.txt')) {
+//           const [content] = await file.download();
+  
+//           // Extract the title and content from the combined data
+//           const lines = content.toString().split('\n');
+//           const title = lines[0].substring(7); // Remove the "Title: " prefix
+//           const postContent = lines.slice(2).join('\n'); // Combine remaining lines as post content
+  
+//           // Get the corresponding image file for each post
+//           const imageFilename = file.name.replace('.txt', '');
+//           const [imageFile] = await bucket.getFiles({ prefix: imageFilename });
+//           const imageUrl = imageFile[0].publicUrl();
+  
+//           posts.push({
+//             title,
+//             content: postContent,
+//             imageUrl,
+//           });
+//         }
+//       }
+  
+//       res.render('blog', { posts });
+//     } catch (error) {
+//       console.error('Error retrieving blog posts:', error);
+//     //   res.status(500).send('Error retrieving blog posts');
+//     res.redirect('/404');
+//     }
+// });  
+
+// //get single blog post by filename 
+// router.get('/blog/:filename', async (req, res) => {
+//     try {
+//         const { filename } = req.params;
+
+//         // Get the content file for the specified filename
+//         const contentFile = bucket.file(`blog/${filename}.txt`);
+//         const [content] = await contentFile.download();
+
+//         // Get the corresponding image file
+//         const imageFile = bucket.file(`blog/${filename}`);
+//         const imageUrl = imageFile.publicUrl();
+
+//         // Get the title file
+//         const titleFile = bucket.file(`blog/${filename}.txt`);
+//         const [title] = await titleFile.download();
+
+//         // Get the createdAt property
+//         const createdAtFile = bucket.file(`blog/${filename}.txt`);
+//         const [createdAt] = await createdAtFile.download();
+//         const parsedCreatedAt = new Date(createdAt.toString());
+
+//         const post = {
+//             title: title.toString(),
+//             content: content.toString(),
+//             imageUrl,
+//             createdAt: parsedCreatedAt,
+//         };
+
+//         res.render('singlePost', { post });
+//     } catch (error) {
+//         console.error('Error retrieving blog post:', error);
+//         // res.status(500).send('Error retrieving blog post');
+//         res.redirect('/404');
+//     }
+// });
+
+// //get all posts by admin
+// router.get('/allPosts', async (req, res) => {
+//     try {
+//       // Get a list of files in the "blog" directory
+//       const [files] = await bucket.getFiles({ prefix: 'blog/' });
+  
+//       // Retrieve the blog posts
+//       const posts = [];
+  
+//       for (const file of files) {
+//         if (file.name.endsWith('.txt')) {
+//           const [content] = await file.download();
+  
+//           // Extract the title and content from the combined data
+//           const lines = content.toString().split('\n');
+//           const title = lines[0].substring(7); // Remove the "Title: " prefix
+//           const postContent = lines.slice(2).join('\n'); // Combine remaining lines as post content
+  
+//           // Get the corresponding image file for each post
+//           const imageFilename = file.name.replace('.txt', '');
+//           const [imageFile] = await bucket.getFiles({ prefix: imageFilename });
+//           const imageUrl = imageFile[0].publicUrl();
+  
+//           posts.push({
+//             title,
+//             content: postContent,
+//             imageUrl,
+//           });
+//         }
+//       }
+  
+//       res.render('allPosts', { posts });
+//     } catch (error) {
+//       console.error('Error retrieving blog posts:', error);
+//       res.status(500).send('Error retrieving blog posts');
+//     }
+// });
 
 //get updatePost page
 

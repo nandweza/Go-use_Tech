@@ -1,50 +1,81 @@
 <%- include('./partials/head.ejs') %>
 
 <body>
+  	<div class="intro">
     <%- include('./partials/nav.ejs') %>
-    <div class="blog-c">
-
         <div id="blog-carousel" class="carousel slide d-flex justify-content-center align-items-center" data-bs-ride="carousel" style="height: 75vh;">
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <div class="text-center">
-                <h3 class="intro blog-header fs-*"><%= post.title %></h3>
-              </div>
-            </div>
-            <div class="carousel-item">
-              <div class="text-center">
-                <p class="post-text fs-*">
-                  <%= post.content.substring(0, 120) + "..." %>
-                  <a href="#post" style="color: black;">Read more.</a>
-                </p>
-              </div>
-            </div>
-          </div>
-          <button class="carousel-control-prev" type="button" data-bs-target="#blog-carousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-          </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#blog-carousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-          </button>
+          	<div class="carousel-inner">
+            	<div class="carousel-item active">
+              		<div class="text-center">
+                		<h2 class="single-post-header fs-* text-center"><%= post.title %></h2>
+              		</div>
+            	</div>
+            	<div class="carousel-item">
+              		<div class="text-center px-5">
+                		<p class="single-post-text fs-*">
+                  			<%= post.content.substring(0, 120) + "..." %>
+                  			<a href="#post">Read more.</a>
+               			</p>
+              		</div>
+            	</div>
+          	</div>
+          	<button class="carousel-control-prev" type="button" data-bs-target="#blog-carousel" data-bs-slide="prev">
+            	<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            	<span class="visually-hidden">Previous</span>
+          	</button>
+          	<button class="carousel-control-next" type="button" data-bs-target="#blog-carousel" data-bs-slide="next">
+            	<span class="carousel-control-next-icon" aria-hidden="true"></span>
+            	<span class="visually-hidden">Next</span>
+          	</button>
         </div>
-      </div>
-    <div class="container">
-        <div id="post" class="posts-card">
-                <div>
-                  <img src="<%= post.imageUrl %>" alt="Post Image" class="img-responsive">
-                </div>
-                <span class="text-muted">
-                    <%= post.createdAt.toDateString() %>
-                </span>
-                <h2 class="title-text">
-                    <%= post.title %>
-                </h2>
-                <div class="desc mt-2">
-                    <%= post.content %>
-                </div>
-            </div>
+    </div>
+    <div class="container pt-5">
+      	<div id="post" class="">
+			<div class="row">
+				<div class="col-lg-12 col-md-12">
+					<div>
+						<img src="/uploads/<%= post.blogimg %>" alt="Post Image" class="img-responsive">
+					</div>
+					<span class="text-muted">
+						<%= post.createdAt.toDateString() %>
+					</span>
+					<h2 class="title-text">
+						<%= post.title %>
+					</h2>
+					<div class="desc mt-2">
+						<%= post.content %>
+					</div>
+				</div>
+				<div class="col-lg-12 col-md-12 pt-5">
+					<hr class="border-bottom">
+					<h3 class="py-2">More from Go UseTech</h3>
+					<div class="row">
+						<% if ( posts.length > 0 ) { %>
+							<% posts.forEach((post) => { %>
+								<div class="col-lg-4 col-md-4 col-sm-12 p-5">
+									<div class="card">
+										<div class="img-div">
+											<img src="/uploads/<%= post.blogimg %>" alt="Post Image" class="img-responsive" width="100%" height="150">
+										</div>
+										<div class="title">
+											<%= post.title.substring(0, 40) + "..." %>
+										</div>
+										<div class="desc">
+											<p>
+												<%= post.content.substring(0, 150) + "..." %>
+												<a href="/blog/<%= post._id %>" style="color: red;">Read more.</a>
+											</p>
+										</div>
+									</div>
+								</div>
+							<% }) %>
+						<% } else { %>
+											
+						<% } %>
+					</div>
+				</div>
+			</div>
+      	</div>
     </div>
 
     <%- include('./partials/footer.ejs') %>

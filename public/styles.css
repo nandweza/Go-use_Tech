@@ -321,7 +321,7 @@ nav {
 }
 
 .intro h2 {
-    font-size: 6.5vw;
+    font-size: 6vw;
     font-weight: 800;
     color: var(--main-orange);
 }
@@ -659,24 +659,11 @@ footer .footer-text {
 }
 
 /* single post */
-.singlePost {
-    height: auto;
-    padding-top: 200px;
-    margin-bottom: 50px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.singlePost-intro {
-    font-style: normal;
-    font-size: 5vw;
-    font-weight: bold;
-}
-
-.post-text {
-    font-size: 2rem;
+.single-post-text {
+    color: var(--main-orange);
+    font-size: 2vw;
     text-align: left;
-    margin: 0 100px;
+    padding: 0 8%;
 }
 
 @media (max-width: 540px) {

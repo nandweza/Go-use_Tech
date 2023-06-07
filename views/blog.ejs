@@ -36,17 +36,17 @@
           <% posts.forEach((post) => { %>
             <div class="fblog col-lg-4 col-md-6 mb-4">
               <div class="img-div">
-                <img src="<%= post.imageUrl %>" alt="Post Image" class="img-responsive">
+                <img src="<%= post.blogimg %>" alt="Post Image" class="img-responsive">
               </div>
               <br>
               <br>
               <div class="title">
-                <%= post.title %>
+                <%= post.title.substring(0, 40) + "..." %>
               </div>
               <div class="desc">
                 <p>
-                  <%= post.content.substring(0, 200) + "..." %>
-                  <a href="/blog/<%= post.filename %>" style="color: red;">Read more.</a>
+                  <%= post.content.substring(0, 150) + "..." %>
+                  <a href="/blog/<%= post._id %>" style="color: red;">Read more.</a>
                 </p>
               </div>
             </div>
