@@ -699,9 +699,23 @@ router.post('/donate', (req, res) => {
     });
 });
 
+//USERS ROUTES
+
+//get users
+router.get('/allUsers', async (req, res) => {
+    try {
+        const users = await User.find({ isAdmin: false }).lean();
+
+        res.render('allUsers', { users: users });
+    } catch(err) {
+        console.log(err);
+        res.status(500).send("Internal Server")
+    }
+});
+
 //404 page
 router.get('/404', (req, res) => {
     res.render('404');
-})
+});
 
 module.exports = router;

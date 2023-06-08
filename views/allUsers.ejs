@@ -1,0 +1,41 @@
+<%- include('./partials/head.ejs') %>
+
+<body>
+    <%- include('./partials/admin-navbar.ejs') %>
+
+    <main class="admin">
+        <h3 class="dashboard mt-4 mb-2">Users Data</h3>
+        <hr class="border">
+        <div class="container">
+            <div class="row">
+                <% if (users.length > 0) { %>
+                    <% users.forEach((user) => { %>
+                        <div class="col-lg-3 col-md-6 col-sm-12 p-3">
+                            <div class="card p-2">
+                                <div class="text-center">
+                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj7j9IDpZsbq4HghrNPneZustxYupRgrt0oQ&usqp=CAU" alt="Users Avatar" width="150" height="150">
+                                </div>
+                                <div class="users py-3 px-5">
+                                    <h4 class="p-1">
+                                        <i class="fa fa-user"></i> <%= user.fname %> <%= user.lname %>
+                                    </h4>
+                                    <h5 class="p-1">
+                                        <i class="fa fa-envelope"></i> <%= user.username %>
+                                    </h5>
+                                    <h5 class="p-1">
+                                        <i class="fa fa-briefcase"></i> <%= user.profession %>
+                                    </h5>
+                                    <h5 class="p-1">
+                                        <i class="fa fa-flag"></i> <%= user.country %>
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+                    <% }) %>
+                <% } else { %>
+                    <span class="text-center fw-bold">No Users to display</span>
+                <% } %>
+            </div>
+        </div>
+    </main>
+</body>

@@ -838,7 +838,7 @@ footer .footer-text {
     color: var(--main-orange);
 }
 
-.oauth-login .fa {
+.oauth-login .fab {
     font-size: 25px;
 }
 
@@ -862,7 +862,7 @@ footer .footer-text {
     background-color: #4267B2;
 }
 
-.facebook-oauth .fa,
+.facebook-oauth .fab,
 .facebook-oauth span {
     color: #fff;
 }
@@ -1273,3 +1273,9 @@ footer .footer-text {
   .share-button {
     margin-top: 10px;
   }
+
+/*  users section */
+.users .fa {
+    color: var(--main-orange);
+    font-size: 1.5rem;
+}
