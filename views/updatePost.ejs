@@ -1,0 +1,18 @@
+<%- include('./partials/head.ejs') %>
+
+<body>
+    <%- include('./partials/admin-navbar.ejs') %>
+
+    <main class="admin">
+        <h3 class="dashboard mt-4 mb-2">Update Post</h3>
+        <hr class="border">
+        <div class="container">
+            <form action="/updatePost/<%= post._id %>" method="post" enctype="multipart/form-data">
+                <input class="form-control" type="text" name="title" id="title" value="<%= post.title %>">
+                <input class="form-control" type="file" name="blogimg" id="img" multiple="multiple" accept="image/*">
+                <textarea class="form-control" name="content" id="content" cols="30" rows="20"><%= post.content %></textarea>
+                <button type="submit" class="btn btn-primary">Update Post</button>
+            </form>
+        </div>
+    </main>
+</body>

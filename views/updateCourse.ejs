@@ -9,21 +9,16 @@
         <div class="admin-wrapper">
             <div class="course-wrapper">
                 <form action="/courses/<%= filename %>?_method=PUT" method="POST" class="course-form mb-5">
-                    <div class="form-group">
-                        <label for="title">Title:</label>
-                        <input class="form-control" type="text" id="title" name="title" value="<%= title %>">
-                    </div>
-                    <!-- Other input fields for metadata -->
                     <label for="video" class="fw-bold">Upload Course Video:</label>
                     <input class="form-control" type="file" name="video" id="video" value="<%= video %>">
                     <label for="title" class="fw-bold">Add Course Title:</label>
                     <input class="form-control" type="text" name="title" id="title" value="<%= title %>">
                     <label for="desc" class="fw-bold">Course Description:</label>
-                    <textarea class="form-control" name="desc" id="desc" cols="30" rows="15" value="<%= desc %>"></textarea>
+                    <textarea class="form-control" name="desc" id="desc" cols="30" rows="15"><%= desc %></textarea>
                     <label for="author" class="fw-bold">Author's Name:</label>
                     <input class="form-control" type="text" name="author" id="author" value="<%= author %>">
                     <label for="abtAuthor" class="fw-bold">About the Author:</label>
-                    <textarea class="form-control" name="abtAuthor" id="abtAuthor" cols="20" rows="10" value="<%= abtAuthor %>"></textarea>
+                    <textarea class="form-control" name="abtAuthor" id="abtAuthor" cols="20" rows="10"><%= abtAuthor %></textarea>
                     <label for="email">Email:</label>
                     <input class="form-control" type="email" name="email" id="email" value="<%= email %>">
                     <label for="twitter">Twitter Url:</label>
@@ -32,7 +27,7 @@
                     <input class="form-control" type="url" name="linkedin" id="linkedin" value="<%= linkedin %>">
                     <label for="facebook">Facebook Url:</label>
                     <input class="form-control" type="url" name="facebook" id="facebook" value="<%= facebook %>">
-                    <button class="btn btn-primary btn-lg p-2" type="submit">Update</button>
+                    <button class="btn btn-primary btn-lg p-2" type="submit">Update Course</button>
                 </form>
             </div>
         </div>
