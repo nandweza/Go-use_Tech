@@ -6,24 +6,24 @@
     <main class="admin">
         <h3 class="dashboard mt-4 mb-2">Users Data</h3>
         <hr class="border">
-        <div class="container">
+        <div class="container pb-5">
             <div class="row">
                 <% if (users.length > 0) { %>
                     <% users.forEach((user) => { %>
-                        <div class="col-lg-3 col-md-6 col-sm-12 p-3">
-                            <div class="card p-2">
+                        <div class="col-lg-3 col-md-4 col-sm-6 p-3">
+                            <div class="user-card card p-2">
                                 <div class="text-center">
                                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj7j9IDpZsbq4HghrNPneZustxYupRgrt0oQ&usqp=CAU" alt="Users Avatar" width="150" height="150">
                                 </div>
-                                <div class="users py-3 px-5">
+                                <div class="users py-3 px-2">
                                     <h4 class="p-1">
                                         <i class="fa fa-user"></i> <%= user.fname %> <%= user.lname %>
                                     </h4>
                                     <h5 class="p-1">
-                                        <i class="fa fa-envelope"></i> <%= user.username %>
+                                        <i class="fa fa-envelope"></i> <%= user.username.substring(0, 16) %>
                                     </h5>
                                     <h5 class="p-1">
-                                        <i class="fa fa-briefcase"></i> <%= user.profession %>
+                                        <i class="fa fa-briefcase"></i> <%= user.profession.substring(0, 12) %>
                                     </h5>
                                     <h5 class="p-1">
                                         <i class="fa fa-flag"></i> <%= user.country %>

@@ -59,13 +59,6 @@ const Storage = multer.diskStorage({
 const upload = multer({ storage: Storage }).single('blogimg');
 
 // home route
-// router.get('/', async (req, res) => {
-//     const posts = await Post.find().sort({ createdAt: -1 }).limit(2);
-//     const courses = await Course.find().sort({ createdAt: -1 }).limit(3);
-//     res.render('home', { posts: posts, courses: courses });
-// });
-
-// home route
 router.get('/', async (req, res) => {
   try {
     const [files] = await bucket.getFiles();
@@ -609,7 +602,7 @@ router.get('/admin', async (req, res) => {
             return count;
         }, 0);
 
-        const userCount = await User.countDocuments();
+        const userCount = await User.countDocuments({isAdmin: false});
   
         res.render('admin', {
             courseCount: courseCount,
@@ -712,6 +705,18 @@ router.get('/allUsers', async (req, res) => {
         res.status(500).send("Internal Server")
     }
 });
+
+// get admin profile
+router.get('/adminProfile', async (req, res) => {
+    try {
+      const admin = await User.findOne({ isAdmin: true }).lean();
+  
+      res.render('adminProfile', { admin });
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Internal Server Error');
+    }
+});  
 
 //404 page
 router.get('/404', (req, res) => {

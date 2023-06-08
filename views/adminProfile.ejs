@@ -1,0 +1,18 @@
+<%- include('./partials/head.ejs') %>
+
+<body>
+    <%- include('./partials/admin-navbar.ejs') %>
+
+    <main class="admin">
+        <h3 class="dashboard mt-4 mb-2">Admin Profile</h3>
+        <hr class="border">
+        <div class="container pb-5">
+            <div class="card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj7j9IDpZsbq4HghrNPneZustxYupRgrt0oQ&usqp=CAU" width="200" height="200" alt="Admin Avatar">
+                <h3 class="p-2">
+                    <i class="fa fa-envelope"></i> <%= admin.username %>
+                </h3>
+            </div>
+        </div>
+    </main>
+</body>
