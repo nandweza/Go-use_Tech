@@ -3,26 +3,45 @@
 <body class="course-body">
     <div class="bg-light">
         <nav class="container navbar navbar-expand-lg navbar-light">
-            <a class="navbar-brand" href="">
-                <img class="logo mylogo" src="/images/gousetech.png" alt="logo" width="75">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <form class="d-flex nav-item mx-auto" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search...">
-                    <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>
-                </form>
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/courses">Dashboard</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/logout">Logout</a>
-                    </li>
-                </ul>
-            </div>
+          <a class="navbar-brand" href="">
+            <img class="logo mylogo" src="/images/gousetech.png" alt="logo" width="75">
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <form class="d-flex nav-item mx-auto" role="search">
+              <input class="form-control me-2" type="text" id="searchInput" placeholder="Search...">
+              <button class="btn btn-primary" type="submit" onclick="searchVideos()">
+                <i class="fa fa-search"></i>
+              </button>
+            </form>
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+              <!-- <li class="nav-item">
+                <a class="nav-link" href="/courses">Dashboard</a>
+              </li>
+              <li class="nav-item">
+                <a id="signout-button" class="nav-link" href="/logout">Logout</a>
+              </li> -->
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj7j9IDpZsbq4HghrNPneZustxYupRgrt0oQ&usqp=CAU" alt="user profile" class="user-profile" width="50" height="50">
+                </a>
+                <div class="dropdown-menu custom-dropdown" aria-labelledby="userDropdown">
+                  <a class="dropdown-item" href="#">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj7j9IDpZsbq4HghrNPneZustxYupRgrt0oQ&usqp=CAU" alt="user profile" class="user-profile" width="50" height="50">
+                    <span class="user-profile-text fw-bold">
+                      <%= firstName %> <%= lastName %>
+                    </span>
+                  </a>
+                  <a class="dropdown-item p-2 pt-2 text-center user-profile-text" href="#">Manage your Account</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item user-profile-text" href="/courses">Dashboard</a>
+                  <a class="dropdown-item user-profile-text" href="/logout">Sign Out</a>
+                </div>
+              </li>
+            </ul>
+          </div>
         </nav>
     </div>
     <div class="container pb-4">

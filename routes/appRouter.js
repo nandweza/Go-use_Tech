@@ -394,10 +394,22 @@ router.get('/courses', async (req, res) => {
         // Remove any undefined entries
         const filteredVideos = videoData.filter(video => video);
   
-        const sortedVideos = filteredVideos.sort((a, b) => b.createdAt - a.createdAt);
+        const sortedVideos = filteredVideos.sort(
+                                (a, b) => b.createdAt - a.createdAt);
   
         if (req.isAuthenticated()) {
-            res.render('courses', { videoData: sortedVideos });
+            const userId = req.user.id;
+            const user = await User.findById(userId).lean();
+            const firstName = user ? user.fname : 'User';
+            const lastName = user ? user.lname : 'User';
+
+            res.render('courses', 
+                        { 
+                            videoData: sortedVideos, 
+                            firstName: firstName, 
+                            lastName: lastName 
+                        }
+            );
         } else {
             res.render('login');
         }
@@ -412,29 +424,51 @@ router.get('/courses', async (req, res) => {
 //retrieve single course video and metadata from firebase storage by end user
 router.get('/courses/:filename', async (req, res) => {
     try {
-      const filename = req.params.filename;
-      const StorageRef = ref(storage, filename);
-      const url = await getDownloadURL(StorageRef);
-      const metadata = await getMetadata(StorageRef);
-      const title = metadata.customMetadata.title || 'Untitled';
-      const desc = metadata.customMetadata.desc || '';
-      const author = metadata.customMetadata.author || '';
-      const abtAuthor = metadata.customMetadata.abtAuthor || '';
-      const email = metadata.customMetadata.email || '';
-      const twitter = metadata.customMetadata.twitter || '';
-      const linkedin = metadata.customMetadata.linkedin || '';
-      const facebook = metadata.customMetadata.facebook || '';
-      const shareLink = `http://localhost:8001/share/${uuidv4()}`;
+        const filename = req.params.filename;
+        const StorageRef = ref(storage, filename);
+        const url = await getDownloadURL(StorageRef);
+        const metadata = await getMetadata(StorageRef);
+        const title = metadata.customMetadata.title || 'Untitled';
+        const desc = metadata.customMetadata.desc || '';
+        const author = metadata.customMetadata.author || '';
+        const abtAuthor = metadata.customMetadata.abtAuthor || '';
+        const email = metadata.customMetadata.email || '';
+        const twitter = metadata.customMetadata.twitter || '';
+        const linkedin = metadata.customMetadata.linkedin || '';
+        const facebook = metadata.customMetadata.facebook || '';
+        const shareLink = `http://localhost:8001/share/${uuidv4()}`;
 
-      res.render('singleCourse', 
-      { 
-        url, title, desc, author, abtAuthor, email, twitter, linkedin, facebook, shareLink
-      });
-      console.log(url);
+        if (req.isAuthenticated()) {
+
+            const userId = req.user.id;
+            const user = await User.findById(userId).lean();
+            const firstName = user ? user.fname : 'User';
+            const lastName = user ? user.lname : 'User';
+            
+            res.render('singleCourse', 
+            { 
+                url, 
+                title, 
+                desc, 
+                author, 
+                abtAuthor, 
+                email, 
+                twitter, 
+                linkedin, 
+                facebook, 
+                shareLink,
+                firstName: firstName,
+                lastName: lastName
+            }
+            );
+        } else {
+            res.render('login');
+        }
+        console.log('success');
     } catch (error) {
-      console.log('Error retrieving video:', error);
-    //   res.render('singleCourse', { error: 'Error retrieving video' });
-      res.redirect('/404');
+        console.log('Error retrieving video:', error);
+        //   res.render('singleCourse', { error: 'Error retrieving video' });
+        res.redirect('/404');
     }
 });
 

@@ -1283,3 +1283,17 @@ footer .footer-text {
 .user-card {
     box-shadow: 2px 2px 2px;
 }
+
+.custom-dropdown {
+    padding: 2%;
+    /* width: 250px; */
+    /* padding-right: 150px; */
+}
+
+.user-profile {
+    border-radius: 50%;
+}
+
+.user-profile-text {
+    font-size: 1.2rem;
+}
