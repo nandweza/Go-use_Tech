@@ -394,30 +394,28 @@ router.get('/courses', async (req, res) => {
         // Remove any undefined entries
         const filteredVideos = videoData.filter(video => video);
   
-        const sortedVideos = filteredVideos.sort(
-                                (a, b) => b.createdAt - a.createdAt);
+        const sortedVideos = filteredVideos.sort((a, b) => b.createdAt - a.createdAt);
+  
+        let firstName = 'User';
+        let lastName = 'User';
   
         if (req.isAuthenticated()) {
             const userId = req.user.id;
             const user = await User.findById(userId).lean();
-            const firstName = user ? user.fname : 'User';
-            const lastName = user ? user.lname : 'User';
-
-            res.render('courses', 
-                        { 
-                            videoData: sortedVideos, 
-                            firstName: firstName, 
-                            lastName: lastName 
-                        }
-            );
+            if (user) {
+                firstName = user.fname || 'User';
+                lastName = user.lname || 'User';
+            }
+  
+            res.render('courses', { videoData: sortedVideos, firstName, lastName });
         } else {
             res.render('login');
         }
-        console.log("success");
+  
+        console.log('success');
     } catch (error) {
-      console.error('Error retrieving videos:', error);
-    //   res.status(500).send('Error retrieving videos');
-    res.redirect('/404');
+        console.error('Error retrieving videos:', error);
+        res.redirect('/404');
     }
 });
 
@@ -437,37 +435,39 @@ router.get('/courses/:filename', async (req, res) => {
         const linkedin = metadata.customMetadata.linkedin || '';
         const facebook = metadata.customMetadata.facebook || '';
         const shareLink = `http://localhost:8001/share/${uuidv4()}`;
-
+  
+        let firstName = 'User';
+        let lastName = 'User';
+  
         if (req.isAuthenticated()) {
-
             const userId = req.user.id;
             const user = await User.findById(userId).lean();
-            const firstName = user ? user.fname : 'User';
-            const lastName = user ? user.lname : 'User';
-            
-            res.render('singleCourse', 
-            { 
-                url, 
-                title, 
-                desc, 
-                author, 
-                abtAuthor, 
-                email, 
-                twitter, 
-                linkedin, 
-                facebook, 
-                shareLink,
-                firstName: firstName,
-                lastName: lastName
+            if (user) {
+                firstName = user.fname || 'User';
+                lastName = user.lname || 'User';
             }
-            );
+  
+            res.render('singleCourse', {
+                url,
+                title,
+                desc,
+                author,
+                abtAuthor,
+                email,
+                twitter,
+                linkedin,
+                facebook,
+                shareLink,
+                firstName,
+                lastName
+            });
         } else {
             res.render('login');
         }
+  
         console.log('success');
     } catch (error) {
         console.log('Error retrieving video:', error);
-        //   res.render('singleCourse', { error: 'Error retrieving video' });
         res.redirect('/404');
     }
 });
