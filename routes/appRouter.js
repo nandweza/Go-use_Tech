@@ -563,7 +563,8 @@ router.put('/courses/:filename', async (req, res) => {
         };
 
         await updateMetadata(StorageRef, updatedMetadata);
-        res.sendStatus(200);
+        // res.sendStatus(200);
+        res.redirect('/allCourses');
     } catch (error) {
         console.log('Error updating video metadata:', error);
         res.sendStatus(500);

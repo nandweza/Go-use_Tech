@@ -7,36 +7,47 @@
         <div class="admin">
             <h3 class="dashboard mt-4 mb-2">Access & Update All Courses</h3>
             <hr class="border">
-            <div class="admin-wrapper">
-                <div class="course-wrapper">
+            <div class="all-courses">
+                <div class="course-wrapper row">
                     <% videoData.forEach((video) => { %>
-                        <div class="flex-btn">
-                            <div class="pb-3">
-                                <form action="/courses/<%= video.filename %>?_method=DELETE" method="POST" class="">
-                                    <input type="hidden" name="_method" value="DELETE">
-                                    <button type="submit" class="btn btn-primary btn-lg p-2">Delete</button>
-                                </form>
-                            </div>
-                            <div class="pb-3">
-                                <a href="/courses/<%= video.filename %>/update" class="">
-                                    <button class="btn btn-primary btn-lg p-2">Update</button>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="img-div">
-                            <video width="640" height="360" controls>
-                                <source src="<%= video.url %>" type="video/mp4">
-                            </video>
-                        </div>
-                        <span>
-                            <%= video.createdAt %>
-                        </span>
-                        <div class="pb-5">
-                            <h3 class="title-text fw-bold pt-5 pb-3">
-                                <%= video.title %>
-                            </h3>
-                            <div class="desc">
-                                <%= video.desc %>
+                        <div class="col-lg-4 col-md-6 col-sm-12 p-2">
+                            <div class="card">
+                                <div class="img-div">
+                                    <video width="100%" height="225" controls>
+                                        <source src="<%= video.url %>" type="video/mp4">
+                                    </video>
+                                </div>
+                                <span class="p-2">
+                                    <%= video.createdAt.toDateString() %>
+                                </span>
+                                <div class="">
+                                    <h3 class="title-text fw-bold p-2 pb-3">
+                                        <%= video.title %>
+                                    </h3>
+                                    <!-- <div class="desc">
+                                        <%= video.desc %>
+                                    </div> -->
+                                </div>
+                                <span>
+                                    <div class="flex-btn px-2">
+                                        <div class="pb-3">
+                                            <form action="/courses/<%= video.filename %>?_method=DELETE" method="POST" class="">
+                                                <input type="hidden" name="_method" value="DELETE">
+                                                <button type="submit" class="btn btn-primary btn-lg p-2">Delete</button>
+                                            </form>
+                                        </div>
+                                        <div class="pb-3">
+                                            <a href="/courses/<%= video.filename %>/update" class="">
+                                                <button class="btn btn-primary btn-lg p-2">Update</button>
+                                            </a>
+                                        </div>
+                                        <div class="pb-3">
+                                            <a href="/courses/<%= video.filename %>">
+                                                <button class="btn btn-primary btn-lg p-2">View Course</button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </span>
                             </div>
                         </div>
                     <% }); %>

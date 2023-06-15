@@ -8,8 +8,6 @@
             <form action="/addCourse" method="post" class="course-form mb-5" enctype="multipart/form-data">
                 <label for="video" class="fw-bold">Upload Course Video:</label>
                 <input class="form-control" type="file" name="video" id="video" placeholder="add video" multiple="multiple" accept="video/*">
-                <label for="img" class="fw-bold">Upload Course Image:</label>
-                <input class="form-control" type="file" name="img" id="img" placeholder="add image" multiple="multiple">
                 <label for="title" class="fw-bold">Add Course Title:</label>
                 <input class="form-control" type="text" name="title" id="title" placeholder="Course Title">
                 <label for="desc" class="fw-bold">Course Description:</label>
@@ -26,7 +24,9 @@
                 <input class="form-control" type="url" name="linkedin" id="linkedin" placeholder="https://www.linkedin.com/in/johndoe">
                 <label for="facebook">Facebook Url:</label>
                 <input class="form-control" type="url" name="facebook" id="facebook" placeholder="https://www.facebook.com/profile.php?id=0001">
-                <button type="submit" class="btn btn-primary">Upload Course</button>
+                <div class="py-3">
+                    <button type="submit" class="btn btn-primary fw-bold">Upload Course</button>
+                </div>
             </form>
         </div>
     </main>
