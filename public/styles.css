@@ -1222,18 +1222,13 @@ footer .footer-text {
     color: var(--main-black);
 }
 
-.donate-page {
-    height: 80vh;
-    width: 100wv;
-}
-
-.donate-page{
-    padding: 0 30%;
-}
-
 .donate-page h3 {
     font-size: 3rem;
     font-weight: bold;
+}
+
+.donate-page p {
+    font-size: 1.3rem;
 }
 
 .donate-page label {
