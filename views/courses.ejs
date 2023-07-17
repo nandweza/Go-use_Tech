@@ -36,8 +36,8 @@
                       </a>
                       <a class="dropdown-item p-2 pt-2 text-center user-profile-text" href="#">Manage your Account</a>
                       <div class="dropdown-divider"></div>
-                      <a class="dropdown-item user-profile-text" href="/courses">Dashboard</a>
-                      <a class="dropdown-item user-profile-text" href="/logout">Sign Out</a>
+                      <a class="dropdown-item user-profile-text" href="/api/course/">Dashboard</a>
+                      <a class="dropdown-item user-profile-text" href="/auth/logout">Sign Out</a>
                     </div>
                   </li>
                 </ul>
@@ -69,7 +69,7 @@
                                         <span class="date col mt-3">
                                             <%= video.createdAt.toDateString() %>
                                         </span>
-                                        <a href="/courses/<%= video.filename %>" class="col btn btn-primary">View Course</a>
+                                        <a href="/api/course/<%= video.filename %>" class="col btn btn-primary">View Course</a>
                                     </div>
                                 </div>
                             </div>

@@ -10,9 +10,18 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
 const methodOverride = require('method-override');
 const User = require('./models/User');
-const appRouter = require('./routes/appRouter');
+const homeRoutes = require('./routes/homeRoutes');
+const aboutRoutes = require('./routes/aboutRoutes');
+const blogRoutes = require('./routes/blogRoutes');
+const contactRoutes = require('./routes/contactRoutes');
+const authRoutes = require('./routes/authRoutes');
+const courseRoutes = require('./routes/courseRoutes');
+const adminRoutes = require('./routes/adminRoutes');
+const userRoutes = require('./routes/userRoutes');
+const subscribeRoutes = require('./routes/subscribeRoutes');
+const donateRoutes = require('./routes/donateRoutes');
+const errorRoutes = require('./routes/errorRoutes');
 
-const port = process.env.PORT || 8001;
 dotenv.config();
 
 //register view engine
@@ -97,8 +106,16 @@ passport.use(new FacebookStrategy({
 }
 ));
 
-app.use('/', appRouter);
+app.use('/api/', homeRoutes);
+app.use('/api/about/', aboutRoutes);
+app.use('/api/blog/', blogRoutes);
+app.use('/api/contact/', contactRoutes);
+app.use('/auth/', authRoutes);
+app.use('/api/course/', courseRoutes);
+app.use('/api/admin/', adminRoutes);
+app.use('/api/user/', userRoutes);
+app.use('/api/subscribe/', subscribeRoutes);
+app.use('/api/donate/', donateRoutes);
+app.use('/api/error/', errorRoutes);
 
-app.listen(port, () => {
-    console.log(`App listening on port: ${port}`);
-});
+module.exports = app;
