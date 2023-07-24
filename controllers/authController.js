@@ -19,7 +19,7 @@ exports.loginUser = (req, res, next) => {
                 return next(err);
             }
             if (user.isAdmin) {
-                return res.redirect('/admin');
+                return res.redirect('/api/admin/');
             } else {
             if (req.session.redirectTo) {
                 const redirectTo = req.session.redirectTo;

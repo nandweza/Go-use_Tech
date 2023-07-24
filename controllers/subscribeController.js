@@ -1,3 +1,5 @@
+const https = require('https');
+
 exports.subscribeEmail = (req, res) => {
     const email = req.body.email;
 
@@ -38,3 +40,4 @@ exports.subscribeEmail = (req, res) => {
 exports.subscribeFailure = (req, res) => {
     res.redirect('/');
 }
+``
