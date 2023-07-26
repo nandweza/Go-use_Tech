@@ -82,5 +82,5 @@ exports.logoutUser = (req, res, next) => {
             return next(err);
         }
     });
-    res.redirect('/api/home');
+    res.redirect('/');
 }

@@ -10,12 +10,12 @@
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <form class="d-flex nav-item mx-auto" role="search">
+            <!-- <form class="d-flex nav-item mx-auto" role="search">
               <input class="form-control me-2" type="text" id="searchInput" placeholder="Search...">
               <button class="btn btn-primary" type="submit" onclick="searchVideos()">
                 <i class="fa fa-search"></i>
               </button>
-            </form>
+            </form> -->
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
               <!-- <li class="nav-item">
                 <a class="nav-link" href="/courses">Dashboard</a>
@@ -36,8 +36,8 @@
                   </a>
                   <a class="dropdown-item p-2 pt-2 text-center user-profile-text" href="#">Manage your Account</a>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item user-profile-text" href="/courses">Dashboard</a>
-                  <a class="dropdown-item user-profile-text" href="/logout">Sign Out</a>
+                  <a class="dropdown-item user-profile-text" href="/api/course">Dashboard</a>
+                  <a class="dropdown-item user-profile-text" href="/auth/logout">Sign Out</a>
                 </div>
               </li>
             </ul>
@@ -63,22 +63,6 @@
                     <h3 class="py-5"><%= title %></h3>
                     <p class="">
                         <%= desc %>
-                    </p>
-                    <p class="card text-center">
-                        <!-- <p id="shareLinkContainer" style="display: none;">Share this course: <span id="shareLink"></span></p> -->
-
-                        <!-- Add a button to show the shareable link -->
-                        <button class="p-2 btn btn-primary btn-lg" id="showShareLinkBtn">
-                            <i class="fa fa-share"></i> Share
-                        </button>
-
-                        <!-- Add buttons for social media sharing -->
-                        <!-- <button class="p-2 btn btn-primary btn-lg" onclick="shareOnFacebook()">
-                            <i class="fab fa-facebook px-2"></i>
-                        </button>
-                        <button class="p-2 btn btn-primary btn-lg" onclick="shareOnTwitter()">
-                            <i class="fab fa-twitter px-2"></i>
-                        </button> -->
                     </p>
                   <% } else { %>
                     <h1>Error</h1>
