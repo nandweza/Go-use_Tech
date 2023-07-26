@@ -68,6 +68,18 @@ p {
     font-size: 70px;
 }
 
+@media (max-width: 991px) {
+    .fa {
+        font-size: 50px;
+    }
+}
+
+@media (max-width: 489px) {
+    .fa {
+        font-size: 30px;
+    }
+}
+
 body {
     background-color: var(--main-white);
     color: black;
@@ -413,6 +425,28 @@ nav {
     height: 200;
 }
 
+@media (max-width: 991px) {
+    .myflex {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+    .abt-desc .abt-text {
+        padding-top: 10px;
+    }
+    .project-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 380px) {
+    .project h4 {
+        font-size: 1.5rem;
+    }
+    .project p {
+        font-size: 1.2rem;
+    }
+}
+
 /*core values*/
 #core-carousel {
     margin-bottom: -300px;
@@ -438,7 +472,52 @@ nav {
 #core-carousel .text-right {
     text-align: right;
 }
+
+@media (max-width: 767px) {
+    .project-grid {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    #core-carousel {
+        margin-bottom: -200px;
+        padding-top: 50px;
+    }
     
+    #core-carousel button {
+        margin-bottom: 200px;
+    }
+    #core-carousel h5 {
+        font-size: 1.5rem;
+    }
+    #core-carousel h4 {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 489px) {
+    .abt-desc h1 {
+        font-size: 2.2rem;
+    }
+    .display-none {
+        display: none;
+    }
+    .sect-header {
+        font-size: 2rem;
+    }
+    #core-carousel {
+        margin-bottom: -170px;
+        padding-top: 100px;
+    }
+    
+    #core-carousel button {
+        margin-bottom: 170px;
+    }
+    #core-carousel h5 {
+        font-size: 1.2rem;
+    }
+    #core-carousel h4 {
+        font-size: 1.7rem;
+    }
+}
 
 /*contact section*/
 
