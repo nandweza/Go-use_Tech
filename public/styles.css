@@ -49,12 +49,23 @@ h3 {
 }
 
 h4 {
-    font-size: 2rem;
+    font-size: 2.2rem;
     font-weight: bold;
+    color: var(--main-black);
+}
+
+h5 {
+    font-size: 1.8rem;
+    color: var(--main-orange);
 }
 
 p {
     font-size: 1.3rem;
+}
+
+.fa {
+    color: var(--main-orange);
+    font-size: 70px;
 }
 
 body {
@@ -385,11 +396,6 @@ nav {
 }
 
 /*projects*/
-.projects .fa {
-    color: var(--main-orange);
-    font-size: 70px;
-}
-
 .project-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -399,12 +405,40 @@ nav {
 
 .project-grid .project .card {
     height: 450;
+    box-shadow: 0 3rem 5rem -2rem rgba(0, 0, 0, 0.3);
 }
 
 .project-grid .project .card img {
     width: 100%;
     height: 200;
 }
+
+/*core values*/
+#core-carousel {
+    margin-bottom: -300px;
+}
+
+#core-carousel button {
+    margin-bottom: 300px;
+}
+
+#core-carousel .fa {
+    font-size: 2rem;
+    padding-right: 100px;
+}
+
+#core-carousel h4 {
+    padding-right: 48px;
+}
+
+#core-carousel .carousel-item {
+    padding-bottom: 300px;
+}
+
+#core-carousel .text-right {
+    text-align: right;
+}
+    
 
 /*contact section*/
 
@@ -521,7 +555,7 @@ footer .footer-text {
     color: var(--main-white);
 }
 
-.f-adjust .fa {
+.fa-chevron-right {
     font-size: 1.5rem;
     color: var(--main-white);
 }
@@ -800,6 +834,10 @@ footer .footer-text {
 
 .back-home a:hover {
     color: var(--main-blue);
+}
+
+.back-home .fa {
+    font-size: 1.5rem;
 }
 
 @media (max-width: 340px) {
