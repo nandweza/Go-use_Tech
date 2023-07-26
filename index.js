@@ -106,10 +106,10 @@ passport.use(new FacebookStrategy({
 }
 ));
 
-app.use('/api/', homeRoutes);
-app.use('/api/about/', aboutRoutes);
-app.use('/api/blog/', blogRoutes);
-app.use('/api/contact/', contactRoutes);
+app.use('/', homeRoutes);
+app.use('/about', aboutRoutes);
+app.use('/blog/', blogRoutes);
+app.use('/contact/', contactRoutes);
 app.use('/auth/', authRoutes);
 app.use('/api/course/', courseRoutes);
 app.use('/api/admin/', adminRoutes);
