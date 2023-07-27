@@ -1356,6 +1356,10 @@ footer .footer-text {
 .not-found a:hover {
     color: var(--main-blue);
 }
+
+.not-found .fa {
+    font-size: 2rem;
+}
   
 .not-found .emoji {
     font-size: 10rem;

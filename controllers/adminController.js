@@ -1,19 +1,21 @@
+const User = require('../models/User');
+
 exports.getAdminPage = async (req, res) => {
     try {
-        const [files] = await bucket.getFiles();
+        // const [files] = await bucket.getFiles();
 
-        // Count the number of course files
-        const courseCount = files.reduce((count, file) => {
-            if (!file.name.startsWith('blog/')) {
-                count++;
-            }
-            return count;
-        }, 0);
+        // // Count the number of course files
+        // const courseCount = files.reduce((count, file) => {
+        //     if (!file.name.startsWith('blog/')) {
+        //         count++;
+        //     }
+        //     return count;
+        // }, 0);
 
         const userCount = await User.countDocuments({isAdmin: false});
   
         res.render('admin', {
-            courseCount: courseCount,
+            // courseCount: courseCount,
             userCount: userCount
         });
     } catch (error) {
