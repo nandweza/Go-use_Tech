@@ -1,4 +1,4 @@
-# Go-use Tech
+# GO USETECH
 
 Go UseTech is a comprehensive learning platform designed to offer various courses and a blog to help users enhance their skills and knowledge. This web application is built using Node.js, Express, Mongoose, EJS, Bootstrap, CSS, Passport.js for user authentication, and Firebase Storage for storing and retrieving video files and metadata for the courses. In addition to the courses and blog, the platform also includes subscription and donation features. There is also an admin dashboard for managing users, courses and blog posts.
 
