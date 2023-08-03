@@ -16,15 +16,15 @@ To run this project, you need to have the following software installed on your m
 
 1. Clone the repository to your local machine using Git:
 
-`git clone https://github.com/your-username/Go-use_Tech.git`
+    `git clone https://github.com/your-username/Go-use_Tech.git`
 
 2. Navigate to the project directory:
 
-`cd Go-use_Tech`
+    `cd Go-use_Tech`
 
 3. Install the dependencies:
 
-`npm install`
+    `npm install`
 
 4. Set up the environment variables:
 
@@ -39,7 +39,7 @@ To run this project, you need to have the following software installed on your m
 
 5. Start the server:
 
-`npm start`
+    `npm start`
 
 6. Open your web browser and visit http://localhost:8001 to access the Go UseTech platform.
 
