@@ -4,35 +4,35 @@ exports.getContactPage = (req, res) => {
     res.render('contact');
 }
 
-exports.sendMessage = (req, res) => {
-    console.log(req.body);
-    const name = req.body.name;
-    const email = req.body.email;
-    const subject = req.body.subject;
-    const message = req.body.message;
+const emailConfig = {
+    host: 'smtp.gmail.com',
+    port: 587,
+    secure: false,
+    auth: {
+        user: process.env.EMAIL,
+        pass: process.env.APP_PASSWORD
+    }
+}
 
-    const transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-            user: 'usetech.go@gmail.com',
-            pass: 'Jona1234@!'
-        }
-    });
+const mailTransporter = nodemailer.createTransport(emailConfig);
+
+exports.sendMessage = (req, res) => {
+    const { name, email, subject, message } = req.body;
     
     const mailOptions = {
-        from: req.body.email,
-        to: 'usetech.go@gmail.com',
-        subject: `Message from ${req.body.email}: ${req.body.subject}`,
-        text: req.body.message
+        from: email,
+        to: process.env.EMAIL,
+        subject: subject,
+        text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`
     }
 
-    transporter.sendMail(mailOptions, (error, info) => {
+    mailTransporter.sendMail(mailOptions, (error, info) => {
         if (error) {
             console.log(error);
             res.send('error');
         } else {
-            console.log('Email sent: ' + info.response);
-            res.send('success');
+            // console.log('Email sent: ' + info.response);
+            res.redirect('/contact');
         }
     })
 }
