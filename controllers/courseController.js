@@ -117,7 +117,7 @@ exports.getAllCourses = async (req, res) => {
             const user = await User.findById(userId).lean();
             if (user) {
                 firstName = user.fname || 'User';
-                lastName = user.lname || 'User';
+                lastName = user.lname || ' ';
             }
   
             res.render('courses', { videoData: sortedVideos, firstName, lastName });

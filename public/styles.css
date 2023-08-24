@@ -615,6 +615,10 @@ textarea::placeholder {
     color: var(--main-white);
 }
 
+.footer-container h4 {
+    color: var(--main-white);
+}
+
 .footerLinks {
     font-size: 1.3rem;
 }
@@ -626,6 +630,10 @@ textarea::placeholder {
 .footerLinks a {
     color: var(--main-white);
     font-weight: normal;
+}
+
+footer .f-adjust {
+    color: var(--main-white);
 }
 
 footer .footer-text {
