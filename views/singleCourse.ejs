@@ -3,45 +3,45 @@
 <body class="course-body">
     <div class="bg-light">
         <nav class="container navbar navbar-expand-lg navbar-light">
-          <a class="navbar-brand" href="">
-            <img class="logo mylogo" src="/images/gousetech.png" alt="logo" width="75">
-          </a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <!-- <form class="d-flex nav-item mx-auto" role="search">
-              <input class="form-control me-2" type="text" id="searchInput" placeholder="Search...">
-              <button class="btn btn-primary" type="submit" onclick="searchVideos()">
-                <i class="fa fa-search"></i>
-              </button>
-            </form> -->
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-              <!-- <li class="nav-item">
-                <a class="nav-link" href="/courses">Dashboard</a>
-              </li>
-              <li class="nav-item">
-                <a id="signout-button" class="nav-link" href="/logout">Logout</a>
-              </li> -->
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj7j9IDpZsbq4HghrNPneZustxYupRgrt0oQ&usqp=CAU" alt="user profile" class="user-profile" width="50" height="50">
-                </a>
-                <div class="dropdown-menu custom-dropdown" aria-labelledby="userDropdown">
-                  <a class="dropdown-item" href="#">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj7j9IDpZsbq4HghrNPneZustxYupRgrt0oQ&usqp=CAU" alt="user profile" class="user-profile" width="50" height="50">
-                    <span class="user-profile-text fw-bold">
-                      <%= firstName %> <%= lastName %>
-                    </span>
-                  </a>
-                  <a class="dropdown-item p-2 pt-2 text-center user-profile-text" href="#">Manage your Account</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item user-profile-text" href="/api/course">Dashboard</a>
-                  <a class="dropdown-item user-profile-text" href="/auth/logout">Sign Out</a>
-                </div>
-              </li>
-            </ul>
-          </div>
+            <a class="navbar-brand" href="">
+                <img class="logo mylogo" src="/images/gousetech.png" alt="logo" width="75">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <!-- <form class="d-flex nav-item mx-auto" role="search">
+                    <input class="form-control me-2" type="text" id="searchInput" placeholder="Search...">
+                    <button class="btn btn-primary" type="submit" onclick="searchVideos()">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </form> -->
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <!-- <li class="nav-item">
+                        <a class="nav-link" href="/courses">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="signout-button" class="nav-link" href="/logout">Logout</a>
+                    </li> -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj7j9IDpZsbq4HghrNPneZustxYupRgrt0oQ&usqp=CAU" alt="user profile" class="user-profile" width="50" height="50">
+                        </a>
+                        <div class="dropdown-menu custom-dropdown" aria-labelledby="userDropdown">
+                            <a class="dropdown-item" href="#">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj7j9IDpZsbq4HghrNPneZustxYupRgrt0oQ&usqp=CAU" alt="user profile" class="user-profile" width="50" height="50">
+                                <span class="user-profile-text fw-bold">
+                                    <%= firstName %> <%= lastName %>
+                                </span>
+                            </a>
+                            <a class="dropdown-item p-2 pt-2 text-center user-profile-text" href="#">Manage your Account</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item user-profile-text" href="/api/course">Dashboard</a>
+                            <a class="dropdown-item user-profile-text" href="/auth/logout">Sign Out</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </nav>
     </div>
     <div class="container pb-4">
@@ -69,94 +69,9 @@
                     <p><%= error %></p>
                   <% } %>
             </div>
-            <div class="col-lg-4 col-md-12 col-sm-12">
-                <div class="pt-5 author-section">
-                    <div class="card">
-                        <h3 class="text-center fw-bold pt-5 pb-2">ABOUT THE AUTHOR</h3>
-                        <hr>
-                        <h4 class="p-4 pb-0">
-                            <%= author %>
-                        </h4>
-                        <p class="p-4">
-                            <%= abtAuthor %>
-                        </p>
-                        <p class="p-3 pb-2">
-                            <span>
-                                <strong class="fw-bold px-2">Email:</strong> <%= email %>
-                            </span>
-                        </p>
-                        <div class="social px-3">
-                            <h3 class="px-2 pb-2 fw-bold">Social</h3>
-                            <span class="fw-bold">
-                                <a href="<%= twitter %>">
-                                    <i class="fab fa-twitter fa-2x"></i>
-                                </a>
-                            </span>
-                            <span class="fw-bold">
-                                <a href="<%= linkedin %>">
-                                    <i class="fab fa-linkedin fa-2x"></i>
-                                </a>
-                            </span>
-                            <span class="fw-bold">
-                                <a href="<%= facebook %>">
-                                    <i class="fab fa-facebook fa-2x"></i>
-                                </a>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
     <%- include('./partials/footer.ejs') %>
 
-    <!-- Include the Facebook and Twitter JavaScript SDKs -->
-    <script async defer src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.3"></script>
-    <script async defer src="https://platform.twitter.com/widgets.js"></script>
-
-    <!-- Include your custom JavaScript file -->
-    <script>
-        // custom.js
-
-// Function to show the shareable link popup
-function showShareableLinkPopup() {
-  const shareableLink = document.getElementById('shareLink').textContent;
-
-  // Create a popup with the shareable link and share buttons
-  const popupHtml = `
-    <div class="popup-container">
-      <p class="share-link">Share this course:</p>
-      <p><input type="text" value="${shareableLink}" readonly></p>
-      <button class="share-button" onclick="shareOnFacebook()">Share on Facebook</button>
-      <button class="share-button" onclick="shareOnTwitter()">Share on Twitter</button>
-    </div>
-  `;
-
-  // Open the popup
-  const popupWindow = window.open('', 'SharePopup', 'width=500,height=300');
-  popupWindow.document.write(popupHtml);
-  popupWindow.document.close();
-}
-
-// Function to share on Facebook
-function shareOnFacebook() {
-  const shareableLink = document.getElementById('shareLink').textContent;
-
-  // Open the Facebook share dialog with the shareable link
-  window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareableLink)}`, '_blank');
-}
-
-// Function to share on Twitter
-function shareOnTwitter() {
-  const shareableLink = document.getElementById('shareLink').textContent;
-
-  // Open the Twitter share dialog with the shareable link
-  window.open(`https://twitter.com/intent/tweet?url=${encodeURIComponent(shareableLink)}`, '_blank');
-}
-
-// Attach event listener to the "Show Shareable Link" button
-document.getElementById('showShareLinkBtn').addEventListener('click', showShareableLinkPopup);
-
-    </script>
 </body>
  

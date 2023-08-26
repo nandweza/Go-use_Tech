@@ -9,7 +9,6 @@ const https = require('https');
 const { v4: uuidv4 } = require('uuid');
 // const firebaseAdmin = require('../firebase/firebaseAdmin');
 // const firebaseStorage = require('../firebase/firebaseStorage');
-const courseController = require('./courseController');
 
 
 dotenv.config();

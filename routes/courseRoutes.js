@@ -8,26 +8,29 @@ router
     .get(courseController.getCreateCoursePage)
     .post(courseController.createCourse);
 
-//retrieve all course videos and metadata from firebase storage to end user
 router
     .route('/')
-    .get(courseController.getAllCourses);
+    .get(courseController.getCourses);
+
+router
+    .route('/:id')
+    .get(courseController.getCourse);
 
 //retrieve single course video and metadata from firebase storage by end user
-router
-    .route('/:filename')
-    .get(courseController.getCourse)
-    .post(courseController.UpdateCourse)
-    .delete(courseController.deleteCourse);
+// router
+//     .route('/:filename')
+//     .get(courseController.getCourse)
+//     .post(courseController.UpdateCourse)
+//     .delete(courseController.deleteCourse);
 
-//get all courses by admin
-router
-    .route('/admin')
-    .get(courseController.getAllCourseAdmin);
+// //get all courses by admin
+// router
+//     .route('/admin')
+//     .get(courseController.getAllCourseAdmin);
 
-router
-    .route('/:filename/update')
-    .get(courseController.getUpdateCoursePage);
+// router
+//     .route('/:filename/update')
+//     .get(courseController.getUpdateCoursePage);
 
 // Update course video metadata by admin
 // router.put('/courses/:filename', );

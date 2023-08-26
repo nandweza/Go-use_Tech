@@ -20,7 +20,7 @@ exports.postDonate = (req, res) => {
       .then((response) => {
         // Handle the API response
         console.log(response.data);
-        res.send('Payment request initiated successfully');
+        res.send('Payment request initiated successfully').status(202);
       })
       .catch((error) => {
         // Handle any errors

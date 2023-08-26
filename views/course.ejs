@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('./partials/head.ejs') %>
+
+    <body>
+        <%- include('./partials/admin-navbar.ejs') %>
+        <div class="admin">
+            <h3 class="dashboard mt-4 mb-2">Access & Update All Courses</h3>
+            <hr class="border">
+            <div class="all-courses">
+                <div class="course-wrapper ">
+                    <span class="p-2">
+                        <a href="">
+                            <button class="btn btn-primary btn-lg">
+                                Create Modules
+                            </button>
+                        </a>
+                        <a href="">
+                            <button class="btn btn-primary btn-lg">
+                                Update Course
+                            </button>
+                        </a>
+                        <a href="">
+                            <button class="btn btn-primary btn-lg">
+                                Delete Course
+                            </button>
+                        </a>
+                    </span>
+                    <div class="img-div pt-2">
+                        <img src="" width="100%" height="225" >
+                    </div>
+                    <span class="p-2">
+                        <%= course.createdAt %>
+                    </span>
+                    <div class="">
+                        <h3 class="title-text fw-bold p-2 pb-3">
+                            <%= course.title %>
+                        </h3>
+                        <div class="desc">
+                            <%= course.description %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

@@ -18,7 +18,7 @@ const mailTransporter = nodemailer.createTransport(emailConfig);
 
 exports.sendMessage = (req, res) => {
     const { name, email, subject, message } = req.body;
-    
+
     const mailOptions = {
         from: email,
         to: process.env.EMAIL,

@@ -1,122 +1,59 @@
 <nav class="sidebar bg-white">
-<div class="flex-shrink-0 p-3 bg-white" style="width: 200px;">
-    <a href="/" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
-      <svg class="bi pe-none me-2" width="30" height="24"><use xlink:href="#bootstrap"/></svg>
-      <img class="logo" src="/images/gousetech.png" alt="logo" width="75">
-    </a>
-    <ul class="list-unstyled ps-0">
-      <li class="mb-1">
-        <button class="admin-btn btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
-          Home
-        </button>
-        <div class="collapse show" id="home-collapse">
-          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <li><a href="/admin" class="link-dark d-inline-flex text-decoration-none rounded">Overview</a></li>
-            <li><a href="/allUsers" class="link-dark d-inline-flex text-decoration-none rounded">View Users</a></li>
-            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Reports</a></li>
-          </ul>
-        </div>
-      </li>
-      <li class="mb-1">
-        <button class="admin-btn btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
-          Courses
-        </button>
-        <div class="collapse" id="dashboard-collapse">
-          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <li><a href="/addCourse" class="link-dark d-inline-flex text-decoration-none rounded">New Course</a></li>
-            <li><a href="/allCourses" class="link-dark d-inline-flex text-decoration-none rounded">View Courses</a></li>
-            <li><a href="/courses" class="link-dark d-inline-flex text-decoration-none rounded">Go to class</a></li>
-          </ul>
-        </div>
-      </li>
-      <li class="mb-1">
-        <button class="admin-btn btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
-          Blog
-        </button>
-        <div class="collapse" id="orders-collapse">
-          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <li><a href="/addPost" class="link-dark d-inline-flex text-decoration-none rounded">New Post</a></li>
-            <li><a href="/allPosts" class="link-dark d-inline-flex text-decoration-none rounded">View Posts</a></li>
-            <li><a href="/blog" class="link-dark d-inline-flex text-decoration-none rounded">Go to Blog</a></li>
-          </ul>
-        </div>
-      </li>
-      <li class="border-top my-3"></li>
-      <li class="mb-1">
-        <button class="admin-btn btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
-          Account
-        </button>
-        <div class="collapse" id="account-collapse">
-          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Profile</a></li>
-            <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Settings</a></li>
-            <li><a href="/logout" class="link-dark d-inline-flex text-decoration-none rounded">Sign out</a></li>
-          </ul>
-        </div>
-      </li>
-    </ul>
-  </div>
-  </nav>
-  <nav class="topnav navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">
-        <img src="/images/gousetech.png" alt="" class="logo" width="75">
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav grid-nav">
-          <li class="nav-item">
-            <div class="dropdown">
-              <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Home
-              </button>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="/admin">Overview</a></li>
-                <li><a class="dropdown-item" href="#">Updates</a></li>
-                <li><a class="dropdown-item" href="#">Reports</a></li>
-              </ul>
-            </div>
-          </li>
-          <li class="nav-item">
-            <div class="dropdown">
-              <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Courses
-              </button>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="/course/create">New Course</a></li>
-                <li><a class="dropdown-item" href="/course/admin">View Courses</a></li>
-                <li><a class="dropdown-item" href="/api/course">Go to class</a></li>
-              </ul>
-            </div>
-          </li>
-          <li class="nav-item">
-            <div class="dropdown">
-              <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Blog
-              </button>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="/blog/create">New Post</a></li>
-                <li><a class="dropdown-item" href="/blog/admin">View Posts</a></li>
-                <li><a class="dropdown-item" href="/blog">Go to Blog</a></li>
-              </ul>
-            </div>
-          </li>
-          <li class="nav-item">
-            <div class="dropdown">
-              <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Account
-              </button>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="/adminProfile">Profile</a></li>
-                <li><a class="dropdown-item" href="#">Settings</a></li>
-                <li><a class="dropdown-item" href="/auth/logout">Sign out</a></li>
-              </ul>
-            </div>
-          </li>
+    <div class="flex-shrink-0 p-3 bg-white" style="width: 200px;">
+        <a href="/api/admin" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
+            <svg class="bi pe-none me-2" width="30" height="24"><use xlink:href="#bootstrap"/></svg>
+            <img class="logo" src="/images/gousetech.png" alt="logo" width="75">
+        </a>
+        <ul class="list-unstyled ps-0">
+            <li class="mb-1">
+                <button class="admin-btn btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
+                    Home
+                </button>
+                <div class="collapse show" id="home-collapse">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                        <li><a href="/api/admin" class="link-dark d-inline-flex text-decoration-none rounded">Overview</a></li>
+                        <li><a href="/allUsers" class="link-dark d-inline-flex text-decoration-none rounded">View Users</a></li>
+                        <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Reports</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li class="mb-1">
+                <button class="admin-btn btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
+                    Courses
+                </button>
+                <div class="collapse" id="dashboard-collapse">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                        <li><a href="/api/course/create" class="link-dark d-inline-flex text-decoration-none rounded">New Course</a></li>
+                        <li><a href="/api/course/" class="link-dark d-inline-flex text-decoration-none rounded">View Courses</a></li>
+                        <li><a href="/api/course" class="link-dark d-inline-flex text-decoration-none rounded">Go to class</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li class="mb-1">
+                <button class="admin-btn btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
+                    Blog
+                </button>
+                <div class="collapse" id="orders-collapse">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                        <li><a href="/blog/create" class="link-dark d-inline-flex text-decoration-none rounded">New Post</a></li>
+                        <li><a href="/blog/" class="link-dark d-inline-flex text-decoration-none rounded">View Posts</a></li>
+                        <li><a href="/blog" class="link-dark d-inline-flex text-decoration-none rounded">Go to Blog</a></li>
+                    </ul>
+                </div>
+            </li>
+            <li class="border-top my-3"></li>
+            <li class="mb-1">
+                <button class="admin-btn btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
+                    Account
+                </button>
+                <div class="collapse" id="account-collapse">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                        <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Profile</a></li>
+                        <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Settings</a></li>
+                        <li><a href="/logout" class="link-dark d-inline-flex text-decoration-none rounded">Sign out</a></li>
+                    </ul>
+                </div>
+            </li>
         </ul>
-      </div>
     </div>
-  </nav>
-  
+</nav>
