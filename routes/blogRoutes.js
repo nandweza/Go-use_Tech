@@ -3,28 +3,31 @@ const blogController = require('../controllers/blogController');
 
 const router = express.Router();
 
+// client routes
+
 router
     .route('/')
-    .get(blogController.getAllPosts);
+    .get(blogController.getPosts);
 
 
 router
     .route('/:id')
     .get(blogController.getPost);
 
-//get all posts by admin
+// admin routes
+
 router
     .route('/admin')
-    .get(blogController.getAllPostsAdmin);
+    .get(blogController.getPostsAdmin);
 
 router
     .route('/create')
-    .get(blogController.getCreatePostPage)
+    .get(blogController.getCreatePost)
     .post(blogController.createPost);
 
 router
     .route('/update/:id')
-    .get(blogController.getUpdatePostPage)
+    .get(blogController.getUpdatePost)
     .post(blogController.updatePost);
 
 router

@@ -1,3 +1,3 @@
 exports.getNotFoundPage =  (req, res) => {
-    res.render('404');
+    res.render('error/404');
 }

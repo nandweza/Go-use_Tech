@@ -14,7 +14,7 @@ exports.getAdminPage = async (req, res) => {
 
         const userCount = await User.countDocuments({isAdmin: false});
   
-        res.render('admin', {
+        res.render('admin/admin', {
             // courseCount: courseCount,
             userCount: userCount
         });
@@ -28,7 +28,7 @@ exports.getAdminProfile = async (req, res) => {
     try {
       const admin = await User.findOne({ isAdmin: true }).lean();
   
-      res.render('adminProfile', { admin });
+      res.render('admin/adminProfile', { admin });
     } catch (error) {
       console.error(error);
       res.status(500).send('Internal Server Error');

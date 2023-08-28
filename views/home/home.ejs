@@ -1,0 +1,294 @@
+<%- include('../partials/head.ejs') %>
+
+<body>
+    <%- include('../partials/nav.ejs') %>
+    <div class="main">
+        <div class="main-home">
+            <h1 class="text">GO USETECH</h1>
+            <P class="text">
+                Welcome to our education and tech website, where we strive<br>
+                to provide you with the latest and most informative content<br>
+                about the intersection of technology and education.
+            </P>
+            <div class="home-btn">
+                <button class="main-btn left">
+                    <a href="/about">ABOUT US</a>
+                </button>
+                <button class="main-btn right">
+                    <a href="/api/donate">SUPPORT OUR MISSION</a>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="statements container">
+        <!-- <h3 class="text-center">Our Slogan</h3> -->
+        <div class="d-flex justify-content-center align-items-center pb-2">
+            <i class="fa fa-quote-left"></i>
+        </div>
+        <p class="text-center pb-5">"Unlocking Potential, Embracing Technology."</p>
+        <div class="row">
+            <div class="col-lg-4 col-sm-12">
+                <div class="d-flex justify-content-center align-items-center">
+                    <i class="fa fa-eye"></i>
+                </div>
+                <h3 class="text-center mt-4">Our Vision</h3>
+                <p class="text-center mt-2 stext">
+                    Empowering individuals with IT skills for social impact 
+                    and professional success, fostering equality.
+                </p>
+            </div>
+            <div class="col-lg-4 col-sm-12">
+                <div class="d-flex justify-content-center align-items-center">
+                    <i class="fa fa-bullseye"></i>
+                </div>
+                <h3 class="text-center mt-4">Our Mission</h3>
+                <p class="text-center stext">
+                    To empower refugees through comprehensive IT skills training,
+                    fostering their self-reliance, enhancing their employability,
+                    and enabling them to contribute to their communities
+                </p>
+            </div>
+            <div class="col-lg-4 col-sm-12">
+                <div class="d-flex justify-content-center align-items-center">
+                    <i class="fa fa-key"></i>
+                </div>
+                <h3 class="text-center mt-4">Our Core Values</h3>
+                <p class="text-center stext">
+                    Empowerment, Inclusivity, Collaboration, Innovation, 
+                    Empathy, Accountability, Social Impact
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="featured-blog">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="card p-5">
+                        <h3 class="mt-4 mb-4">Latest Posts</h3>
+                        <% if (posts.length > 0) { %> 
+                            <% posts.forEach((post) => { %>
+                                <div class="row mb-4 pb-4 border-bottom">
+                                    <div class="col-lg-6 col-md-12">
+                                        <img 
+                                            src="<%= post.blogimg %>" 
+                                            class="img-responsive fblog-img" 
+                                            width="300" 
+                                            height="185"
+                                        >
+                                    </div>
+                                    <div class="col-lg-6 col-md-12">
+                                        <div class="fblog-title">
+                                            <%= post.title %>
+                                        </div>
+                                        <div class="fblog-desc">
+                                            <p>
+                                                <%= post.content.substring(0, 240) + "..." %>
+                                                <a 
+                                                    href="/blog/<%= post._id %>" 
+                                                    style="color: red;"
+                                                >
+                                                    Read more.
+                                                </a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            <% }) %>
+                        <% } else { %>
+                            <span class="text-center fw-bold" style="font-size: 18px;">No Post yet.</span>
+                        <% } %>
+                    </div>
+                </div>
+                <div class="col-lg-4 events">
+                    <div class="card p-3">
+                        <h3 class="mt-5">Schedule Event</h3>
+                        <div>
+                            <!-- Calendly inline widget begin -->
+                            <div class="calendly-inline-widget" data-url="https://calendly.com/gousetech" style="min-width:320px;height:490px;"></div>
+                            <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+                            <!-- Calendly inline widget end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="clients-header">
+            <h5 class="text-center pb-4">TESTIMONIALS</h5>
+            <h3 class="text-center pb-2">WHAT CLIENTS SAY</h3>
+        </div>
+        <div id="clients-carousel" class="carousel slide d-flex justify-content-center align-items-center" data-bs-ride="carousel" style="height: 70vh;">
+            <div class="carousel-inner">
+                <div class="carousel-item active clients">
+                    <div class="text-center">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                <img 
+                                    src="/images/success/Apophia.png" 
+                                    alt="Apophia's Image" 
+                                    width="200" 
+                                    class="pb-5"
+                                >
+                                <h4 class="text">Owomugisha Apophia</h4>
+                                <h5 class="text pb-4">Research Assistant</h5>
+                                <i class="fa fa-quote-left pb-2"></i>
+                                <p class="text px-5">
+                                    Through GO USETECH, I have gained proficiency in data collection, 
+                                    design, cleaning, analysis, and transcription, expanding my 
+                                    professional repertoire.
+                                </p>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12 false-sm">
+                                <img 
+                                    src="/images/success/Blaise.jpg" 
+                                    alt="Blaise's Image" 
+                                    width="200" 
+                                    class="pb-5"
+                                >
+                                <h4 class="text">Blaise Ntibonera</h4>
+                                <h5 class="text pb-4">Ressetlement Support Specialist</h5>
+                                <i class="fa fa-quote-left pb-2"></i>
+                                <p class="text px-5">
+                                    GO USETECH has equipped me with expertise in data collection, 
+                                    entry, Microsoft Excel, and tailored solutions for my NGO's data 
+                                    needs.
+                                </p>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12 false-sm false-md">
+                                <img 
+                                    src="/images/success/Ndabwije.png" 
+                                    alt="Ndabwije's Image" 
+                                    width="200" 
+                                    class="pb-5"
+                                >
+                                <h4 class="text">Vanessah Ndabwike</h4>
+                                <h5 class="text pb-4">Research Assistant</h5>
+                                <i class="fa fa-quote-left pb-2"></i>
+                                <p class="text px-5">GO USETECH has empowered me with comprehensive knowledge in data collection, design, cleaning, and analysis, bolstering my professional capabilities.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item clients">
+                    <div class="text-center">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                <img 
+                                    src="/images/success/Kumi.png" 
+                                    alt="Kumi's Image" 
+                                    width="200" 
+                                    class="pb-5"
+                                >
+                                <h4 class="text">Patrick Kumi</h4>
+                                <h5 class="text pb-4">Freelancer</h5>
+                                <i class="fa fa-quote-left pb-2"></i>
+                                <p class="text px-5">
+                                    Thanks to Go USETECH Youtube Videos, I've enhanced my data 
+                                    collection design skills, advancing my professional expertise.
+                                </p>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12 false-sm">
+                                <img 
+                                    src="/images/success/Carren.png" 
+                                    alt="Carren's Image" 
+                                    width="200" 
+                                    class="pb-5"
+                                >
+                                <h4 class="text">Carren Moyo</h4>
+                                <h5 class="text pb-4">Sales Person</h5>
+                                <i class="fa fa-quote-left pb-2"></i>
+                                <p class="text px-5">
+                                    Through GO USETECH, I've achieved mastery in data collection 
+                                    design and Microsoft Excel, elevating my professional proficiency.
+                                </p>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12 false-sm false-md">
+                                <img 
+                                    src="/images/success/Miskat.png" 
+                                    alt="Miskat's Image" 
+                                    width="200" 
+                                    class="pb-5"
+                                >
+                                <h4 class="text">Miskat Mariata Blessing</h4>
+                                <h5 class="text pb-4">Data Collector</h5>
+                                <i class="fa fa-quote-left pb-2"></i>
+                                <p class="text px-5">
+                                    Through GO USETECH, I've acquired expertise in data collection, 
+                                    design, cleaning, entry, and transcription, enhancing my 
+                                    professional skill set.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item clients">
+                    <div class="text-center">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                <img 
+                                    src="/images/success/Ruusa.png" 
+                                    alt="Ruusa's Image" 
+                                    width="200" 
+                                    class="pb-5"
+                                >
+                                <h4 class="text">Ruusa Tulela Nuuyoma</h4>
+                                <h5 class="text pb-4">Electrical Engineer</h5>
+                                <i class="fa fa-quote-left pb-2"></i>
+                                <p class="text px-5">
+                                    As an electrical engineer, I have leveraged GO USETECH's 
+                                    resources to expand my knowledge and excel in my field.
+                                </p>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12 false-sm">
+                                <img 
+                                    src="/images/success/Vanessa.jpg" 
+                                    alt="Vanessa's Image" 
+                                    width="200" 
+                                    class="pb-5"
+                                >
+                                <h4 class="text">Shukuru Vanessa</h4>
+                                <h5 class="text pb-4">Nutrition Support</h5>
+                                <i class="fa fa-quote-left pb-2"></i>
+                                <p class="text px-5">
+                                    GO USETECH has provided me with comprehensive training in data 
+                                    collection and design methodologies, enhancing my professional 
+                                    capabilities.
+                                </p>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12 false-sm false-md">
+                                <img 
+                                    src="/images/success/Maruf.png" 
+                                    alt="Maruf's Image" 
+                                    width="200" 
+                                    class="pb-5"
+                                >
+                                <h4 class="text">Md Maruf Hossain</h4>
+                                <h5 class="text pb-4">Backend Engineer</h5>
+                                <i class="fa fa-quote-left pb-2"></i>
+                                <p class="text px-5">
+                                    As a backend engineer, my collaboration with GO USETECH has 
+                                    propelled my technical prowess to new heights
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#clients-carousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#clients-carousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+
+    <%- include('../partials/footer.ejs') %>
+</body>
+

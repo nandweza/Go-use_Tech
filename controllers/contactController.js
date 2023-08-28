@@ -1,7 +1,7 @@
 const nodemailer = require('nodemailer');
 
 exports.getContactPage = (req, res) => {
-    res.render('contact');
+    res.render('contact/contact');
 }
 
 const emailConfig = {
@@ -32,7 +32,7 @@ exports.sendMessage = (req, res) => {
             res.send('error');
         } else {
             // console.log('Email sent: ' + info.response);
-            res.redirect('/contact');
+            res.redirect('contact');
         }
     })
 }

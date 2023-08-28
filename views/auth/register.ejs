@@ -1,0 +1,184 @@
+<%- include('../partials/head.ejs') %>
+
+    <body>
+        <div class="login-main register-main">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <form 
+                            id="signup-form" 
+                            method="post" 
+                            action="/auth/register"
+                        >
+                            <h2>Sign Up</h2>
+                            <div class="flex-names">
+                                <div class="input-group px-1">
+                                    <label 
+                                        for="fname"
+                                    >
+                                        First Name<span style="color: red;">*</span>
+                                    </label>
+                                    <input 
+                                        class="form-control input-adjust" 
+                                        type="text" 
+                                        id="fname" 
+                                        name="fname" 
+                                        placeholder="eg Jon" 
+                                        required
+                                    >
+                                </div>
+                                <div class="input-group px-1">
+                                    <label for="lname">Last Name<span style="color: red;">*</span></label>
+                                    <input class="form-control input-adjust" type="text" id="lname" name="lname" placeholder="eg Doe" required>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <label 
+                                    for="country"
+                                >
+                                    Country<span style="color: red;">*</span>
+                                </label>
+                                <input 
+                                    class="form-control input-adjust" 
+                                    type="text" 
+                                    id="country" 
+                                    name="country" 
+                                    placeholder="eg Jon" 
+                                    required
+                                >
+                            </div>
+                            <div class="input-group">
+                                <label 
+                                    for="profession"
+                                >
+                                    Profession<span style="color: red;">*</span>
+                                </label>
+                                <input 
+                                    class="form-control input-adjust" 
+                                    type="text" 
+                                    id="profession" 
+                                    name="profession" 
+                                    placeholder="eg Jon" 
+                                    required
+                                >
+                            </div>
+                            <div class="input-group">
+                                <label 
+                                    for="email"
+                                >
+                                    Email<span style="color: red;">*</span>
+                                </label>
+                                <input 
+                                    class="form-control input-adjust" 
+                                    type="text" 
+                                    id="email" 
+                                    name="username" 
+                                    placeholder="eg jondoe@gmail.com" 
+                                    required
+                                >
+                            </div>
+                            <div class="input-group">
+                                <label 
+                                    for="password"
+                                >
+                                    Password<span style="color: red;">*</span>
+                                    <span class="fs-5 text-muted pass-min">(6 characters minimun)</span>
+                                </label>
+                                <input 
+                                    class="form-control input-adjust" 
+                                    type="password" 
+                                    id="password" 
+                                    name="password" 
+                                    required
+                                >
+                                <button 
+                                    type="button" 
+                                    id="btnToggle" 
+                                    class="toggle"
+                                >
+                                    <i id="eyeIcon" class="fa fa-eye"></i>
+                                </button>
+                            </div>
+                            <button 
+                                class="btn btn-lg btn-primary btn-block button-adjust" 
+                                type="submit"
+                            >
+                                SIGN UP
+                            </button>
+                            <div class="register fs-*">
+                                Already a member?<a href="/auth/login">Sign in</a>
+                            </div>
+                            <div class="text-center pt-3 back-home">
+                                <a href="/">
+                                    <i class="fa fa-arrow-left px-2"></i>
+                                    <span>Back to Go UseTech</span>
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 p-5 oauth-login">
+                        <h3 class="text-center fw-bold pt-5">Or Sign Up with</h3>
+                        <div class="row text-center d-flex justify-content-center align-items-center p-5">
+                            <div class="col-lg-6 col-md-12 col-sm-12 p-3 google-oauth">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <a 
+                                            class="btn btn-block" 
+                                            href="/auth/google" 
+                                            role="button"
+                                        >
+                                            <i class="fab fa-google"></i>
+                                            <span class="px-2">Google</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-12 col-sm-12 p-3 facebook-oauth">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <a 
+                                            class="btn btn-block" 
+                                            href="/auth/facebook" 
+                                            role="button"
+                                        >
+                                            <i class="fab fa-facebook-square"></i>
+                                            <span class="px-2">Facebook</span>
+                                        </a>
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center signup-img">
+                            <img 
+                                src="/images/comp-user.png"
+                                alt="computer user image"
+                            >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script>
+
+        let passwordInput = document.getElementById('password'),
+            toggle = document.getElementById('btnToggle'),
+            icon = document.getElementById('eyeIcon');
+
+            function togglePassword() {
+                if (passwordInput.type === 'password') {
+                    passwordInput.type = 'text';
+                    icon.classList.add("fa-eye-slash");
+                } else {
+                    passwordInput.type = 'password';
+                    icon.classList.remove("fa-eye-slash");
+                }
+            }
+
+            function checkInput() {
+
+            }
+
+            toggle.addEventListener('click', togglePassword, false);
+            passwordInput.addEventListener('keyup', checkInput, false);
+    </script>

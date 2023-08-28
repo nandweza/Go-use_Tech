@@ -9,6 +9,14 @@ router
     .post(courseController.createCourse);
 
 router
+    .route('/admin')
+    .get(courseController.getCoursesAdmin);
+
+router
+    .route('/admin/:id')
+    .get(courseController.getCourseAdmin);
+
+router
     .route('/')
     .get(courseController.getCourses);
 

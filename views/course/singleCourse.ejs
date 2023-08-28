@@ -1,4 +1,4 @@
-<%- include('./partials/head.ejs') %>
+<%- include('../partials/head.ejs') %>
 
 <body class="course-body">
     <div class="bg-light">
@@ -31,7 +31,7 @@
                             <a class="dropdown-item" href="#">
                                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj7j9IDpZsbq4HghrNPneZustxYupRgrt0oQ&usqp=CAU" alt="user profile" class="user-profile" width="50" height="50">
                                 <span class="user-profile-text fw-bold">
-                                    <%= firstName %> <%= lastName %>
+                                    User
                                 </span>
                             </a>
                             <a class="dropdown-item p-2 pt-2 text-center user-profile-text" href="#">Manage your Account</a>
@@ -47,31 +47,22 @@
     <div class="container pb-4">
         <div class="row pt-4">
             <div class="col-lg-8 col-md-12 col-sm-12 course-section">
-                <% if (url) { %>
-                    <div class="embed-responsive embed-responsive-16by9 pt-5">
-                        <video 
-                            class="embed-responsive-item"
-                            src="<%= url %>" 
-                            controls 
-                            width="100%" 
-                            height="400" 
-                            allowfullscreen 
-                            controlsList="nodownload" 
-                            oncontextmenu="return false;">
-                        </video>
-                    </div>
-                    <h3 class="py-5"><%= title %></h3>
-                    <p class="">
-                        <%= desc %>
-                    </p>
-                  <% } else { %>
-                    <h1>Error</h1>
-                    <p><%= error %></p>
-                  <% } %>
+                <img
+                    src=""
+                    alt="Course Image"
+                    width=""
+                    height=""
+                />
+                <h3 class="py-5">
+                    <%= course.title %>
+                </h3>
+                <p class="">
+                    <%= course.description %>
+                </p>
             </div>
         </div>
     </div>
-    <%- include('./partials/footer.ejs') %>
+    <%- include('../partials/footer.ejs') %>
 
 </body>
  

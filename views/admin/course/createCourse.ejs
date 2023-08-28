@@ -1,11 +1,16 @@
-<%- include('./partials/head.ejs') %>
+<%- include('../../partials/head.ejs') %>
 <body>
-    <%- include('./partials/admin-navbar.ejs') %>
+    <%- include('../../partials/admin-navbar.ejs') %>
     <main class="admin">
         <h3 class="dashboard mt-4 mb-2">Add Course</h3>
         <hr class="border">
         <div class="container">
-            <form action="/api/course/create" method="post" class="course-form mb-5" enctype="multipart/form-data">
+            <form 
+                action="/api/course/create" 
+                method="post" 
+                class="course-form mb-5" 
+                enctype="multipart/form-data"
+            >
                 <label 
                     for="courseImg" 
                     class="fw-bold"

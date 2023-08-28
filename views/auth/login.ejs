@@ -1,25 +1,59 @@
-<%- include('./partials/head.ejs') %>
+<%- include('../partials/head.ejs') %>
 
 <body>
-    <%- include('./partials/nav.ejs') %>  
+    <%- include('../partials/nav.ejs') %>  
     <div class="login-main">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-12">
-                    <form id="login-form" method="post" action="/auth/login">
+                    <form 
+                        id="login-form" 
+                        method="post" 
+                        action="/auth/login"
+                    >
                         <h2>Sign In</h2>
                         <div class="input-group">
-                            <label for="email">Email<span style="color: red;">*</span></label>
-                            <input class="form-control input-adjust" type="email" id="email" name="username" placeholder="eg jondoe@gmail.com" required>
+                            <label 
+                                for="email"
+                            >
+                                Email<span style="color: red;">*</span>
+                            </label>
+                            <input 
+                                class="form-control input-adjust" 
+                                type="email" 
+                                id="email" 
+                                name="username" 
+                                placeholder="eg jondoe@gmail.com" 
+                                required
+                            >
                         </div>
                         <div class="input-group">
-                            <label for="password">Password<span style="color: red;">*</span></label>
-                            <input class="form-control input-adjust" type="password" id="password" name="password" required>
-                            <button type="button" id="btnToggle" class="toggle">
+                            <label 
+                                for="password"
+                            >
+                                Password<span style="color: red;">*</span>
+                            </label>
+                            <input 
+                                class="form-control input-adjust" 
+                                type="password" 
+                                id="password" 
+                                name="password" 
+                                required
+                            >
+                            <button 
+                                type="button" 
+                                id="btnToggle" 
+                                class="toggle"
+                            >
                                 <i id="eyeIcon" class="fa fa-eye"></i>
                             </button>
                         </div>
-                        <button class="btn btn-lg btn-primary btn-block button-adjust" type="submit">SIGN IN</button>
+                        <button 
+                            class="btn btn-lg btn-primary btn-block button-adjust" 
+                            type="submit"
+                        >
+                            SIGN IN
+                        </button>
                         <div class="register fs-*">
                             Not a member? <a href="/auth/register">Sign up</a>
                         </div>
@@ -31,7 +65,11 @@
                         <div class="col-lg-6 col-md-12 col-sm-12 p-3 google-oauth">
                             <div class="card">
                               <div class="card-body">
-                                <a class="btn btn-block" href="/auth/google" role="button">
+                                <a 
+                                    class="btn btn-block" 
+                                    href="/auth/google" 
+                                    role="button"
+                                >
                                   <i class="fab fa-google"></i>
                                   <span class="px-2">Google</span>
                                 </a>
@@ -41,7 +79,11 @@
                         <div class="col-lg-6 col-md-12 col-sm-12 p-3 facebook-oauth">
                             <div class="card">
                               <div class="card-body">
-                                <a class="btn btn-block" href="/auth/facebook" role="button">
+                                <a 
+                                    class="btn btn-block" 
+                                    href="/auth/facebook" 
+                                    role="button"
+                                >
                                   <i class="fab fa-facebook-square"></i>
                                   <span class="px-2">Facebook</span>
                                 </a>
@@ -53,7 +95,7 @@
             </div>
         </div>
     </div>
-    <%- include('./partials/footer.ejs') %>
+    <%- include('../partials/footer.ejs') %>
 </body>
 
     <script>

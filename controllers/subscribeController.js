@@ -23,9 +23,9 @@ exports.subscribeEmail = (req, res) => {
 
     const request = https.request(url, options, function(response) {
         if (response.statusCode === 200) {
-            res.render("success");
+            res.render("subscribe/success");
         } else {
-            res.render("failure");
+            res.render("subscribe/failure");
         }
         response.on("data", function(data){
             console.log(JSON.parse(data));

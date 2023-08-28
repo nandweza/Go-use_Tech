@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-    <%- include('./partials/head.ejs') %>
+    <%- include('../../partials/head.ejs') %>
 
     <body>
-        <%- include('./partials/admin-navbar.ejs') %>
+        <%- include('../../partials/admin-navbar.ejs') %>
         <div class="admin">
             <h3 class="dashboard mt-4 mb-2">Access & Update All Courses</h3>
             <hr class="border">
@@ -13,7 +13,11 @@
                         <div class="col-lg-4 col-md-6 col-sm-12 p-2">
                             <div class="card">
                                 <div class="img-div">
-                                    <img src="" width="100%" height="225" >
+                                    <img 
+                                        src="" 
+                                        width="100%"
+                                        height="225"
+                                    >
                                 </div>
                                 <span class="p-2">
                                     <%= course.createdAt %>
@@ -27,7 +31,7 @@
                                     </div>
                                 </div>
                                 <span>
-                                    <a href="/api/course/<%= course._id %>">
+                                    <a href="/api/course/admin/<%= course._id %>">
                                         <button class="btn btn-lg btn-primary p-2">View Course</button>
                                     </a>
                                 </span>

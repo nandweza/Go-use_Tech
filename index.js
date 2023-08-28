@@ -108,7 +108,7 @@ passport.use(new FacebookStrategy({
 
 app.use('/', homeRoutes);
 app.use('/about', aboutRoutes);
-app.use('/blog', blogRoutes);
+app.use('/blog/', blogRoutes);
 app.use('/contact', contactRoutes);
 app.use('/auth/', authRoutes);
 app.use('/api/course/', courseRoutes);

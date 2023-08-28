@@ -1,49 +1,80 @@
 // controllers/courseController.js
 const Course = require('../models/Course');
+// const User = require('../models/User');
+
+
+//client requests
 
 exports.getCourses = async (req, res) => {
-  try {
-    const courses = await Course.find();
-    res.render('allCourses', { courses });
-    // res.status(200).json({ message: 'success', courses });
-  } catch (error) {
-    console.log(error);
-    res.status(500).json(error);
-  }
+    try {
+        const courses = await Course.find();
+
+        res.render('course/courses', { courses });
+        // res.status(200).json({ message: 'success', courses });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json(error);
+    }
 };
 
 exports.getCourse = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const course = await Course.findOne({ _id: id });
+    try {
+        const { id } = req.params;
+        const course = await Course.findOne({ _id: id });
 
-    res.render('course', { course: course });
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ message: 'something went wrong!' });
-  }
+        res.render('course/singleCourse', { course: course });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: 'something went wrong!' });
+    }
 }
 
+//admin requests
+
 exports.getCreateCoursePage = async (req, res) => {
-  try {
-    res.render('addCourse');
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ message: 'something went wrong!' });
-  }
+    try {
+        res.render('admin/course/createCourse');
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: 'something went wrong!' });
+    }
 }
 
 exports.createCourse = async (req, res) => {
-  try {
-    const { title, description, author, courseImg } = req.body;
-    const course = new Course({ title, description, author, courseImg });
-    await course.save();
-    // res.redirect('/api/courses');
-    res.status(201).json({ message: 'course created!' })
-  } catch (error) {
-    res.status(400).send(error);
-  }
+    try {
+        const { title, description, author, courseImg } = req.body;
+        const course = new Course({ title, description, author, courseImg });
+        await course.save();
+        // res.redirect('/api/courses');
+        res.status(201).json({ message: 'course created!' })
+    } catch (error) {
+        res.status(400).send(error);
+    }
 };
+
+exports.getCoursesAdmin = async (req, res) => {
+    try {
+        const courses = await Course.find();
+
+        res.render('admin/course/adminCourses', { courses });
+        // res.status(200).json({ message: 'success', courses });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json(error);
+    }
+};
+
+exports.getCourseAdmin = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const course = await Course.findOne({ _id: id });
+
+        res.render('admin/course/course', { course: course });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: 'something went wrong!' });
+    }
+}
 
 
 
@@ -199,16 +230,16 @@ exports.createCourse = async (req, res) => {
 //         const facebook = metadata.customMetadata.facebook || '';
 //         const shareLink = `http://localhost:8001/share/${uuidv4()}`;
   
-//         let firstName = 'User';
-//         let lastName = 'User';
+        // let firstName = 'User';
+        // let lastName = 'User';
   
-//         if (req.isAuthenticated()) {
-//             const userId = req.user.id;
-//             const user = await User.findById(userId).lean();
-//             if (user) {
-//                 firstName = user.fname || 'User';
-//                 lastName = user.lname || 'User';
-//             }
+        // if (req.isAuthenticated()) {
+        //     const userId = req.user.id;
+        //     const user = await User.findById(userId).lean();
+        //     if (user) {
+        //         firstName = user.fname || 'User';
+        //         lastName = user.lname || 'User';
+        //     }
   
 //             res.render('singleCourse', {
 //                 url,

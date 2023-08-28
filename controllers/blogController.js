@@ -13,9 +13,11 @@ const Storage = multer.diskStorage({
 
 const uploads = multer({ storage: Storage }).single('blogimg');
 
-exports.getAllPosts = async (req, res) => {
+//client requests
+
+exports.getPosts = async (req, res) => {
     posts = await Post.find().sort({createdAt: -1});
-    res.render('blog', { posts: posts });
+    res.render('blog/blog', { posts: posts });
 }
 
 exports.getPost = async (req, res) => {
@@ -23,19 +25,21 @@ exports.getPost = async (req, res) => {
         const { id } = req.params;
         const post = await Post.findOne({ _id: id });
         const posts = await Post.find().limit(3);
-        res.status(200).render("singlePost", { post: post, posts: posts });
+        res.status(200).render("blog/singlePost", { post: post, posts: posts });
     } catch (err) {
         res.status(404).redirect("/api/error/404");
     }
 }
 
-exports.getAllPostsAdmin = async (req, res) => {
+//admin requests
+
+exports.getPostsAdmin = async (req, res) => {
     posts = await Post.find().sort({ createdAt: -1});
-    res.render('allPosts', {posts: posts});
+    res.render('admin/blog/posts', {posts: posts});
 }
 
-exports.getCreatePostPage = (req, res) => {
-    res.render('addPost');
+exports.getCreatePost = (req, res) => {
+    res.render('admin/blog/createPost');
 }
 
 exports.createPost = uploads, (req, res) => {
@@ -44,7 +48,7 @@ exports.createPost = uploads, (req, res) => {
 
 
     if (!title || !content) {
-        return res.redirect("/addPost");
+        return res.redirect("/blog/create");
     }
 
     const posts = new Post({ title, content, blogimg });
@@ -53,15 +57,15 @@ exports.createPost = uploads, (req, res) => {
         .save()
         .then(() => {
             console.log("Post created!!!");
-            res.status(201).redirect('/allPosts');
+            res.status(201).redirect('/blog/admin');
         })
         .catch ((err) => console.log(err));
 }
 
-exports.getUpdatePostPage = async (req, res) => {
+exports.getUpdatePost = async (req, res) => {
     const { id } = req.params;
     const getData = await Post.findOne({ _id: id });
-    res.render('updatePost', { post: getData });
+    res.render('admin/blog/updatePost', { post: getData });
 }
 
 exports.updatePost = uploads, (req, res) => {
@@ -72,7 +76,7 @@ exports.updatePost = uploads, (req, res) => {
     Post.updateOne({ _id: id }, { title, blogimg, content })
         .then(() => {
             console.log("Blog Updated!");
-            res.redirect("/allPosts");
+            res.redirect("/blog/admin");
         })
         .catch((err) => console.log(err));
 }
@@ -83,7 +87,7 @@ exports.deletePost = (req, res) => {
     Post.findByIdAndDelete(deletedItemId, (err) => {
         if (!err) {
             console.log("deletion success!");
-            res.redirect("/allPosts");
+            res.redirect("/blog/admin");
         } else {
             console.log(err);
         }

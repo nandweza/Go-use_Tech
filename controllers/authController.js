@@ -3,7 +3,7 @@ const passport = require('passport');
 const User = require('../models/User');
 
 exports.getLoginPage = (req, res) => {
-    res.render('login');
+    res.render('auth/login');
 }
 
 exports.loginUser = (req, res, next) => {
@@ -33,7 +33,7 @@ exports.loginUser = (req, res, next) => {
 }
 
 exports.getRegisterPage = (req, res) => {
-    res.render('register');
+    res.render('auth/register');
 }
 
 exports.registerUser = (req, res) => {

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('../../partials/head.ejs') %>
+
+    <body>
+        <%- include('../../partials/admin-navbar.ejs') %>
+        <div class="admin">
+            <h3 class="dashboard mt-4 mb-2">Access & Update All Posts</h3>
+            <div class="admin-wrapper">
+                <div class="course-wrapper row py-5">
+                    <% posts.forEach((post) => { %>
+                        <div class="col-lg-4 col-md-6 col-sm-12 py-2">
+                            <div class="card p-2">
+                                <div class="img-div">
+                                    <img 
+                                        src="<%= post.blogimg %>"
+                                        alt="Post image" 
+                                        width="100%" 
+                                        height="200"
+                                    >
+                                </div>
+                                <span>
+                                    <%= post.createdAt.toDateString() %>
+                                </span>
+                                <div class="pb-2">
+                                    <h3 class="title-text fw-bold pt-2 pb-3">
+                                        <%= post.title.substring(0, 30) + "..." %>
+                                    </h3>
+                                    <div class="desc pb-4">
+                                        <%= post.content.substring(0, 180) + "....." %>
+                                    </div>
+                                </div>
+                                <span class="border-bottom">
+                                    <div class="flex-btn">
+                                        <div class="pb-3">
+                                            <form 
+                                                action="/delete" 
+                                                method="POST" 
+                                                class=""
+                                            >
+                                                <button 
+                                                    name="deleteBtn" 
+                                                    value="<%= post._id %>" 
+                                                    type="submit" 
+                                                    class="btn btn-primary btn-lg p-2"
+                                                >
+                                                    Delete
+                                                </button>
+                                            </form>
+                                        </div>
+                                        <div class="pb-3">
+                                            <a 
+                                                href="/blog/update/<%= post._id %>" 
+                                                class=""
+                                            >
+                                                <button 
+                                                    class="btn btn-primary btn-lg p-2"
+                                                >
+                                                    Update
+                                                </button>
+                                            </a>
+                                        </div>
+                                        <div class="pb-3">
+                                            <a 
+                                                href="/blog/admin/<%= post._id %>" 
+                                                target="_blank"
+                                            >
+                                                <button 
+                                                    class="btn btn-primary btn-lg p-2"
+                                                >
+                                                    View Post
+                                                </button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </span>
+                            </div>
+                        </div>
+                    <% }); %>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
