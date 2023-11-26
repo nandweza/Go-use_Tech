@@ -1,6 +1,40 @@
 const mongoose = require('mongoose');
+const randomUUID = require("crypto");
 
-const CourseSchema = new mongoose.Schema(
+const lectureSchema = new mongoose.Schema(
+    {
+        id: {
+            type: String,
+            default: randomUUID(),
+        },
+        title: {
+            type: String,
+            unique: true,
+            required: true,
+        },
+        video: {
+            type: String,
+            required: true,
+        }
+    }
+);
+
+const lessonSchema = new mongoose.Schema(
+    {
+        id: {
+            type: String,
+            default: randomUUID(),
+        },
+        title: {
+            type: String,
+            required: true,
+            unique: true
+        },
+        lectures: [lectureSchema]
+    }
+)
+
+const courseSchema = new mongoose.Schema(
     {
         title: {
             type: String,
@@ -17,13 +51,9 @@ const CourseSchema = new mongoose.Schema(
         author: {
             type: String
         },
-        lessons: [
-            {
-                type: mongoose.Schema.Types.ObjectId, ref: 'Lesson'
-            }
-        ]
+        lessons: [lessonSchema]
     },
     {timestamps: true}
 );
 
-module.exports = mongoose.model('course', CourseSchema);
+module.exports = mongoose.model("Course", courseSchema);
