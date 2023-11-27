@@ -1,12 +1,7 @@
 const mongoose = require('mongoose');
-const randomUUID = require("crypto");
 
 const lectureSchema = new mongoose.Schema(
     {
-        id: {
-            type: String,
-            default: randomUUID(),
-        },
         title: {
             type: String,
             unique: true,
@@ -21,10 +16,6 @@ const lectureSchema = new mongoose.Schema(
 
 const lessonSchema = new mongoose.Schema(
     {
-        id: {
-            type: String,
-            default: randomUUID(),
-        },
         title: {
             type: String,
             required: true,
