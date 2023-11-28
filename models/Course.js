@@ -5,11 +5,9 @@ const lectureSchema = new mongoose.Schema(
         title: {
             type: String,
             unique: true,
-            required: true,
         },
         video: {
             type: String,
-            required: true,
         }
     }
 );
@@ -18,7 +16,6 @@ const lessonSchema = new mongoose.Schema(
     {
         title: {
             type: String,
-            required: true,
             unique: true
         },
         lectures: [lectureSchema]

@@ -1,5 +1,6 @@
 const express = require('express');
 const courseController = require('../controllers/courseController');
+const lessonController = require("../controllers/lessonController");
 
 const router = express.Router();
 
@@ -24,26 +25,22 @@ router
     .route('/:id')
     .get(courseController.getCourse);
 
-//retrieve single course video and metadata from firebase storage by end user
-// router
-//     .route('/:filename')
-//     .get(courseController.getCourse)
-//     .post(courseController.UpdateCourse)
-//     .delete(courseController.deleteCourse);
+router
+    .route('/:courseId/lessons')
+    .post(lessonController.createLesson)
+    .get(lessonController.getLessons);
 
-// //get all courses by admin
-// router
-//     .route('/admin')
-//     .get(courseController.getAllCourseAdmin);
+router
+    .route('/:courseId/lessons/:lessonId')
+    .get(lessonController.getLesson);
 
-// router
-//     .route('/:filename/update')
-//     .get(courseController.getUpdateCoursePage);
+router
+    .route('/:courseId/lessons/:lessonId/lectures')
+    .post(lessonController.createLecture)
+    .get(lessonController.getLectures);
 
-// Update course video metadata by admin
-// router.put('/courses/:filename', );
+router
+    .route('/:courseId/lessons/:lessonId/lectures/:lectureId');
 
-// Delete course video and metadata from firebase storage by admin
-// router.delete('/courses/:filename');
 
 module.exports = router;
