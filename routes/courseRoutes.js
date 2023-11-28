@@ -40,7 +40,8 @@ router
     .get(lessonController.getLectures);
 
 router
-    .route('/:courseId/lessons/:lessonId/lectures/:lectureId');
+    .route('/:courseId/lessons/:lessonId/lectures/:lectureId')
+    .get(lessonController.getLecture);
 
 
 module.exports = router;

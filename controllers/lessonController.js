@@ -92,7 +92,7 @@ exports.getLecture = async (req, res) => {
     const lectureId = req.params.lectureId;
 
     const course = await Course.findById(courseId);
-    if (course) {
+    if (!course) {
       res.status(404).json({ message: "Course not found" });
     }
 
@@ -102,7 +102,7 @@ exports.getLecture = async (req, res) => {
     }
 
     const lecture = lesson.lectures.id(lectureId);
-    if (lecture) {
+    if (!lecture) {
       res.status(404).json({ message: "Lecture not found" });
     }
 
