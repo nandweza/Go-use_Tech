@@ -1045,6 +1045,26 @@ footer .footer-text {
     }
 }
 
+/* lectures */
+.lecture-list {
+    list-style-type: disc;
+    font-size: 20px;
+}
+
+.bg-color {
+    background-color: var(--main-orange);
+    color: var(--main-white);
+}
+
+.course-btn {
+    background-color: var(--main-orange);
+    border: none;
+    font-size: 18px;
+}
+.course-btn:hover {
+    background-color: var(--main-black);
+}
+
 /* admin page */
 .sidebar {
     color: var(--main-black);

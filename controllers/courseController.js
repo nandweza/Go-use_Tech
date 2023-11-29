@@ -9,8 +9,8 @@ exports.getCourses = async (req, res) => {
     try {
         const courses = await Course.find();
 
-        // res.render('course/courses', { courses });
-        res.status(200).json({ message: 'success', courses });
+        res.render('course/courses', { courses });
+        // res.status(200).json({ message: 'success', courses });
     } catch (error) {
         console.log(error);
         res.status(500).json(error);
@@ -22,8 +22,8 @@ exports.getCourse = async (req, res) => {
         const { id } = req.params;
         const course = await Course.findOne({ _id: id });
 
-        // res.render('course/singleCourse', { course: course });
-        res.status(200).json(course);
+        res.render('course/singleCourse', { course: course });
+        // res.status(200).json(course);
     } catch (error) {
         console.log(error);
         res.status(500).json({ message: 'something went wrong!' });
@@ -46,8 +46,8 @@ exports.createCourse = async (req, res) => {
         const { title, description, author, courseImg } = req.body;
         const course = new Course({ title, description, author, courseImg });
         await course.save();
-        // res.redirect('/api/courses');
-        res.status(201).json({ message: 'course created!' })
+        res.redirect('/api/courses');
+        // res.status(201).json({ message: 'course created!' })
     } catch (error) {
         res.status(400).send(error);
     }

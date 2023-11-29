@@ -1,0 +1,54 @@
+<%- include('../partials/head.ejs') %>
+
+<body>
+    <%- include('../partials/course-navbar.ejs') %>
+    <div class="bg-color  p-5" width="100%">
+        <h2 class="py-5">
+            <%= lesson.title %>
+        </h2>
+    </div>
+    <div class="container py-4">
+        <div class="row mx-2">
+            <div class="col-lg-8 py-2 course-section">
+                <% if (lesson.lectures.length > 0) { %>
+                    <% lesson.lectures.forEach((lecture) => { %>
+                        <div>
+                            <li class="lecture-list py-4">
+                                <%= lecture.title %>
+                            </li>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <a 
+                                    href="https://youtu.be/Ez1eT7PUqjE?si=GjPs9mPLSpzkA_Lg"
+                                >
+                                    <button class="btn btn-primary btn-lg p-2 fw-bold course-btn">
+                                        Watch Video
+                                    </button>
+                                </a>
+                            </div>
+                            <div class="col-md-6">
+                                <a href="">
+                                    <button class="btn btn-primary btn-lg p-2 fw-bold course-btn">
+                                        Discussion
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                        <hr>
+                    <% }) %>
+                <% } else { %>
+                    <div style="margin: auto;" class="py-5">
+                        <h2 class="py-5">
+                            There are no Lectures to display...
+                        </h2>
+                    </div>
+                <% } %>
+            </div>
+            <div class="col-lg-4 bg-color">
+                <div></div>
+            </div>
+        </div>
+    </div>
+</body>
+<%- include('../partials/footer.ejs') %>

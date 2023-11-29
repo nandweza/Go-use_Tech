@@ -32,7 +32,8 @@ exports.getLesson = async (req, res) => {
       return res.status(404).json({ message: "Lesson not found" });
     }
 
-    res.status(200).json(lesson);
+    // res.status(200).json(lesson);
+    res.render('course/lessons', { lesson });
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: error.message });
