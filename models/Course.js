@@ -1,24 +1,16 @@
 const mongoose = require('mongoose');
 
-const lectureSchema = new mongoose.Schema(
-    {
-        title: {
-            type: String,
-            unique: true,
-        },
-        video: {
-            type: String,
-        }
-    }
-);
-
 const lessonSchema = new mongoose.Schema(
     {
         title: {
             type: String,
-            unique: true
         },
-        lectures: [lectureSchema]
+        video: {
+            type: String,
+        },
+        notes: {
+            type: String,
+        }
     }
 )
 
@@ -33,7 +25,7 @@ const courseSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
-        courseImg: {
+        img: {
             type: String
         },
         author: {

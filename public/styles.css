@@ -1427,3 +1427,35 @@ footer .footer-text {
 .user-profile-text {
     font-size: 1.2rem;
 }
+
+/* Lesson pop-up form */
+.modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-left: 50px;
+    margin-top: 100px;
+    transform: translate(-50%, -50%);
+    width: 60%;
+    padding: 20px;
+    border-radius: 8px;
+    z-index: 1;
+}
+
+.modal-content {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 50px;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: #555;
+}

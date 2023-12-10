@@ -1,5 +1,6 @@
 const express = require('express');
 const blogController = require('../controllers/blogController');
+// const uploads = require('../middleware/imageUpload');
 
 const router = express.Router();
 

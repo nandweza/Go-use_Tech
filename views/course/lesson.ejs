@@ -1,0 +1,16 @@
+<%- include('../partials/head.ejs') %>
+
+<body>
+    <%- include('../partials/course-navbar.ejs') %>
+    <div class="bg-color  p-5" width="100%">
+        <h2 class="py-2">
+            <%= lesson.title %>
+        </h2>
+    </div>
+    <div class="container py-4">
+        <video width="100%" height="70%" controls>
+            <source src="/uploads/<%= lesson.video %>" type="video/mp4">
+        </video>
+    </div>
+</body>
+
