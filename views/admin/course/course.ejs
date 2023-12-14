@@ -33,7 +33,7 @@
                                 value="<%= course._id %>"
                                 type="submit"
                             >
-                                DELETE LESSON
+                                DELETE COURSE
                             </button>
                         </form>
                     </div>
@@ -66,15 +66,21 @@
                                     action="/api/course/lesson/delete" 
                                     method="post"
                                 >
+                                    <input 
+                                        type="hidden" 
+                                        name="courseId" 
+                                        value="<%= course._id %>"
+                                    >
                                     <button 
                                         class="btn btn-lg btn-primary"
-                                        name="deleteBtn"
+                                        name="lessonId"
                                         value="<%= lesson._id %>"
                                         type="submit"
                                     >
                                         DELETE LESSON
                                     </button>
                                 </form>
+
                             </div>
                         </div>
                         <div>

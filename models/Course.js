@@ -26,7 +26,8 @@ const courseSchema = new mongoose.Schema(
             required: true,
         },
         img: {
-            type: String
+            type: String,
+            unique: true
         },
         author: {
             type: String

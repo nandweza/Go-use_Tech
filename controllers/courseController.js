@@ -1,6 +1,8 @@
 const Course = require('../models/Course');
 // const User = require('../models/User');
 const multer = require('multer');
+const fs = require('fs');
+const path = require('path');
 const filename = require('../middleware/imageUpload');
 
 
@@ -82,15 +84,31 @@ exports.getCourseAdmin = async (req, res) => {
     }
 }
 
-exports.deleteCourse = (req, res) => {
-    const deleteCourse = req.body.deleteBtn;
+//delete course
 
-    Course.findByIdAndDelete(deleteCourse, (err) => {
-        if (!err) {
-            console.log("deletion success!");
-            res.redirect("/api/course/admin");
-        } else {
-            console.log(err);
+exports.deleteCourse = async (req, res) => {
+    try {
+        const courseId = req.body.deleteBtn;
+  
+        // Find the course by courseId
+        const course = await Course.findById(courseId);
+  
+        if (!course) {
+            return res.status(404).json({ message: 'Course not found' });
         }
-    });
-}
+  
+        // Delete associated images in the uploads dir
+        if (course.img) {
+            const imgPath = path.join(__dirname, '../public/uploads', course.img);
+            fs.unlinkSync(imgPath);
+        }
+  
+        // Remove the course from the database
+        await Course.findByIdAndDelete(courseId);
+  
+        res.redirect("/api/course/admin");
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: error.message });
+    }
+};
