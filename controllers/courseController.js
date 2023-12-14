@@ -81,3 +81,16 @@ exports.getCourseAdmin = async (req, res) => {
         res.status(500).json({ message: 'something went wrong!' });
     }
 }
+
+exports.deleteCourse = (req, res) => {
+    const deleteCourse = req.body.deleteBtn;
+
+    Course.findByIdAndDelete(deleteCourse, (err) => {
+        if (!err) {
+            console.log("deletion success!");
+            res.redirect("/api/course/admin");
+        } else {
+            console.log(err);
+        }
+    });
+}

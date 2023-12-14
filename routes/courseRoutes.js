@@ -22,6 +22,10 @@ router
     .get(lessonController.getLessons);
 
 router
+    .route('/delete')
+    .post(courseController.deleteCourse);
+
+router
     .route('/')
     .get(courseController.getCourses);
 
@@ -36,5 +40,9 @@ router
 router
     .route('/:courseId/lesson/:lessonId/notes')
     .get(lessonController.getNotes);
+
+router
+    .route('/lesson/delete')
+    .post(lessonController.deleteLesson);
 
 module.exports = router;

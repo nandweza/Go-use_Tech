@@ -117,35 +117,16 @@ exports.createLesson = (async (req, res) => {
 });
 
 //delete a lesson
-exports.deleteLesson = async (req, res) => {
-  try {
-    const courseId = req.params.courseId;
-    const lessonId = req.params.lessonId;
+exports.deleteLesson = (req, res) => {
+  const deleteLesson = req.body.deleteBtn;
 
-    // Find the course by courseId
-    const course = await Course.findById(courseId);
-
-    if (!course) {
-      return res.status(404).json({ message: 'Course not found' });
-    }
-
-    // Find the lesson by lessonId
-    const lesson = course.lessons.id(lessonId);
-
-    if (!lesson) {
-      return res.status(404).json({ message: 'Lesson not found' });
-    }
-
-    // Remove the lesson from the lessons array
-    lesson.remove();
-
-    // Save the updated course
-    await course.save();
-
-    res.status(200).json({ message: 'Lesson deleted successfully' });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: error.message });
-  }
-};
+  Course.findByIdAndDelete(deleteLesson, (err) => {
+      if (!err) {
+          console.log("deletion success!");
+          res.redirect("/api/course/admin");
+      } else {
+          console.log(err);
+      }
+  });
+}
 

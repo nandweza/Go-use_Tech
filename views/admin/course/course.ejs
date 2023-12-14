@@ -9,21 +9,35 @@
         <hr class="border">
         <div class="all-courses px-5">
             <div class="course-wrapper px-5">
-                <span class="p-2">
-                    <button class="btn btn-primary btn-lg" id="addLessonBtn">
-                        Add Lesson
-                    </button>
-                    <a href="">
-                        <button class="btn btn-primary btn-lg">
-                            Update Course
+                <div class="p-2 row">
+                    <div class="col-md-4">
+                        <button class="btn btn-primary btn-lg" id="addLessonBtn">
+                            Add Lesson
                         </button>
-                    </a>
-                    <a href="">
-                        <button class="btn btn-primary btn-lg">
-                            Delete Course
-                        </button>
-                    </a>
-                </span>
+                    </div>
+                    <div class="col-md-4">
+                        <a href="">
+                            <button class="btn btn-primary btn-lg">
+                                Update Course
+                            </button>
+                        </a>
+                    </div>
+                    <div class="col-md-4">
+                        <form 
+                            action="/api/course/delete" 
+                            method="post"
+                        >
+                            <button 
+                                class="btn btn-lg btn-primary"
+                                name="deleteBtn"
+                                value="<%= course._id %>"
+                                type="submit"
+                            >
+                                DELETE LESSON
+                            </button>
+                        </form>
+                    </div>
+                </div>
                 <div class="img-div pt-2">
                     <img src="/uploads/<%= course.img %>" width="100%" height="225">
                 </div>
@@ -48,9 +62,19 @@
                                 </h4>
                             </div>
                             <div class="col">
-                                <button class="btn btn-lg btn-primary">
-                                    DELETE LESSON
-                                </button>
+                                <form 
+                                    action="/api/course/lesson/delete" 
+                                    method="post"
+                                >
+                                    <button 
+                                        class="btn btn-lg btn-primary"
+                                        name="deleteBtn"
+                                        value="<%= lesson._id %>"
+                                        type="submit"
+                                    >
+                                        DELETE LESSON
+                                    </button>
+                                </form>
                             </div>
                         </div>
                         <div>

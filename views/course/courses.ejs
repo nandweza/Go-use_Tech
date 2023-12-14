@@ -24,7 +24,7 @@
                             />
                             <div class="card-body course-content">
                                 <h4 class="card-title fw-bold">
-                                    <%= course.title %>
+                                    <%= course.title.substring(0, 28) %>
                                 </h4>
                                 <p class="card-text">
                                     <%= course.description.substring(0, 150) + "..." %>
