@@ -40,4 +40,3 @@ exports.subscribeEmail = (req, res) => {
 exports.subscribeFailure = (req, res) => {
     res.redirect('/');
 }
-``

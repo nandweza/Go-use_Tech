@@ -61,7 +61,7 @@ exports.createCourse = async (req, res) => {
 
 exports.getCoursesAdmin = async (req, res) => {
     try {
-        const courses = await Course.find();
+        const courses = await Course.find().sort({ createdAt: -1 });
 
         res.render('admin/course/adminCourses', { courses });
         // res.status(200).json({ message: 'success', courses });
