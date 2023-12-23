@@ -16,8 +16,8 @@
                         </button>
                     </div>
                     <div class="col-md-4">
-                        <a href="">
-                            <button class="btn btn-primary btn-lg">
+                        <a href="/api/course/admin/update/<%= course._id %>">
+                            <button class="btn btn-primary btn-lg" id="updateCourseBtn">
                                 Update Course
                             </button>
                         </a>
@@ -80,7 +80,6 @@
                                         DELETE LESSON
                                     </button>
                                 </form>
-
                             </div>
                         </div>
                         <div>
@@ -117,14 +116,14 @@
                 </div>
                 <div class="form-group pb-2">
                     <label for="title">Lesson Notes:</label>
-                    <textarea 
-                    class="form-control" 
-                    name="notes" 
-                    id="notes" 
-                    cols="30" 
-                    rows="10" 
-                    placeholder=""
-                >
+                    <textarea
+                        class="form-control"
+                        name="notes"
+                        id="notes"
+                        cols="30"
+                        rows="10"
+                        placeholder=""
+                    >
                 </textarea>
                 </div>
                 <button type="submit" class="btn btn-lg btn-primary py-2">Add Lesson</button>
@@ -162,6 +161,25 @@
         function closeModal() {
             modal.style.display = "none";
         }
+
+        var quill = new Quill('#notes', {
+            theme: 'snow'  // 'snow' is one of the Quill themes
+        });
+
+        // Get the HTML element where you want to display the formatted content
+        var formattedContent = document.getElementById('formatted-content');
+
+         // Listen for changes in the Quill editor
+        quill.on('text-change', function(delta, oldDelta, source) {
+            // Check if the change was made by the user
+            if (source === 'user') {
+                // Get the HTML content from Quill
+                var htmlContent = quill.root.innerHTML;
+
+                // Set the HTML content to the separate display element
+                formattedContent.innerHTML = htmlContent;
+            }
+        });
     </script>
 </body>
 

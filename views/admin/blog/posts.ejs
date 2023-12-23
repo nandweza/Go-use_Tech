@@ -13,7 +13,7 @@
                             <div class="card p-2">
                                 <div class="img-div">
                                     <img 
-                                        src="<%= post.blogimg %>"
+                                        src="/uploads/<%= post.img %>"
                                         alt="Post image" 
                                         width="100%" 
                                         height="200"
@@ -34,7 +34,7 @@
                                     <div class="flex-btn">
                                         <div class="pb-3">
                                             <form 
-                                                action="/delete" 
+                                                action="/api/admin/blog/delete" 
                                                 method="POST" 
                                                 class=""
                                             >
@@ -50,7 +50,7 @@
                                         </div>
                                         <div class="pb-3">
                                             <a 
-                                                href="/blog/update/<%= post._id %>" 
+                                                href="/api/admin/blog/update/<%= post._id %>" 
                                                 class=""
                                             >
                                                 <button 
@@ -62,8 +62,7 @@
                                         </div>
                                         <div class="pb-3">
                                             <a 
-                                                href="/blog/admin/<%= post._id %>" 
-                                                target="_blank"
+                                                href="/api/admin/blog/<%= post._id %>"
                                             >
                                                 <button 
                                                     class="btn btn-primary btn-lg p-2"

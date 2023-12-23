@@ -12,7 +12,7 @@ exports.getLessons = async (req, res) => {
         const courseId = req.params.courseId;
         const course = await Course.findById(courseId);
         if (!course) {
-        return res.status(404).json({ message: "Course not found" });
+            return res.status(404).json({ message: "Course not found" });
         }
         const lessons = course.lessons;
         res.status(200).json(lessons);
@@ -88,9 +88,9 @@ exports.createLesson = (async (req, res) => {
 
 
         const newLesson = {
-        title,
-        video,
-        notes,
+            title,
+            video,
+            notes,
         };
 
         course.lessons.push(newLesson);

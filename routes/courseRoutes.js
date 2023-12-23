@@ -22,6 +22,11 @@ router
     .get(lessonController.getLessons);
 
 router
+    .route('/admin/update/:courseId')
+    .get(courseController.getUpdateCourse)
+    .post(uploads, courseController.updateCourse);
+
+router
     .route('/delete')
     .post(courseController.deleteCourse);
 

@@ -1,0 +1,72 @@
+<%- include('../partials/head.ejs') %>
+<body>
+    <div class="intro">
+        <%- include('../partials/nav.ejs') %>
+        <div id="blog-carousel" class="carousel slide d-flex justify-content-center align-items-center" data-bs-ride="carousel" style="height: 75vh;">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="text-center">
+                        <h2 class="blog-header fs-*">Go UseTech Blog ...</h2>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="text-center">
+                        <em class="carousel-em fs-*">Insights and inspiration for lifelong learners</em>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="text-center">
+                        <em class="carousel-em fs-*">Uncovering the Hottest Trends in Technology</em>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#blog-carousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#blog-carousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+    <div class="container px-4">
+        <div class="row mb-5 gx-5 mt-5">
+            <% if (posts.length > 0) { %>
+                <% posts.forEach((post) => { %>
+                    <div class="fblog col-lg-4 col-md-6 mb-4">
+                        <div class="img-div">
+                            <img 
+                                src="/uploads/<%= post.img %>" 
+                                alt="Post Image" 
+                                class="img-responsive"
+                            >
+                        </div>
+                        <br>
+                        <br>
+                        <div class="title">
+                            <%= post.title.substring(0, 40) + "..." %>
+                        </div>
+                        <div class="desc">
+                            <p>
+                                <%= post.content.substring(0, 100) + "..." %>
+                                <a 
+                                    href="/blog/<%= post.id %>" 
+                                    style="color: red;"
+                                >
+                                    Read more.
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                <% }) %>
+            <% } else { %>
+                <div class="text-center fw-bold" style="font-size: 18px;">
+                    There are no blog posts to display at the moment...
+                </div>
+            <% } %>
+        </div>
+    </div>
+    <%- include('../partials/footer.ejs') %>
+</body>
+</html>

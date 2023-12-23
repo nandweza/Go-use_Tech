@@ -1,0 +1,33 @@
+<%- include('../../partials/head.ejs') %>
+
+<body>
+	<%- include('../../partials/admin-navbar.ejs') %>
+	<div class="admin">
+		<h3 class="dashboard mt-4 mb-2">Blog POst</h3>
+		<div class="admin-wrapper">
+			<div id="post" class="">
+    			<div class="pt-5">
+					<div class="row">
+						<div class="col-lg-12 col-md-12">
+							<div class="post-img">
+								<img 
+									src="/uploads/<%= post.img %>"
+									alt="Post Image"
+									class="img-responsive"
+									width="80%"
+									height="600"
+								>
+							</div>
+							<h2 class="post-title fw-bold pt-5 pb-2">
+								<%= post.title %>
+							</h2>
+							<div class="post-content">
+								<%= post.content %>
+							</div>
+						</div>
+					</div>
+      			</div>
+    		</div>
+		</div>
+	</div>
+</body>

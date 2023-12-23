@@ -20,7 +20,7 @@ exports.sendMessage = (req, res) => {
     const { name, email, subject, message } = req.body;
 
     const mailOptions = {
-        from: email,
+        from: name,
         to: process.env.EMAIL,
         subject: subject,
         text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`

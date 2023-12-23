@@ -7,4 +7,8 @@ router
     .route('/')
     .get(userController.getAllUsers);
 
+router
+    .route('/delete')
+    .post(userController.deleteUser);
+
 module.exports = router;

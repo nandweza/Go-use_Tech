@@ -34,6 +34,21 @@
                                         <i class="fa fa-flag"></i> <%= user.country %>
                                     </h5>
                                 </div>
+                                <div>
+                                    <form 
+                                        action="/api/user/delete" 
+                                        method="post"
+                                    >
+                                        <button 
+                                            class="btn btn-lg btn-primary"
+                                            name="deleteBtn"
+                                            value="<%= user._id %>"
+                                            type="submit"
+                                        >
+                                            Remove User
+                                        </button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     <% }) %>

@@ -84,6 +84,38 @@ exports.getCourseAdmin = async (req, res) => {
     }
 }
 
+//get updateCourse page
+exports.getUpdateCourse = async (req, res) => {
+    try {
+        const { courseId } = req.params;
+        const getData = await Course.findOne({ _id: courseId });
+        res.render('admin/course/updateCourse', { course: getData });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "Something went wrong" });
+    }
+}
+
+// update course
+exports.updateCourse = async (req, res) => {
+    try {
+        const { courseId } = req.params;
+        const { title, description, author } = req.body;
+        const img = req.file ? req.file.filename : undefined;
+
+        try {
+            await Course.updateOne({ _id: courseId }, { title, img, description, author });
+            res.redirect(`/api/course/admin/${courseId}`);;
+        } catch (updateError) {
+            console.log(updateError);
+            res.status(500).json({ message: "Error updating course." });
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: `Something went wrong: ${error.message}` });
+    }
+}
+
 //delete course
 
 exports.deleteCourse = async (req, res) => {
