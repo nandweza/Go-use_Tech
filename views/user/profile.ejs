@@ -1,0 +1,45 @@
+<%- include('../partials/head.ejs') %>
+
+<body>
+    <%- include('../partials/course-navbar.ejs') %>
+
+    <div class="container">
+        <h3 class="p-5">Profile</h3>
+        <div class="container pb-5">
+            <div class="card text-center p-2">
+                <img 
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj7j9IDpZsbq4HghrNPneZustxYupRgrt0oQ&usqp=CAU" 
+                    width="150" 
+                    height="150"
+                    alt="Avatar"
+                    class="mx-auto"
+                >
+                <h3 class="p-2">
+                    <%= user.fname %>
+                </h3>
+                <p>Member since <%= user.createdAt.toDateString() %></p>
+            </div>
+            <div class="py-5">
+                <h5>Full Name</h5>
+                <h4>
+                    <%= user.fname %> <%= user.lname %>
+                </h4>
+                <hr>
+                <h5>Email</h5>
+                <h4>
+                    <%= user.username %>
+                </h4>
+                <hr>
+                <h5>Country</h5>
+                <h4>
+                    <%= user.country %>
+                </h4>
+                <hr>
+                <h5>Profession</h5>
+                <h4>
+                    <%= user.profession %>
+                </h4>
+            </div>
+        </div>
+    </div>
+</body>

@@ -11,4 +11,8 @@ router
     .route('/delete')
     .post(userController.deleteUser);
 
+router
+    .route('/profile')
+    .get(userController.userProfile);
+
 module.exports = router;

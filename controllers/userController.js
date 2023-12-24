@@ -31,3 +31,13 @@ exports.deleteUser = async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 };
+
+exports.userProfile = async (req, res) => {
+    try {
+        const user = User.findOne();
+        res.render('user/profile', { user: req.user });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "Something went wrong" });
+    }
+}

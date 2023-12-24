@@ -1,5 +1,5 @@
 const Course = require('../models/Course');
-// const User = require('../models/User');
+const User = require('../models/User');
 const multer = require('multer');
 const fs = require('fs');
 const path = require('path');
@@ -11,8 +11,11 @@ const filename = require('../middleware/imageUpload');
 exports.getCourses = async (req, res) => {
     try {
         const courses = await Course.find().sort({ createdAt: -1 });
+        const user = await User.findOne();
+        // const userName = req.user.username;
+        // const username = userName.split('@')[0]
 
-        res.render('course/courses', { courses });
+        res.render('course/courses', { courses, user: req.user });
         // res.status(200).json({ message: 'success', courses });
     } catch (error) {
         console.log(error);
