@@ -27,8 +27,9 @@ exports.getCourse = async (req, res) => {
     try {
         const { courseId } = req.params;
         const course = await Course.findOne({ _id: courseId });
+        const user = await User.findOne();
 
-        res.render('course/singleCourse', { course: course });
+        res.render('course/singleCourse', { course, user: req.user });
         // res.status(200).json(course);
     } catch (error) {
         console.log(error);

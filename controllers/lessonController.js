@@ -1,7 +1,8 @@
-const Course = require('../models/Course');
 const multer = require('multer');
 const fs = require('fs');
 const path = require('path');
+const Course = require('../models/Course');
+const User = require('../models/User');
 const filename = require('../middleware/videoUpload');
 
 
@@ -34,13 +35,15 @@ exports.getLesson = async (req, res) => {
         return res.status(404).json({ message: "Course not found" });
         }
 
+        const user = await User.findOne();
+
         const lesson = course.lessons.id(lessonId);
         if (!lesson) {
         return res.status(404).json({ message: "Lesson not found" });
         }
 
         // res.status(200).json(lesson);
-        res.render('course/lesson', { lesson });
+        res.render('course/lesson', { lesson, user: req.user });
     } catch (error) {
         console.log(error);
         res.status(500).json({ error: error.message });
@@ -59,13 +62,15 @@ exports.getNotes = async (req, res) => {
         return res.status(404).json({ message: "Course not found" });
         }
 
+        const user = await User.findOne();
+
         const lesson = course.lessons.id(lessonId);
         if (!lesson) {
         return res.status(404).json({ message: "Lesson not found" });
         }
 
         // res.status(200).json(lesson);
-        res.render('course/notes', { lesson });
+        res.render('course/notes', { lesson, user: req.user });
     } catch (error) {
         console.log(error);
         res.status(500).json({ error: error.message });

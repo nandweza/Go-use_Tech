@@ -24,13 +24,13 @@
                                 </span>
                                 <div class="">
                                     <h3 class="title-text fw-bold p-2 pb-3">
-                                        <%= course.title %>
+                                        <%= course.title.substring(0, 30) + '...' %>
                                     </h3>
-                                    <div class="desc">
-                                        <%= course.description %>
+                                    <div class="desc p-2">
+                                        <%= course.description.substring(0, 200) + '......' %>
                                     </div>
                                 </div>
-                                <span>
+                                <span class="pb-3">
                                     <a href="/api/course/admin/<%= course._id %>">
                                         <button class="btn btn-lg btn-primary p-2">View Course</button>
                                     </a>

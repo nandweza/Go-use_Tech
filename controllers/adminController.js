@@ -13,8 +13,8 @@ exports.getAdminPage = async (req, res) => {
         const userCount = await User.countDocuments({isAdmin: false});
   
         res.render('admin/admin', {
-            courseCount: courseCount,
-            userCount: userCount
+            courseCount,
+            userCount
         });
     } catch (error) {
         console.log('Error retrieving files:', error);
@@ -61,12 +61,7 @@ exports.getPostAdmin = async (req, res) => {
 }
 
 exports.getCreatePost = (req, res) => {
-    try {
-        res.render('admin/blog/createPost');
-    } catch (error) {
-        console.log(error);
-        res.status(500).json({ message: "Something went wrong" });
-    }
+    render('admin/blog/createPost');
 }
 
 exports.createPost = async (req, res) => {
