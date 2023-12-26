@@ -27,9 +27,16 @@ exports.subscribeEmail = (req, res) => {
         } else {
             res.render("subscribe/failure");
         }
+        // response.on("data", function(data){
+        //     console.log(JSON.parse(data));
+        // })
         response.on("data", function(data){
-            console.log(JSON.parse(data));
-        })
+            try {
+                console.log(JSON.parse(data));
+            } catch (error) {
+                console.error("Error parsing JSON:", error);
+            }
+        })        
     })
 
     request.write(jsonData);
