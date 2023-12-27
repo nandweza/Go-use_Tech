@@ -5,7 +5,7 @@ const findOrCreate = require('mongoose-findorcreate');
 
 const UserSchema = new mongoose.Schema(
     {
-        username: {  type: String, unique: true },
+        username: {  type: String, unique: true, required: true, match: /^[^\s@]+@[^\s@]+\.[^\s@]+$/ },
         password: { type: String, match:/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/, minlength: 6 },
         fname: { type: String },
         lname: { type: String },

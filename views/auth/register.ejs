@@ -9,6 +9,7 @@
                             id="signup-form" 
                             method="post" 
                             action="/auth/register"
+                            onsubmit="return validateEmailDomain()"
                         >
                             <h2>Sign Up</h2>
                             <div class="flex-names">
@@ -160,25 +161,124 @@
         </div>
     </body>
     <script>
+        // let passwordInput = document.getElementById('password'),
+        //     toggle = document.getElementById('btnToggle'),
+        //     icon = document.getElementById('eyeIcon');
 
-        let passwordInput = document.getElementById('password'),
-            toggle = document.getElementById('btnToggle'),
-            icon = document.getElementById('eyeIcon');
+        // function togglePassword() {
+        //     if (passwordInput.type === 'password') {
+        //         passwordInput.type = 'text';
+        //         icon.classList.add("fa-eye-slash");
+        //     } else {
+        //         passwordInput.type = 'password';
+        //         icon.classList.remove("fa-eye-slash");
+        //     }
+        // }
 
-            function togglePassword() {
-                if (passwordInput.type === 'password') {
-                    passwordInput.type = 'text';
-                    icon.classList.add("fa-eye-slash");
-                } else {
-                    passwordInput.type = 'password';
-                    icon.classList.remove("fa-eye-slash");
-                }
+        // function checkInput() {
+
+        // }
+
+        // toggle.addEventListener('click', togglePassword, false);
+        // passwordInput.addEventListener('keyup', checkInput, false);
+
+        // function validateEmailDomain() {
+        //     let emailInput = document.getElementById('email');
+        //     let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        //     let validDomains = ['gmail.com', 'yahoo.com', 'outlook.com'];
+
+        //     if (!emailRegex.test(emailInput.value)) {
+        //         alert('Invalid email format. Please use a valid email address.');
+        //         return false; // Prevent form submission
+        //     }
+
+        //     let [, domain] = emailInput.value.split('@');
+
+        //     if (!validDomains.includes(domain)) {
+        //         alert('Invalid email domain. Please use a valid email address.');
+        //         return false; // Prevent form submission
+        //     }
+
+        //     // Additional validation logic if needed
+
+        //     return true; // Allow form submission
+        // }
+
+        // function checkInput() {
+        //     let password = passwordInput.value;
+
+        //     // Regular expressions for checking password requirements
+        //     let letterRegex = /[a-zA-Z]/;
+        //     let numberRegex = /\d/;
+        //     let specialCharRegex = /[!@#$%^&*(),.?":{}|<>]/;
+
+        //     if (
+        //         !letterRegex.test(password) ||
+        //         !numberRegex.test(password) ||
+        //         !specialCharRegex.test(password)
+        //     ) {
+        //         alert('Password must include letters, numbers, and special characters.');
+        //     }
+        // }
+
+    let passwordInput = document.getElementById('password');
+    let toggle = document.getElementById('btnToggle');
+    let icon = document.getElementById('eyeIcon');
+
+    function togglePassword() {
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            icon.classList.add('fa-eye-slash');
+        } else {
+            passwordInput.type = 'password';
+            icon.classList.remove('fa-eye-slash');
+        }
+    }
+
+    function checkInput(event) {
+        // Check if the key pressed is the Enter key (key code 13)
+        if (event.keyCode === 13) {
+            let password = passwordInput.value;
+
+            // Regular expressions for checking password requirements
+            let letterRegex = /[a-zA-Z]/;
+            let numberRegex = /\d/;
+            let specialCharRegex = /[!@#$%^&*(),.?":{}|<>]/;
+
+            if (
+                !letterRegex.test(password) ||
+                !numberRegex.test(password) ||
+                !specialCharRegex.test(password)
+            ) {
+                alert('Password must include letters, numbers, and special characters.');
+                event.preventDefault(); // Prevent form submission
             }
+        }
+    }
 
-            function checkInput() {
+    toggle.addEventListener('click', togglePassword, false);
+    passwordInput.addEventListener('keyup', checkInput, false);
 
-            }
+    function validateEmailDomain() {
+        let emailInput = document.getElementById('email');
+        let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        let validDomains = ['gmail.com', 'yahoo.com', 'outlook.com'];
 
-            toggle.addEventListener('click', togglePassword, false);
-            passwordInput.addEventListener('keyup', checkInput, false);
+        if (!emailRegex.test(emailInput.value)) {
+            alert('Invalid email format. Please use a valid email address.');
+            return false; // Prevent form submission
+        }
+
+        let [, domain] = emailInput.value.split('@');
+
+        if (!validDomains.includes(domain)) {
+            alert('Invalid email domain. Please use a valid email address.');
+            return false; // Prevent form submission
+        }
+
+        // Additional validation logic if needed
+
+        return true; // Allow form submission
+    }
+
     </script>

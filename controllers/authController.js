@@ -46,9 +46,21 @@ exports.registerUser = (req, res) => {
         isAdmin: false,
     });
 
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(req.body.username)) {
+        return res.status(400).json({ message: 'Invalid email format' });
+    }
+
+    // Check if the email address has a valid domain
+    // const validEmailDomains = ['gmail.com', 'yahoo.com', 'outlook.com'];
+    // const userDomain = req.body.username.split('@')[1];
+    // if (!validEmailDomains.includes(userDomain)) {
+    //     return res.status(400).json({ message: 'Invalid email domain' });
+    // }
+
     User.register(newUser, req.body.password, (err, user) => {
         if (err) {
-            res.status(500).send(err);
+            res.status(500).redirect('/api/error/404');
         } else {
             passport.authenticate('local')(req, res, () => {
                 res.redirect('/api/course/');

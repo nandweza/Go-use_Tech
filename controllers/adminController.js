@@ -69,7 +69,6 @@ exports.createPost = async (req, res) => {
         const { title, content } = req.body;
         const img = req.file.filename;
 
-
         if (!title || !content) {
             return res.redirect("/api/admin/blog/create");
         }
