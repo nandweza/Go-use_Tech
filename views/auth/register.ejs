@@ -1,226 +1,185 @@
 <%- include('../partials/head.ejs') %>
 
-    <body>
-        <div class="login-main register-main">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6 col-md-6 col-sm-12">
-                        <form 
-                            id="signup-form" 
-                            method="post" 
-                            action="/auth/register"
-                            onsubmit="return validateEmailDomain()"
-                        >
-                            <h2>Sign Up</h2>
-                            <div class="flex-names">
-                                <div class="input-group px-1">
-                                    <label 
-                                        for="fname"
-                                    >
-                                        First Name<span style="color: red;">*</span>
-                                    </label>
-                                    <input 
-                                        class="form-control input-adjust" 
-                                        type="text" 
-                                        id="fname" 
-                                        name="fname" 
-                                        placeholder="eg Jon" 
-                                        required
-                                    >
-                                </div>
-                                <div class="input-group px-1">
-                                    <label for="lname">Last Name<span style="color: red;">*</span></label>
-                                    <input class="form-control input-adjust" type="text" id="lname" name="lname" placeholder="eg Doe" required>
-                                </div>
-                            </div>
-                            <div class="input-group">
+<body>
+    <div class="login-main register-main">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <form 
+                        id="signup-form" 
+                        method="post" 
+                        action="/auth/register"
+                        onsubmit="return validateEmailDomain()"
+                    >
+                        <h2>Sign Up</h2>
+                        <div class="flex-names">
+                            <div class="input-group px-1">
                                 <label 
-                                    for="country"
+                                    for="fname"
                                 >
-                                    Country<span style="color: red;">*</span>
+                                    First Name<span style="color: red;">*</span>
                                 </label>
                                 <input 
                                     class="form-control input-adjust" 
                                     type="text" 
-                                    id="country" 
-                                    name="country" 
+                                    id="fname" 
+                                    name="fname" 
                                     placeholder="eg Jon" 
+                                    pattern="[A-Za-z]{3,}" 
+                                    title="Minimum 3 characters, only alphabets" 
                                     required
                                 >
                             </div>
-                            <div class="input-group">
-                                <label 
-                                    for="profession"
-                                >
-                                    Profession<span style="color: red;">*</span>
-                                </label>
+                            <div class="input-group px-1">
+                                <label for="lname">Last Name<span style="color: red;">*</span></label>
                                 <input 
                                     class="form-control input-adjust" 
                                     type="text" 
-                                    id="profession" 
-                                    name="profession" 
-                                    placeholder="eg Jon" 
+                                    id="lname" 
+                                    name="lname" 
+                                    placeholder="eg Doe" 
+                                    pattern="[A-Za-z]{3,}" 
+                                    title="Minimum 3 characters, only alphabets" 
                                     required
                                 >
                             </div>
-                            <div class="input-group">
-                                <label 
-                                    for="email"
-                                >
-                                    Email<span style="color: red;">*</span>
-                                </label>
-                                <input 
-                                    class="form-control input-adjust" 
-                                    type="text" 
-                                    id="email" 
-                                    name="username" 
-                                    placeholder="eg jondoe@gmail.com" 
-                                    required
-                                >
-                            </div>
-                            <div class="input-group">
-                                <label 
-                                    for="password"
-                                >
-                                    Password<span style="color: red;">*</span>
-                                    <span class="fs-5 text-muted pass-min">(6 characters minimun)</span>
-                                </label>
-                                <input 
-                                    class="form-control input-adjust" 
-                                    type="password" 
-                                    id="password" 
-                                    name="password" 
-                                    required
-                                >
-                                <button 
-                                    type="button" 
-                                    id="btnToggle" 
-                                    class="toggle"
-                                >
-                                    <i id="eyeIcon" class="fa fa-eye"></i>
-                                </button>
-                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label 
+                                for="country"
+                            >
+                                Country<span style="color: red;">*</span>
+                            </label>
+                            <input 
+                                class="form-control input-adjust" 
+                                type="text" 
+                                id="country" 
+                                name="country" 
+                                placeholder="eg United States" 
+                                pattern="[A-Za-z]{4,}" 
+                                title="Minimum 4 characters, only alphabets" 
+                                required
+                            >
+                        </div>
+                        <div class="input-group">
+                            <label 
+                                for="profession"
+                            >
+                                Profession<span style="color: red;">*</span>
+                            </label>
+                            <input 
+                                class="form-control input-adjust" 
+                                type="text" 
+                                id="profession" 
+                                name="profession" 
+                                placeholder="e.g. Software Engineer" 
+                                pattern="[A-Za-z\s]{4,}" 
+                                title="Minimum 4 characters, only alphabets and spaces" 
+                                required
+                            >
+                        </div>
+                        <div class="input-group">
+                            <label 
+                                for="email"
+                            >
+                                Email<span style="color: red;">*</span>
+                            </label>
+                            <input 
+                                class="form-control input-adjust" 
+                                type="email" 
+                                id="email" 
+                                name="username" 
+                                placeholder="eg jondoe@gmail.com" 
+                                pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}" 
+                                title="Invalid email format" 
+                                required
+                            >
+                        </div>
+                        <div class="input-group">
+                            <label 
+                                for="password"
+                            >
+                                Password<span style="color: red;">*</span>
+                                <span class="fs-5 text-muted pass-min">(6 characters minimum)</span>
+                            </label>
+                            <input 
+                                class="form-control input-adjust" 
+                                type="password" 
+                                id="password" 
+                                name="password" 
+                                pattern=".{6,}" 
+                                title="Minimum 6 characters" 
+                                required
+                            >
                             <button 
-                                class="btn btn-lg btn-primary btn-block button-adjust" 
-                                type="submit"
+                                type="button" 
+                                id="btnToggle" 
+                                class="toggle"
                             >
-                                SIGN UP
+                                <i id="eyeIcon" class="fa fa-eye"></i>
                             </button>
-                            <div class="register fs-*">
-                                Already a member?<a href="/auth/login">Sign in</a>
+                        </div>
+                        <button 
+                            class="btn btn-lg btn-primary btn-block button-adjust" 
+                            type="submit"
+                        >
+                            SIGN UP
+                        </button>
+                        <div class="register fs-*">
+                            Already a member?<a href="/auth/login">Sign in</a>
+                        </div>
+                        <div class="text-center pt-3 back-home">
+                            <a href="/">
+                                <i class="fa fa-arrow-left px-2"></i>
+                                <span>Back to Go UseTech</span>
+                            </a>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 p-5 oauth-login">
+                    <h3 class="text-center fw-bold pt-5">Or Sign Up with</h3>
+                    <div class="row text-center d-flex justify-content-center align-items-center p-5">
+                        <div class="col-lg-6 col-md-12 col-sm-12 p-3 google-oauth">
+                            <div class="card">
+                                <div class="card-body">
+                                    <a 
+                                        class="btn btn-block" 
+                                        href="/auth/google" 
+                                        role="button"
+                                    >
+                                        <i class="fab fa-google"></i>
+                                        <span class="px-2">Google</span>
+                                    </a>
+                                </div>
                             </div>
-                            <div class="text-center pt-3 back-home">
-                                <a href="/">
-                                    <i class="fa fa-arrow-left px-2"></i>
-                                    <span>Back to Go UseTech</span>
-                                </a>
+                        </div>
+                        <div class="col-lg-6 col-md-12 col-sm-12 p-3 facebook-oauth">
+                            <div class="card">
+                                <div class="card-body">
+                                    <a 
+                                        class="btn btn-block" 
+                                        href="/auth/facebook" 
+                                        role="button"
+                                    >
+                                        <i class="fab fa-facebook-square"></i>
+                                        <span class="px-2">Facebook</span>
+                                    </a>
+                              </div>
                             </div>
-                        </form>
+                        </div>
                     </div>
-                    <div class="col-lg-6 col-md-6 col-sm-12 p-5 oauth-login">
-                        <h3 class="text-center fw-bold pt-5">Or Sign Up with</h3>
-                        <div class="row text-center d-flex justify-content-center align-items-center p-5">
-                            <div class="col-lg-6 col-md-12 col-sm-12 p-3 google-oauth">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <a 
-                                            class="btn btn-block" 
-                                            href="/auth/google" 
-                                            role="button"
-                                        >
-                                            <i class="fab fa-google"></i>
-                                            <span class="px-2">Google</span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-12 col-sm-12 p-3 facebook-oauth">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <a 
-                                            class="btn btn-block" 
-                                            href="/auth/facebook" 
-                                            role="button"
-                                        >
-                                            <i class="fab fa-facebook-square"></i>
-                                            <span class="px-2">Facebook</span>
-                                        </a>
-                                  </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="text-center signup-img">
-                            <img 
-                                src="/images/comp-user.png"
-                                alt="computer user image"
-                            >
-                        </div>
+                    <div class="text-center signup-img">
+                        <img 
+                            src="/images/comp-user.png"
+                            alt="computer user image"
+                        >
                     </div>
                 </div>
             </div>
         </div>
-    </body>
-    <script>
-        // let passwordInput = document.getElementById('password'),
-        //     toggle = document.getElementById('btnToggle'),
-        //     icon = document.getElementById('eyeIcon');
-
-        // function togglePassword() {
-        //     if (passwordInput.type === 'password') {
-        //         passwordInput.type = 'text';
-        //         icon.classList.add("fa-eye-slash");
-        //     } else {
-        //         passwordInput.type = 'password';
-        //         icon.classList.remove("fa-eye-slash");
-        //     }
-        // }
-
-        // function checkInput() {
-
-        // }
-
-        // toggle.addEventListener('click', togglePassword, false);
-        // passwordInput.addEventListener('keyup', checkInput, false);
-
-        // function validateEmailDomain() {
-        //     let emailInput = document.getElementById('email');
-        //     let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        //     let validDomains = ['gmail.com', 'yahoo.com', 'outlook.com'];
-
-        //     if (!emailRegex.test(emailInput.value)) {
-        //         alert('Invalid email format. Please use a valid email address.');
-        //         return false; // Prevent form submission
-        //     }
-
-        //     let [, domain] = emailInput.value.split('@');
-
-        //     if (!validDomains.includes(domain)) {
-        //         alert('Invalid email domain. Please use a valid email address.');
-        //         return false; // Prevent form submission
-        //     }
-
-        //     // Additional validation logic if needed
-
-        //     return true; // Allow form submission
-        // }
-
-        // function checkInput() {
-        //     let password = passwordInput.value;
-
-        //     // Regular expressions for checking password requirements
-        //     let letterRegex = /[a-zA-Z]/;
-        //     let numberRegex = /\d/;
-        //     let specialCharRegex = /[!@#$%^&*(),.?":{}|<>]/;
-
-        //     if (
-        //         !letterRegex.test(password) ||
-        //         !numberRegex.test(password) ||
-        //         !specialCharRegex.test(password)
-        //     ) {
-        //         alert('Password must include letters, numbers, and special characters.');
-        //     }
-        // }
-
+    </div>
+</body>
+<script>
     let passwordInput = document.getElementById('password');
     let toggle = document.getElementById('btnToggle');
     let icon = document.getElementById('eyeIcon');
@@ -269,7 +228,12 @@
             return false; // Prevent form submission
         }
 
+        // Additional email validation
         let [, domain] = emailInput.value.split('@');
+        if (domain.length < 2) {
+            alert('Email domain should have a minimum of 2 characters.');
+            return false; // Prevent form submission
+        }
 
         if (!validDomains.includes(domain)) {
             alert('Invalid email domain. Please use a valid email address.');
@@ -280,5 +244,4 @@
 
         return true; // Allow form submission
     }
-
-    </script>
+</script>

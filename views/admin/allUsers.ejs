@@ -4,43 +4,43 @@
     <%- include('../partials/admin-navbar.ejs') %>
 
     <main class="admin">
-        <h3 class="dashboard mt-4 mb-2">Users Data</h3>
+        <h3 class="dashboard mt-4 mb-2">User Data</h3>
         <hr class="border">
         <div class="container pb-5">
-            <div class="row">
-                <% if (users.length > 0) { %>
-                    <% users.forEach((user) => { %>
-                        <div class="col-lg-3 col-md-4 col-sm-6 p-3">
-                            <div class="user-card card p-2">
-                                <div class="text-center">
+            <% if (users.length > 0) { %>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Avatar</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Profession</th>
+                            <th scope="col">Country</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% users.forEach((user) => { %>
+                            <tr>
+                                <td>
                                     <img 
                                         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj7j9IDpZsbq4HghrNPneZustxYupRgrt0oQ&usqp=CAU" 
                                         alt="Users Avatar" 
-                                        width="150" 
-                                        height="150"
+                                        width="50" 
+                                        height="50"
                                     >
-                                </div>
-                                <div class="users py-3 px-2">
-                                    <h4 class="p-1">
-                                        <i class="fa fa-user"></i> <%= user.fname %> <%= user.lname %>
-                                    </h4>
-                                    <h5 class="p-1">
-                                        <i class="fa fa-envelope"></i> <%= user.username.substring(0, 16) %>
-                                    </h5>
-                                    <h5 class="p-1">
-                                        <i class="fa fa-briefcase"></i> <%= user.profession.substring(0, 12) %>
-                                    </h5>
-                                    <h5 class="p-1">
-                                        <i class="fa fa-flag"></i> <%= user.country %>
-                                    </h5>
-                                </div>
-                                <div>
+                                </td>
+                                <td><%= user.fname %> <%= user.lname %></td>
+                                <td><%= user.username %></td>
+                                <td><%= user.profession %></td>
+                                <td><%= user.country %></td>
+                                <td>
                                     <form 
                                         action="/api/user/delete" 
                                         method="post"
                                     >
                                         <button 
-                                            class="btn btn-lg btn-primary"
+                                            class="btn btn-primary"
                                             name="deleteBtn"
                                             value="<%= user._id %>"
                                             type="submit"
@@ -48,14 +48,14 @@
                                             Remove User
                                         </button>
                                     </form>
-                                </div>
-                            </div>
-                        </div>
-                    <% }) %>
-                <% } else { %>
-                    <span class="text-center fw-bold">No Users to display</span>
-                <% } %>
-            </div>
+                                </td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            <% } else { %>
+                <span class="text-center fw-bold">No Users to display</span>
+            <% } %>
         </div>
     </main>
 </body>
