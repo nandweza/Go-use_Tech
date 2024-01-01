@@ -60,8 +60,49 @@ exports.getPostAdmin = async (req, res) => {
     }
 }
 
-exports.getCreatePost = (req, res) => {
-    render('admin/blog/createPost');
+// exports.getCreatePost = async (req, res) => {
+//     try {
+//         await render('admin/blog/createPost');
+//     } catch (error) {
+//         console.log(error);
+//         res.status(500).json({ message: "An error occured." });
+//     }
+// }
+
+// exports.getCreatePost = async (req, res) => {
+//     try {
+//         res.render('admin/blog/createPost');
+//     } catch (error) {
+//         console.log(error);
+//         res.status(500).json({ message: 'something went wrong!' });
+//     }
+// }
+
+// exports.createPost = async (req, res) => {
+//     try {
+//         const { title, content } = req.body;
+//         const img = req.file.filename;
+
+//         if (!title || !content) {
+//             return res.redirect("/api/admin/blog/create");
+//         }
+
+//         const post = new Post({ title, content, img });
+//         await post.save()
+//         res.status(201).redirect('/api/admin/blog');
+//     } catch (error) {
+//         console.log(error);
+//         res.status(500).json({ message: "Something went wrong" });
+//     }
+// }
+
+exports.getCreatePost = async (req, res) => {
+    try {
+        res.render('admin/blog/createPost');
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: 'something went wrong!' });
+    }
 }
 
 exports.createPost = async (req, res) => {
@@ -77,7 +118,7 @@ exports.createPost = async (req, res) => {
         await post.save()
         res.status(201).redirect('/api/admin/blog');
     } catch (error) {
-        console.log(error);
+        console.error(error); // Log the error to the console
         res.status(500).json({ message: "Something went wrong" });
     }
 }
