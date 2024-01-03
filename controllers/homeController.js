@@ -6,7 +6,25 @@ exports.getHomePage = async (req, res) => {
 
         res.render('home/home', { posts: posts });
     } catch (error) {
-        console.error(error);
+        console.log(error);
         res.redirect('/api/error/404');
     }
 };
+
+exports.getPrivacyPolicy = async (req, res) => {
+    try {
+        res.render('home/privacyPolicy');
+    } catch (error) {
+        console.log(error);
+        res.redirect('/api/error/404');
+    }
+}
+
+exports.getTermsAndConditions = async (req, res) => {
+    try {
+        res.render('home/termsAndConditions');
+    } catch (error) {
+        console.log(error);
+        res.redirect('/api/error/404');
+    }
+}

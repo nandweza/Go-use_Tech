@@ -105,6 +105,11 @@ a {
     background-color: var(--main-gray);
 }
 
+.orange-bg {
+    background-color: var(--main-orange);
+    color: var(--main-white);
+}
+
 .nav-link:hover {
     color: var(--main-blue);
 }
@@ -1458,4 +1463,29 @@ footer .footer-text {
     border: none;
     cursor: pointer;
     color: #555;
+}
+
+/* privacy policy & terms and conditions */
+
+.orange-bg h5 {
+    color: var(--main-white);
+}
+
+.policy h3 {
+    color: var(--main-orange);
+    padding-bottom: 7px;
+}
+
+.policy h5 {
+    color: var(--main-black);
+    padding-bottom: 4px;
+}
+
+.policy ul li {
+    list-style-type: disc;
+    font-size: 16px;
+}
+
+.policy p {
+    font-size: 16px;
 }
