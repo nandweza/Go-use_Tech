@@ -19,7 +19,7 @@ router
     .get(authController.getGoogleProfile);
 
 router
-    .route("/google/api/course")
+    .route("/google/course")
     .get(authController.googleAuthSuccess);
 
 //Facebook Auth routes
