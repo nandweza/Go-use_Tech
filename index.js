@@ -81,8 +81,8 @@ passport.deserializeUser(async function(id, done) {
 passport.use(new GoogleStrategy({
   clientID: process.env.CLIENT_ID,
   clientSecret: process.env.CLIENT_SECRET,
-  callbackURL: "http://localhost:8001/auth/google/courses",
-  callbackURL: "https://go-use-tech.onrender.com/auth/google/courses",
+  callbackURL: "http://localhost:8001/api/course",
+  callbackURL: "https://www.gousetech.com/api/course/",
   userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo"
 },
 function(accessToken, refreshToken, profile, cb) {
