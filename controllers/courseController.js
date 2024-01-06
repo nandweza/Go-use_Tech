@@ -42,6 +42,7 @@ exports.getCourse = async (req, res) => {
 exports.getCreateCoursePage = async (req, res) => {
     try {
         res.render('admin/course/createCourse');
+        // res.render('admin/blog/createPost');
     } catch (error) {
         console.log(error);
         res.status(500).json({ message: 'something went wrong!' });

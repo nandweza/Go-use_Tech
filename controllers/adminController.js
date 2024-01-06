@@ -20,7 +20,7 @@ exports.getAdminPage = async (req, res) => {
         console.log('Error retrieving files:', error);
         res.status(500).send('Error retrieving files');
     }
-}
+};
 
 exports.getAdminProfile = async (req, res) => {
     try {
@@ -31,18 +31,15 @@ exports.getAdminProfile = async (req, res) => {
       console.error(error);
       res.status(500).send('Internal Server Error');
     }
-}
+};
 
 //get posts
 
 exports.getPostsAdmin = async (req, res) => {
     try {
-        // const courses = await Course.find().sort({ createdAt: -1 });
         const posts = await Post.find().sort({ createdAt: -1 });
 
-        // res.render('admin/course/adminCourses', { courses });
         res.render('admin/blog/posts', { posts });
-        // res.status(200).json({ message: 'success', courses });
     } catch (error) {
         console.log(error);
         res.status(500).json(error);
@@ -58,16 +55,27 @@ exports.getPostAdmin = async (req, res) => {
         console.log(error);
         res.status(500).json({ message: "Something went wrong" });
     }
-}
+};
 
-exports.getCreatePost = async (req, res) => {
+// exports.getCreatePost = (async (req, res) => {
+//     try {
+//         res.render('admin/blog/createPost');
+//     } catch (error) {
+//         console.log(error);
+//         res.status(500).send(error);
+//     }
+// });
+
+exports.getCreatePost = (req, res) => {
     try {
         res.render('admin/blog/createPost');
     } catch (error) {
-        console.log(error);
-        res.status(500).json({ message: 'something went wrong!' });
+        console.error(error);
+        res.status(500).json({ message: 'Internal Server Error', error: error.message });
     }
-}
+};
+
+
 
 exports.createPost = async (req, res) => {
     try {
@@ -85,7 +93,7 @@ exports.createPost = async (req, res) => {
         console.error(error); // Log the error to the console
         res.status(500).json({ message: "Something went wrong" });
     }
-}
+};
 
 exports.getUpdatePost = async (req, res) => {
     try {
@@ -96,7 +104,7 @@ exports.getUpdatePost = async (req, res) => {
         console.log(error);
         res.status(500).json({ message: "Something went wrong" });
     }
-}
+};
 
 exports.updatePost = async (req, res) => {
     try {
@@ -115,7 +123,7 @@ exports.updatePost = async (req, res) => {
         console.log(error);
         res.status(500).json({ message: `Something went wrong: ${error.message}` });
     }
-}
+};
 
 exports.deletePost = async (req, res) => {
     try {

@@ -11,4 +11,5 @@ router
 router
     .route('/:id')
     .get(blogController.getPost);
+
 module.exports = router;

@@ -15,4 +15,8 @@ router
     .route('/profile')
     .get(userController.userProfile);
 
+router
+    .route('/new-blog')
+    .get(userController.getCreatePost);
+
 module.exports = router;
