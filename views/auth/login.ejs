@@ -120,4 +120,13 @@
 
             toggle.addEventListener('click', togglePassword, false);
             passwordInput.addEventListener('keyup', checkInput, false);
+
+            function trimInputValue(event) {
+                let input = event.target;
+                input.value = input.value.trim();
+            }
+
+            // Add event listeners to each input field
+            document.getElementById('email').addEventListener('blur', trimInputValue);
+            document.getElementById('password').addEventListener('blur', trimInputValue);
     </script>

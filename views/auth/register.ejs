@@ -56,7 +56,7 @@
                                 id="country" 
                                 name="country" 
                                 placeholder="eg United States" 
-                                pattern="[A-Za-z]{4,}" 
+                                pattern="[A-Za-z\s]{4,}" 
                                 title="Minimum 4 characters, only alphabets" 
                                 required
                             >
@@ -244,4 +244,20 @@
 
         return true; // Allow form submission
     }
+
+
+    // Function to trim spaces from input value
+    function trimInputValue(event) {
+        let input = event.target;
+        input.value = input.value.trim();
+    }
+
+    // Add event listeners to each input field
+    document.getElementById('fname').addEventListener('blur', trimInputValue);
+    document.getElementById('lname').addEventListener('blur', trimInputValue);
+    document.getElementById('country').addEventListener('blur', trimInputValue);
+    document.getElementById('profession').addEventListener('blur', trimInputValue);
+    document.getElementById('email').addEventListener('blur', trimInputValue);
+    document.getElementById('password').addEventListener('blur', trimInputValue);
+
 </script>
